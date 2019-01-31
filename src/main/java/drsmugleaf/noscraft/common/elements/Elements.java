@@ -1,127 +1,51 @@
 package drsmugleaf.noscraft.common.elements;
 
-import javax.annotation.Nonnull;
+import com.sun.istack.internal.NotNull;
 
 /**
  * Created by DrSmugleaf on 31/01/2019
  */
 public enum Elements {
 
-    NONE() {
-        @Nonnull
+    NONE(Elements.NONE, Elements.NONE, Elements.NONE) {
         @Override
-        public Elements getOpposite() {
-            return NONE;
-        }
-
-        @Nonnull
-        @Override
-        public Elements getStrongTo() {
-            return NONE;
-        }
-
-        @Nonnull
-        @Override
-        public Elements getWeakTo() {
-            return NONE;
-        }
-
-        @Override
-        public double damageMultiplierTo(@Nonnull Elements element) {
+        public double damageMultiplierTo(Elements element) {
             return 1.0;
         }
     },
-    DARKNESS() {
-        @Nonnull
-        @Override
-        public Elements getOpposite() {
-            return LIGHT;
-        }
+    DARKNESS(Elements.LIGHT, Elements.WATER, Elements.FIRE),
+    FIRE(Elements.WATER, Elements.DARKNESS, Elements.LIGHT),
+    LIGHT(Elements.DARKNESS, Elements.FIRE, Elements.WATER),
+    WATER(Elements.FIRE, Elements.LIGHT, Elements.DARKNESS);
 
-        @Nonnull
-        @Override
-        public Elements getStrongTo() {
-            return WATER;
-        }
+    private final @NotNull Elements OPPOSITE;
+    private final @NotNull Elements STRONG_TO;
+    private final @NotNull Elements WEAK_TO;
 
-        @Nonnull
-        @Override
-        public Elements getWeakTo() {
-            return FIRE;
-        }
-    },
-    FIRE() {
-        @Nonnull
-        @Override
-        public Elements getOpposite() {
-            return WATER;
-        }
+    Elements(@NotNull Elements opposite, @NotNull Elements strongTo, @NotNull Elements weakTo) {
+        OPPOSITE = opposite;
+        STRONG_TO = strongTo;
+        WEAK_TO = weakTo;
+    }
 
-        @Nonnull
-        @Override
-        public Elements getStrongTo() {
-            return DARKNESS;
-        }
+    public @NotNull Elements getOpposite() {
+        return OPPOSITE;
+    }
 
-        @Nonnull
-        @Override
-        public Elements getWeakTo() {
-            return LIGHT;
-        }
-    },
-    LIGHT() {
-        @Nonnull
-        @Override
-        public Elements getOpposite() {
-            return DARKNESS;
-        }
+    public @NotNull Elements getStrongTo() {
+        return STRONG_TO;
+    }
 
-        @Nonnull
-        @Override
-        public Elements getStrongTo() {
-            return FIRE;
-        }
+    public @NotNull Elements getWeakTo() {
+        return WEAK_TO;
+    }
 
-        @Nonnull
-        @Override
-        public Elements getWeakTo() {
-            return WATER;
-        }
-    },
-    WATER() {
-        @Nonnull
-        @Override
-        public Elements getOpposite() {
-            return FIRE;
-        }
-
-        @Nonnull
-        @Override
-        public Elements getStrongTo() {
-            return LIGHT;
-        }
-
-        @Nonnull
-        @Override
-        public Elements getWeakTo() {
-            return DARKNESS;
-        }
-    };
-
-    Elements() {}
-
-    public abstract @Nonnull Elements getOpposite();
-
-    public abstract @Nonnull Elements getStrongTo();
-
-    public abstract @Nonnull Elements getWeakTo();
-
-    public double damageMultiplierTo(@Nonnull Elements element) {
-        if (element == getOpposite()) {
+    public double damageMultiplierTo(@NotNull Elements element) {
+        if (element == OPPOSITE) {
             return 2.0;
-        } else if (element == getStrongTo()) {
+        } else if (element == STRONG_TO) {
             return 1.5;
-        } else if (element == getWeakTo()) {
+        } else if (element == WEAK_TO) {
             return 1.0;
         } else if (element == NONE) {
             return 1.3;
