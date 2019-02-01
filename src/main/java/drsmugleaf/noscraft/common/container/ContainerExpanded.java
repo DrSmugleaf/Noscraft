@@ -38,6 +38,18 @@ public class ContainerExpanded extends Container {
                 }
             });
         }
+
+        for (int column = 0; column < 9; column++) {
+            int x = 8 + column * 18;
+            int y = 142;
+            addSlotToContainer(new Slot(player.inventory, column, x, y));
+
+            for (int row = 0; row < 3; row++) {
+                int index = column + (row + 1) * 9;
+                y = 84 + row * 18;
+                addSlotToContainer(new Slot(player.inventory, index, x, y));
+            }
+        }
     }
 
     @Override
