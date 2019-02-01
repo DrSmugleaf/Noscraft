@@ -12,27 +12,48 @@ import javax.annotation.Nonnull;
  */
 public enum Armors {
 
-    ADVENTURER_1(12, 14, 12, 24, 1, Effects.NONE, ArmorTypes.ADVENTURER_ARMOR, Rarity.NONE, Optimization.OPTIMIZATION_0);
+    ADVENTURER_1(12, 14, 12, 24, 1, ArmorTypes.ADVENTURER_ARMOR, Effects.NONE);
 
     private final @Nonnull Integer MELEE_DEF;
     private final @Nonnull Integer RANGE_DEF;
     private final @Nonnull Integer MAGIC_DEF;
     private final @Nonnull Integer DODGE;
     private final @Nonnull Integer LEVEL;
-    private final @Nonnull Effects EFFECT;
+    private final @Nonnull Effects[] EFFECT;
     private final @Nonnull ArmorTypes TYPE;
     private final @Nonnull Rarity RARITY;
     private final @Nonnull Optimization OPTIMIZATION;
+
     Armors(
             @Nonnull Integer meleeDef,
             @Nonnull Integer rangeDef,
             @Nonnull Integer magicDef,
             @Nonnull Integer dodge,
             @Nonnull Integer level,
-            @Nonnull Effects effect,
+            @Nonnull ArmorTypes type,
+            @Nonnull Effects... effect
+    ) {
+        MELEE_DEF = meleeDef;
+        RANGE_DEF = rangeDef;
+        MAGIC_DEF = magicDef;
+        DODGE = dodge;
+        LEVEL = level;
+        EFFECT = effect;
+        TYPE = type;
+        RARITY = Rarity.NONE;
+        OPTIMIZATION = Optimization.OPTIMIZATION_0;
+    }
+
+    Armors(
+            @Nonnull Integer meleeDef,
+            @Nonnull Integer rangeDef,
+            @Nonnull Integer magicDef,
+            @Nonnull Integer dodge,
+            @Nonnull Integer level,
             @Nonnull ArmorTypes type,
             @Nonnull Rarity rarity,
-            @Nonnull Optimization optimization
+            @Nonnull Optimization optimization,
+            @Nonnull Effects... effect
     ) {
         MELEE_DEF = meleeDef;
         RANGE_DEF = rangeDef;
@@ -65,7 +86,7 @@ public enum Armors {
         return LEVEL;
     }
 
-    public @Nonnull Effects getEffect() {
+    public @Nonnull Effects[] getEffects() {
         return EFFECT;
     }
 
