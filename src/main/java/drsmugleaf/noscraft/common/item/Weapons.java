@@ -12,13 +12,14 @@ public enum Weapons {
 
     private final @Nonnull Integer RANGE;
 
-    Weapons(int damage, int hitRate, int critChance, int critMultiplier, int level, @Nonnull Effects effect, @Nonnull WeaponTypes type) {
-        if (type == WeaponTypes.ADVENTURER_MAIN || type == WeaponTypes.DAGGER || type == WeaponTypes.SWORD) {
-            RANGE = 1;
-        }
-        else {
-            RANGE = 4;
-        }
+    Weapons(@Nonnull Integer damage,
+            @Nonnull Integer hitRate,
+            @Nonnull Integer critChance,
+            @Nonnull Integer critMultiplier,
+            @Nonnull Integer level,
+            @Nonnull Effects effect,
+            @Nonnull WeaponTypes type) {
+        RANGE = type.getRange();
     }
 
 }
