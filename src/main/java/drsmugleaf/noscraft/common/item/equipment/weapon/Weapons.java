@@ -1,6 +1,7 @@
 package drsmugleaf.noscraft.common.item.equipment.weapon;
 
 import drsmugleaf.noscraft.common.item.equipment.Effects;
+import drsmugleaf.noscraft.common.item.equipment.Optimization;
 import drsmugleaf.noscraft.common.item.equipment.Rarity;
 
 import javax.annotation.Nonnull;
@@ -10,8 +11,8 @@ import javax.annotation.Nonnull;
  */
 public enum Weapons {
 
-    ADVENTURER_MAIN_1(24, 20, 4, 70, 1, Effects.NONE, WeaponTypes.ADVENTURER_MAIN, Rarity.NONE),
-    ADVENTURER_SECONDARY_1(23, 21, 2, 70, 1, Effects.NONE, WeaponTypes.ADVENTURER_SECONDARY, Rarity.NONE);
+    ADVENTURER_MAIN_1(24, 20, 4, 70, 1, Effects.NONE, WeaponTypes.ADVENTURER_MAIN, Rarity.NONE, Optimization.OPTIMIZATION_0),
+    ADVENTURER_SECONDARY_1(23, 21, 2, 70, 1, Effects.NONE, WeaponTypes.ADVENTURER_SECONDARY, Rarity.NONE, Optimization.OPTIMIZATION_0);
 
     private final int DAMAGE;
     private final int HITRATE;
@@ -21,6 +22,8 @@ public enum Weapons {
     private final @Nonnull Effects EFFECT;
     private final @Nonnull WeaponTypes TYPE;
     private final @Nonnull Rarity RARITY;
+    private final @Nonnull
+    Optimization OPTIMIZATION;
 
     Weapons(
             int damage,
@@ -30,7 +33,8 @@ public enum Weapons {
             int level,
             @Nonnull Effects effect,
             @Nonnull WeaponTypes type,
-            @Nonnull Rarity rarity
+            @Nonnull Rarity rarity,
+            @Nonnull Optimization optimization
     ) {
         DAMAGE = damage;
         HITRATE = hitRate;
@@ -40,14 +44,15 @@ public enum Weapons {
         EFFECT = effect;
         TYPE = type;
         RARITY = rarity;
+        OPTIMIZATION = optimization;
     }
 
     public int getDamage() {
-        return (int) Math.floor(DAMAGE - 0.5 * getStatIncrease());
+        return (int) Math.floor((DAMAGE + 0.5 * getStatIncrease()) * OPTIMIZATION.getExtraStats());
     }
 
     public int getHitRate() {
-        return (int) Math.floor(HITRATE - 0.5 * getStatIncrease());
+        return (int) Math.floor((HITRATE + 0.5 * getStatIncrease()) * OPTIMIZATION.getExtraStats());
     }
 
     public int getCritChance() {
@@ -77,6 +82,8 @@ public enum Weapons {
     public int getRange() {
         return TYPE.getRange();
     }
+
+    public @Nonnull Optimization getOptimization() { return OPTIMIZATION;}
 
     public int getStatIncrease() {
         int rarityCapacity = (LEVEL / 5) + 1; //This being an int is intentional; the original game truncates decimals.
