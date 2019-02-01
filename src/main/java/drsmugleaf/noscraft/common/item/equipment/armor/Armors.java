@@ -104,5 +104,18 @@ public enum Armors {
         int rarityCapacity = (LEVEL / 5) + 1; // This being an int is intentional; the original game truncates decimals.
         return (rarityCapacity * RARITY.getStrengtheningFactor()) - RARITY.getStatDecrease();
     }
+    public int optimizeItem() {
+        final double RANDVALUE = Math.random();
+
+        if (RANDVALUE > (1 - OPTIMIZATION.getOptimizationLevel())) {
+            return (OPTIMIZATION.getOptimizationLevel() + 1);
+        } else if (RANDVALUE < (1 - OPTIMIZATION.getOptimizationLevel()) && RANDVALUE > OPTIMIZATION.getBreakChance()){
+            // TODO: 01/02/2019 LOCK THE ITEM
+            return OPTIMIZATION.getOptimizationLevel();
+        } else {
+            // TODO: 01/02/2019 BREAK THE ITEM
+            return 0;
+        }
+    }
 
 }
