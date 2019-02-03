@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Created by DrSmugleaf on 31/01/2019
@@ -33,6 +34,10 @@ public class Noscraft {
     private static @Nonnull Noscraft INSTANCE;
 
     public static final @Nonnull Logger LOG = LogManager.getLogger(MOD_ID.toUpperCase());
+
+    public static final @Nonnull String ASSETS = Objects.requireNonNull(
+            Noscraft.class.getClassLoader().getResource("assets/noscraft")
+    ).getFile();
 
     @Nonnull
     public static Noscraft getInstance() {

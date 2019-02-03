@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/armor/swordsman/a_heavy_armor_of_audacity_share"
+    }
+}

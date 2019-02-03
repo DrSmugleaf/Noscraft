@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/armor/swordsman/armored_armor_of_the_giant_of_flames"
+    }
+}

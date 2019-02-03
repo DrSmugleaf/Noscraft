@@ -21,9 +21,8 @@ import javax.annotation.Nullable;
 @Mod.EventBusSubscriber(modid = Noscraft.MOD_ID, value = Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
-    @Nullable
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public @Nullable Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (world instanceof WorldClient) {
             switch (ID) {
                 case GuiExpanded.ID:
@@ -42,6 +41,11 @@ public class ClientProxy extends CommonProxy {
         super.registerEventHandlers();
 
         MinecraftForge.EVENT_BUS.register(ModGuis.class);
+    }
+
+    @Override
+    public boolean isServer() {
+        return false;
     }
 
 }
