@@ -12,6 +12,10 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -43,7 +47,6 @@ public class ModArmors {
             while ((line = reader.readMap()) != null) {
                 ItemArmor armor = new ItemArmor(EntityEquipmentSlot.CHEST, line.get("name"));
                 event.getRegistry().register(armor);
-//                createJson(line.get("name"), "/items/armor/swordsman");
             }
         } catch (FileNotFoundException e) {
             throw new IllegalStateException("File " + csvPath + " not found", e);
@@ -66,7 +69,7 @@ public class ModArmors {
         lines.add("{");
         lines.add("    \"parent\": \"builtin/generated\",");
         lines.add("    \"textures\": {");
-        lines.add("        \"layer0\": \"noscraft:" + path + name + "\"");
+        lines.add("        \"layer0\": \"" + Noscraft.MOD_ID + ":" + path + name + "\"");
         lines.add("    }");
         lines.add("}");
         String modelsPath = "models/" + path.replaceFirst("items", "item");
@@ -80,6 +83,35 @@ public class ModArmors {
             Files.write(filePath, lines, Charset.forName("UTF-8"));
         } catch (IOException e) {
             throw new IllegalStateException("Error writing to file " + filePath, e);
+        }
+    }
+
+    private static void fixImage(@Nonnull String name) {
+        name = name.replace(' ', '_').replaceAll("[':]", "").toLowerCase();
+        String path = Noscraft.ASSETS + "textures/items/armor/swordsman/" + name + ".png";
+
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            throw new IllegalStateException("Error reading file " + path, e);
+        }
+
+        WritableRaster raster = image.getAlphaRaster();
+        for (int width = 0; width < image.getWidth(); width++) {
+            for (int height = 0; height < image.getHeight(); height++) {
+                int[] pixel = raster.getPixel(width, height, new int[4]);
+                if (pixel[0] > 0) {
+                    pixel[0] = 255;
+                    raster.setPixel(width, height, pixel);
+                }
+            }
+        }
+
+        try {
+            ImageIO.write(image, "png", new File(path));
+        } catch (IOException e) {
+            throw new IllegalStateException("Error overwriting image " + path, e);
         }
     }
 
