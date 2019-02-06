@@ -1,6 +1,7 @@
 package drsmugleaf.noscraft.common.network;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -22,10 +23,11 @@ public class PacketOpenNormalInventory implements IMessage, IMessageHandler<Pack
 
     @Override
     public IMessage onMessage(PacketOpenNormalInventory message, MessageContext ctx) {
-        IThreadListener mainThread = (WorldServer) ctx.getServerHandler().player.world;
+        EntityPlayerMP player = ctx.getServerHandler().player;
+        IThreadListener mainThread = (WorldServer) player.world;
         mainThread.addScheduledTask(() -> {
-            ctx.getServerHandler().player.openContainer.onContainerClosed(ctx.getServerHandler().player);
-            ctx.getServerHandler().player.openContainer = ctx.getServerHandler().player.inventoryContainer;
+            player.openContainer.onContainerClosed(player);
+            player.openContainer = player.inventoryContainer;
         });
 
         return null;

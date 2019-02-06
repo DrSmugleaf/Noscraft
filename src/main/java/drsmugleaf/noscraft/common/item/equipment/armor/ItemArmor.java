@@ -22,8 +22,8 @@ public class ItemArmor extends net.minecraft.item.ItemArmor {
         setCreativeTab(CreativeTabs.COMBAT);
         NAME = name;
         FILE_NAME = name.replace(' ', '_').replaceAll("[':]", "").toLowerCase();
-        setRegistryName(FILE_NAME);
-        setUnlocalizedName(FILE_NAME);
+        setRegistryName(Noscraft.MOD_ID + ":" + FILE_NAME);
+        setUnlocalizedName(Noscraft.MOD_ID + ":" + FILE_NAME);
         if (!Noscraft.getProxy().isServer()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("noscraft:" + FILE_NAME, "inventory"));
         }

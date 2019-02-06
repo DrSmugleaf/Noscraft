@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
  */
 public enum Elements {
 
-    NONE() {
+    NONE(0xB9BA89) {
         @Nonnull
         @Override
         public Elements getOpposite() {
@@ -31,7 +31,7 @@ public enum Elements {
             return 1.0;
         }
     },
-    DARKNESS() {
+    DARKNESS(0x222222) {
         @Nonnull
         @Override
         public Elements getOpposite() {
@@ -50,7 +50,7 @@ public enum Elements {
             return FIRE;
         }
     },
-    FIRE() {
+    FIRE(0xFF0000) {
         @Nonnull
         @Override
         public Elements getOpposite() {
@@ -69,7 +69,7 @@ public enum Elements {
             return LIGHT;
         }
     },
-    LIGHT() {
+    LIGHT(0xF5F911) {
         @Nonnull
         @Override
         public Elements getOpposite() {
@@ -88,7 +88,7 @@ public enum Elements {
             return WATER;
         }
     },
-    WATER() {
+    WATER(0x0080FF) {
         @Nonnull
         @Override
         public Elements getOpposite() {
@@ -108,7 +108,15 @@ public enum Elements {
         }
     };
 
-    Elements() {}
+    private final int HEX_COLOR;
+
+    Elements(int hexColor) {
+        HEX_COLOR = hexColor;
+    }
+
+    public int getHexColor() {
+        return HEX_COLOR;
+    }
 
     public abstract @Nonnull Elements getOpposite();
 

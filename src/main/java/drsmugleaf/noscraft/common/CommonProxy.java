@@ -3,7 +3,10 @@ package drsmugleaf.noscraft.common;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.client.gui.GuiExpanded;
 import drsmugleaf.noscraft.common.container.ContainerExpanded;
+import drsmugleaf.noscraft.common.event.EventHandlerEntity;
+import drsmugleaf.noscraft.common.event.EventHandlerItem;
 import drsmugleaf.noscraft.common.item.equipment.armor.ModArmors;
+import drsmugleaf.noscraft.common.item.equipment.fairy.ModFairies;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,11 +41,18 @@ public class CommonProxy implements IGuiHandler {
     public void init() {}
 
     public void registerEventHandlers() {
+        MinecraftForge.EVENT_BUS.register(EventHandlerEntity.class);
+        MinecraftForge.EVENT_BUS.register(EventHandlerItem.class);
         MinecraftForge.EVENT_BUS.register(ModArmors.class);
+        MinecraftForge.EVENT_BUS.register(ModFairies.class);
     }
 
     public boolean isServer() {
         return true;
+    }
+
+    public @Nullable World getClientWorld() {
+        return null;
     }
 
 }

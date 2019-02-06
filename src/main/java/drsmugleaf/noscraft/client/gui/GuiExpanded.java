@@ -1,13 +1,16 @@
 package drsmugleaf.noscraft.client.gui;
 
 import drsmugleaf.noscraft.common.container.ContainerExpanded;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.achievement.GuiStats;
+import drsmugleaf.noscraft.common.container.FairyCapabilities;
+import drsmugleaf.noscraft.common.container.FairyContainer;
+import drsmugleaf.noscraft.common.elements.Elements;
+import drsmugleaf.noscraft.common.item.equipment.fairy.ItemFairy;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -21,10 +24,12 @@ public class GuiExpanded extends InventoryEffectRenderer {
     public static final @Nonnull ResourceLocation background = new ResourceLocation("noscraft", "textures/gui/expanded_inventory.png");
     private float oldMouseX;
     private float oldMouseY;
+    private final @Nonnull EntityPlayer PLAYER;
 
     public GuiExpanded(@Nonnull EntityPlayer player) {
         super(new ContainerExpanded(player));
         allowUserInput = true;
+        PLAYER = player;
     }
 
     private void resetGui() {
@@ -51,10 +56,17 @@ public class GuiExpanded extends InventoryEffectRenderer {
         super.drawScreen(mouseX, mouseY, partialTicks);
         renderHoveredToolTip(mouseX, mouseY);
 
-        fontRenderer.drawString("13", guiLeft + 97, guiTop + 9, 0xFF0000);
-        fontRenderer.drawString("40", guiLeft + 97, guiTop + 27, 0x0080FF);
-        fontRenderer.drawString("20", guiLeft + 97, guiTop + 45, 0xBFFF00);
-        fontRenderer.drawString("31", guiLeft + 97, guiTop + 63, 0x222222);
+        fontRenderer.drawString("13", guiLeft + 97, guiTop + 9, Elements.FIRE.getHexColor());
+        fontRenderer.drawString("40", guiLeft + 97, guiTop + 27, Elements.WATER.getHexColor());
+        fontRenderer.drawString("20", guiLeft + 97, guiTop + 45, Elements.LIGHT.getHexColor());
+        fontRenderer.drawString("31", guiLeft + 97, guiTop + 63, Elements.DARKNESS.getHexColor());
+
+        FairyContainer container = PLAYER.getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
+        ItemStack stack = container.getStackInSlot(0);
+        if (!stack.isEmpty()) {
+            ItemFairy fairy = (ItemFairy) stack.getItem();
+            fontRenderer.drawString(String.valueOf(fairy.getLevel()), guiLeft + 153, guiTop + 27, fairy.getElement().getHexColor());
+        }
     }
 
     @Override

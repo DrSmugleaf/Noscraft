@@ -8,10 +8,12 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -46,6 +48,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public boolean isServer() {
         return false;
+    }
+
+    @Override
+    public @Nonnull World getClientWorld() {
+        return FMLClientHandler.instance().getClient().world;
     }
 
 }

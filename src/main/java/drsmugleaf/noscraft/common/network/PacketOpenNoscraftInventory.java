@@ -3,6 +3,7 @@ package drsmugleaf.noscraft.common.network;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.client.gui.GuiExpanded;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -24,10 +25,11 @@ public class PacketOpenNoscraftInventory implements IMessage, IMessageHandler<Pa
 
     @Override
     public IMessage onMessage(PacketOpenNoscraftInventory message, MessageContext ctx) {
-        IThreadListener mainThread = (WorldServer) ctx.getServerHandler().player.world;
+        EntityPlayerMP player = ctx.getServerHandler().player;
+        IThreadListener mainThread = (WorldServer) player.world;
         mainThread.addScheduledTask(() -> {
-            ctx.getServerHandler().player.openContainer.onContainerClosed(ctx.getServerHandler().player);
-            ctx.getServerHandler().player.openGui(Noscraft.getInstance(), GuiExpanded.ID, ctx.getServerHandler().player.world, 0, 0, 0);
+            player.openContainer.onContainerClosed(player);
+            player.openGui(Noscraft.getInstance(), GuiExpanded.ID, player.world, 0, 0, 0);
         });
 
         return null;

@@ -40,8 +40,8 @@ public class Image {
 
     public static void translucentToOpaque(@Nonnull String imageName, @Nonnull String path) {
         BufferedImage image = getImage(imageName);
-
         WritableRaster raster = image.getAlphaRaster();
+
         for (int width = 0; width < image.getWidth(); width++) {
             for (int height = 0; height < image.getHeight(); height++) {
                 int[] pixel = raster.getPixel(width, height, new int[4]);
@@ -57,8 +57,8 @@ public class Image {
 
     public static void translucentToTransparent(@Nonnull String imageName, @Nonnull String path) {
         BufferedImage image = getImage(imageName);
-
         WritableRaster raster = image.getAlphaRaster();
+
         for (int width = 0; width < image.getWidth(); width++) {
             for (int height = 0; height < image.getHeight(); height++) {
                 int[] pixel = raster.getPixel(width, height, new int[4]);

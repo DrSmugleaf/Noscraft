@@ -15,9 +15,12 @@ import javax.annotation.Nullable;
  */
 public class ContainerExpanded extends Container {
 
-    private static final EntityEquipmentSlot[] slots = new EntityEquipmentSlot[]{EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET};
+    private static final @Nonnull EntityEquipmentSlot[] slots = new EntityEquipmentSlot[]{EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET};
+    private final @Nonnull FairyContainer fairy;
 
     public ContainerExpanded(@Nonnull EntityPlayer player) {
+        fairy = player.getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
+
         for (int i = 0; i < slots.length; i++) {
             EntityEquipmentSlot slot = slots[i];
             addSlotToContainer(new Slot(player.inventory, 36 + (3 - i), 8, 8 + i * 18) {
@@ -39,6 +42,8 @@ public class ContainerExpanded extends Container {
             });
         }
 
+        addSlotToContainer(new SlotFairy(fairy, 0, 135, 8));
+
         for (int column = 0; column < 9; column++) {
             int x = 8 + column * 18;
             int y = 142;
@@ -55,6 +60,11 @@ public class ContainerExpanded extends Container {
     @Override
     public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
         return true;
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        return ItemStack.EMPTY;
     }
 
 }

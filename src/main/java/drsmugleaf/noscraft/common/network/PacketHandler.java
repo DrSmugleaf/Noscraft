@@ -15,8 +15,9 @@ public class PacketHandler {
     public static final @Nonnull SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Noscraft.MOD_ID);
 
     public static void init() {
-        INSTANCE.registerMessage(PacketOpenNormalInventory.class, PacketOpenNormalInventory.class, 0, Side.SERVER);
-        INSTANCE.registerMessage(PacketOpenNoscraftInventory.class, PacketOpenNoscraftInventory.class, 1, Side.SERVER);
+        INSTANCE.registerMessage(PacketOpenNoscraftInventory.class, PacketOpenNoscraftInventory.class, 0, Side.SERVER);
+        INSTANCE.registerMessage(PacketOpenNormalInventory.class, PacketOpenNormalInventory.class, 1, Side.SERVER);
+        INSTANCE.registerMessage(PacketSync.Handler.class, PacketSync.class, 2, Side.CLIENT);
     }
 
 }

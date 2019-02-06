@@ -1,7 +1,12 @@
 package drsmugleaf.noscraft;
 
 import drsmugleaf.noscraft.common.CommonProxy;
+import drsmugleaf.noscraft.common.container.FairyCapabilities;
+import drsmugleaf.noscraft.common.container.FairyContainer;
+import drsmugleaf.noscraft.common.item.equipment.fairy.FairyItem;
+import drsmugleaf.noscraft.common.item.equipment.fairy.IFairy;
 import drsmugleaf.noscraft.common.network.PacketHandler;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -39,18 +44,27 @@ public class Noscraft {
             Noscraft.class.getClassLoader().getResource("assets/noscraft")
     ).getFile();
 
-    @Nonnull
-    public static Noscraft getInstance() {
+    public static @Nonnull Noscraft getInstance() {
         return INSTANCE;
     }
 
-    @Nonnull
-    public static CommonProxy getProxy() {
+    public static @Nonnull CommonProxy getProxy() {
         return PROXY;
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        CapabilityManager.INSTANCE.register(
+                FairyContainer.class,
+                new FairyCapabilities.CapabilityFairy(),
+                FairyContainer::new
+        );
+        CapabilityManager.INSTANCE.register(
+                IFairy.class,
+                new FairyCapabilities.CapabilityItemFairyStorage(),
+                FairyItem::new
+        );
+
         PROXY.registerEventHandlers();
         PacketHandler.init();
     }

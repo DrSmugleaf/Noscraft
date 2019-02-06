@@ -27,15 +27,16 @@ public class Json {
 
         name = name.replace(' ', '_').replaceAll("[':]", "").toLowerCase();
         List<String> lines = new ArrayList<>();
+
         lines.add("{");
         lines.add("    \"parent\": \"builtin/generated\",");
         lines.add("    \"textures\": {");
-        lines.add("        \"layer0\": \"" + Noscraft.MOD_ID + ":" + path + name + "\"");
+        lines.add("        \"layer0\": \"" + Noscraft.MOD_ID + ":" + path.replaceFirst("item", "items") + name + "\"");
         lines.add("    }");
         lines.add("}");
+
         String modelsPath = "models/" + path.replaceFirst("items", "item");
         Path filePath = Paths.get(Noscraft.ASSETS + modelsPath + name.toLowerCase() + ".json");
-
         try {
             Files.createFile(filePath);
         } catch (IOException ignored) {}
