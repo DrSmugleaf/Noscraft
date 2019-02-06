@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
@@ -22,8 +23,9 @@ public class ItemArmor extends net.minecraft.item.ItemArmor {
         setCreativeTab(CreativeTabs.COMBAT);
         NAME = name;
         FILE_NAME = name.replace(' ', '_').replaceAll("[':]", "").toLowerCase();
-        setRegistryName(Noscraft.MOD_ID + ":" + FILE_NAME);
-        setUnlocalizedName(Noscraft.MOD_ID + ":" + FILE_NAME);
+        setRegistryName(new ResourceLocation(Noscraft.MOD_ID, FILE_NAME));
+        setUnlocalizedName(getRegistryName().toString());
+
         if (!Noscraft.getProxy().isServer()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("noscraft:" + FILE_NAME, "inventory"));
         }

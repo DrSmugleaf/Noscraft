@@ -21,7 +21,13 @@ import java.util.Objects;
 /**
  * Created by DrSmugleaf on 31/01/2019
  */
-@Mod(modid = Noscraft.MOD_ID, name = Noscraft.MOD_NAME, version = Noscraft.VERSION, useMetadata = true)
+@Mod(
+        modid = Noscraft.MOD_ID,
+        name = Noscraft.MOD_NAME,
+        version = Noscraft.VERSION,
+        dependencies = "required-after:forge@[14.23.5.2768,);",
+        useMetadata = true
+)
 public class Noscraft {
 
     public static final @Nonnull String MOD_ID = "noscraft";
