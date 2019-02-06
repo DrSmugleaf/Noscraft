@@ -21,7 +21,7 @@ public class SlotFairy extends SlotItemHandler {
 
     @Override
     public @Nullable String getSlotTexture() {
-        return "noscraft:items/fairy";
+        return "noscraft:items/slot/empty_fairy";
     }
 
 }

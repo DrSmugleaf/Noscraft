@@ -25,6 +25,7 @@ public class PacketOpenNormalInventory implements IMessage, IMessageHandler<Pack
     public IMessage onMessage(PacketOpenNormalInventory message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         IThreadListener mainThread = (WorldServer) player.world;
+
         mainThread.addScheduledTask(() -> {
             player.openContainer.onContainerClosed(player);
             player.openContainer = player.inventoryContainer;

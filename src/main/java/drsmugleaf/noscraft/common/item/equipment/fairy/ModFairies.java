@@ -22,7 +22,7 @@ public class ModFairies {
 
     @SubscribeEvent
     public static void registerSlot(TextureStitchEvent.Pre event) {
-        event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "items/fairy"));
+        event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "items/slot/empty_fairy"));
     }
 
 }

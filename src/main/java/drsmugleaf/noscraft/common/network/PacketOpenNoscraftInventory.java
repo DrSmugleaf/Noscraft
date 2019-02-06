@@ -27,6 +27,7 @@ public class PacketOpenNoscraftInventory implements IMessage, IMessageHandler<Pa
     public IMessage onMessage(PacketOpenNoscraftInventory message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         IThreadListener mainThread = (WorldServer) player.world;
+
         mainThread.addScheduledTask(() -> {
             player.openContainer.onContainerClosed(player);
             player.openGui(Noscraft.getInstance(), GuiExpanded.ID, player.world, 0, 0, 0);

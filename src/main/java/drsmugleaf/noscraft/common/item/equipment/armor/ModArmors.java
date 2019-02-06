@@ -34,7 +34,7 @@ public class ModArmors {
         ) {
             Map<String, String> line;
             while ((line = reader.readMap()) != null) {
-                ItemArmor armor = new ItemArmor(EntityEquipmentSlot.CHEST, line.get("name"));
+                ItemModArmor armor = new ItemModArmor(EntityEquipmentSlot.CHEST, line.get("name"));
                 event.getRegistry().register(armor);
             }
         } catch (FileNotFoundException e) {
