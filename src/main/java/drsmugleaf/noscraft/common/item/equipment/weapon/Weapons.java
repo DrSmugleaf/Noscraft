@@ -118,14 +118,14 @@ public enum Weapons {
     public int optimizeItem() {
         final double RANDVALUE = Math.random();
 
-        if (RANDVALUE > (1 - OPTIMIZATION.getOptimizationLevel())) {
+        if (RANDVALUE > (1 - OPTIMIZATION.getOptimizationChance())) {
             return (OPTIMIZATION.getOptimizationLevel() + 1);
-        } else if (RANDVALUE < (1 - OPTIMIZATION.getOptimizationLevel()) && RANDVALUE > OPTIMIZATION.getBreakChance()){
-            // TODO: 01/02/2019 LOCK THE ITEM 
+        } else if (RANDVALUE < (1 - OPTIMIZATION.getOptimizationChance()) && RANDVALUE > OPTIMIZATION.getBreakChance()){
+            // TODO: 01/02/2019 LOCK THE ITEM
             return OPTIMIZATION.getOptimizationLevel();
         } else {
             // TODO: 01/02/2019 BREAK THE ITEM
-            return 0; 
+            return 0;
         }
     }
 

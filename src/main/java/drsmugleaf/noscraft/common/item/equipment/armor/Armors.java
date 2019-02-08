@@ -107,9 +107,9 @@ public enum Armors {
     public int optimizeItem() {
         final double RANDVALUE = Math.random();
 
-        if (RANDVALUE > (1 - OPTIMIZATION.getOptimizationLevel())) {
+        if (RANDVALUE > (1 - OPTIMIZATION.getOptimizationChance())) {
             return (OPTIMIZATION.getOptimizationLevel() + 1);
-        } else if (RANDVALUE < (1 - OPTIMIZATION.getOptimizationLevel()) && RANDVALUE > OPTIMIZATION.getBreakChance()){
+        } else if (RANDVALUE < (1 - OPTIMIZATION.getOptimizationChance()) && RANDVALUE > OPTIMIZATION.getBreakChance()){
             // TODO: 01/02/2019 LOCK THE ITEM
             return OPTIMIZATION.getOptimizationLevel();
         } else {
