@@ -1,10 +1,11 @@
 package drsmugleaf.noscraft.util;
 
-import drsmugleaf.noscraft.Noscraft;
+import drsmugleaf.noscraft.common.item.IModellable;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,30 +17,25 @@ import java.util.List;
  */
 public class Json {
 
-    public static void createJson(@Nonnull String name, @Nonnull String path) {
-        if (path.charAt(0) == '/') {
-            path = path.substring(1, path.length());
-        }
-
-        if (path.charAt(path.length() - 1) != '/') {
-            path = path + '/';
-        }
-
-        name = name.replace(' ', '_').replaceAll("[':]", "").toLowerCase();
+    public static void createJson(@Nonnull IModellable modellable, @Nonnull String jsonPath) {
         List<String> lines = new ArrayList<>();
 
         lines.add("{");
         lines.add("    \"parent\": \"builtin/generated\",");
         lines.add("    \"textures\": {");
-        lines.add("        \"layer0\": \"" + Noscraft.MOD_ID + ":" + path.replaceFirst("item", "items") + name + "\"");
+        lines.add("        \"layer0\": \"" + modellable.getLayer0Path() + "\"");
         lines.add("    }");
         lines.add("}");
 
-        String modelsPath = "models/" + path.replaceFirst("items", "item");
-        Path filePath = Paths.get(Noscraft.ASSETS + modelsPath + name.toLowerCase() + ".json");
+        String name = modellable.toRegistryName();
+        Path filePath = Paths.get(jsonPath + "/" + name + ".json");
         try {
             Files.createFile(filePath);
-        } catch (IOException ignored) {}
+        } catch (IOException e) {
+            if (!(e instanceof FileAlreadyExistsException)) {
+                throw new IllegalStateException("Error creating file " + filePath);
+            }
+        }
 
         try {
             Files.write(filePath, lines, Charset.forName("UTF-8"));

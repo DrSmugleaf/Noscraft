@@ -8,7 +8,8 @@ public enum ArmorTypes {
     ADVENTURER_ARMOR,
     SWORDSMAN_ARMOR,
     ARCHER_ARMOR,
-    MAGE_ARMOR
+    MAGE_ARMOR,
+    MARTIAL_ARTIST_ARMOR
 
 }
 

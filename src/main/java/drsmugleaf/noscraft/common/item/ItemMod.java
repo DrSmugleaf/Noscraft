@@ -11,11 +11,14 @@ import javax.annotation.Nonnull;
 /**
  * Created by DrSmugleaf on 04/02/2019
  */
-public class ItemMod extends Item {
+public abstract class ItemMod extends Item implements IModellable {
+
+    private final @Nonnull String NAME;
 
     public ItemMod(@Nonnull String name) {
         super();
-        name = toRegistryName(name);
+        NAME = name;
+        name = IModellable.toRegistryName(name);
         setRegistryName(new ResourceLocation(Noscraft.MOD_ID, name));
         setUnlocalizedName(getRegistryName().toString());
 
@@ -24,12 +27,9 @@ public class ItemMod extends Item {
         }
     }
 
-    @Nonnull
-    public static String toRegistryName(@Nonnull String name) {
-        return name
-                .replace(' ', '_')
-                .replaceAll("[':]", "")
-                .toLowerCase();
+    @Override
+    public @Nonnull String getName() {
+        return NAME;
     }
 
 }

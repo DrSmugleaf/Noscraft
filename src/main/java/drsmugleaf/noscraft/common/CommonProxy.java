@@ -7,6 +7,7 @@ import drsmugleaf.noscraft.common.event.EventHandlerEntity;
 import drsmugleaf.noscraft.common.event.EventHandlerItem;
 import drsmugleaf.noscraft.common.item.equipment.armor.ModArmors;
 import drsmugleaf.noscraft.common.item.equipment.fairy.ModFairies;
+import drsmugleaf.noscraft.common.item.equipment.weapon.ModWeapons;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -44,6 +45,7 @@ public class CommonProxy implements IGuiHandler {
         MinecraftForge.EVENT_BUS.register(EventHandlerEntity.class);
         MinecraftForge.EVENT_BUS.register(EventHandlerItem.class);
         MinecraftForge.EVENT_BUS.register(ModArmors.class);
+        MinecraftForge.EVENT_BUS.register(ModWeapons.class);
         MinecraftForge.EVENT_BUS.register(ModFairies.class);
     }
 

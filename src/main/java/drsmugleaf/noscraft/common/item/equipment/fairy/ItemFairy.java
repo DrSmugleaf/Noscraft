@@ -21,6 +21,11 @@ public class ItemFairy extends ItemMod implements IFairy {
         maxStackSize = 1;
     }
 
+    @Override
+    public @Nonnull String getLayer0Path() {
+        return LAYER0_PREFIX + "fairy/" + toRegistryName();
+    }
+
     public @Nonnull Fairies getFairy() {
         return FAIRY;
     }
