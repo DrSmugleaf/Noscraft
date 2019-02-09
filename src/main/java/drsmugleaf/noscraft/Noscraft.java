@@ -6,7 +6,6 @@ import drsmugleaf.noscraft.common.container.FairyContainer;
 import drsmugleaf.noscraft.common.item.equipment.fairy.FairyItem;
 import drsmugleaf.noscraft.common.item.equipment.fairy.IFairy;
 import drsmugleaf.noscraft.common.network.PacketHandler;
-import drsmugleaf.noscraft.util.WikiParser;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
