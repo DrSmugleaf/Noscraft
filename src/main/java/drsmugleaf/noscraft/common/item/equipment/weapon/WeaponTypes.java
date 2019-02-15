@@ -33,6 +33,6 @@ public enum WeaponTypes {
     public @Nonnull WeaponSlot getSlot() {
         return SLOT;
     }
-    public @Nonnull WeaponClass getClassx() { return CLASS; }
+    public @Nonnull WeaponClass getWeaponClass() { return CLASS; }
 
 }

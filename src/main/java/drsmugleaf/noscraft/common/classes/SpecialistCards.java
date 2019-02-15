@@ -41,7 +41,7 @@ public enum SpecialistCards {
     MYSTIC_ART(81, 20, Elements.WATER, WeaponSlot.MAIN, Classes.MARTIAL_ARTIST),
 
     PAJAMA(27, 10, Elements.NONE, WeaponSlot.MAIN, Classes.values()),
-    JAJAMARU(45, 38, Elements.FIRE, WeaponSlot.MAIN, Classes.SWORDSMAN, Classes.ARCHER, Classes.MAGE), // TODO: Add Martial artist to valid classes
+    JAJAMARU(45, 38, Elements.FIRE, WeaponSlot.MAIN, Classes.values()),
     CHICKEN_COSTUME(0, 1, Elements.NONE, WeaponSlot.MAIN, Classes.values()),
     PIRATE(0, 10, Elements.NONE, WeaponSlot.MAIN, Classes.values());
 
