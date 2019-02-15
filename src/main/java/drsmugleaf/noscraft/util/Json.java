@@ -33,7 +33,7 @@ public class Json {
             Files.createFile(filePath);
         } catch (IOException e) {
             if (!(e instanceof FileAlreadyExistsException)) {
-                throw new IllegalStateException("Error creating file " + filePath);
+                throw new IllegalStateException("Error creating file " + filePath, e);
             }
         }
 
