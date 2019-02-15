@@ -5,23 +5,25 @@ import javax.annotation.Nonnull;
  */
 public enum WeaponTypes {
 
-    ADVENTURER_MAIN(Range.MELEE, WeaponSlot.MAIN),
-    ADVENTURER_SECONDARY(Range.RANGED, WeaponSlot.SECONDARY),
-    SWORD(Range.MELEE, WeaponSlot.MAIN),
-    BOW(Range.RANGED, WeaponSlot.MAIN),
-    STAFF(Range.MAGIC, WeaponSlot.MAIN),
-    GAUNTLET(Range.MELEE, WeaponSlot.MAIN),
-    CROSSBOW(Range.RANGED, WeaponSlot.SECONDARY),
-    DAGGER(Range.MELEE, WeaponSlot.SECONDARY),
-    GUN(Range.MAGIC, WeaponSlot.SECONDARY),
-    TOKEN(Range.RANGED, WeaponSlot.SECONDARY);
+    ADVENTURER_MAIN(Range.MELEE, WeaponSlot.MAIN, WeaponClass.ADVENTURER),
+    ADVENTURER_SECONDARY(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.ADVENTURER),
+    SWORD(Range.MELEE, WeaponSlot.MAIN, WeaponClass.SWORDSMAN),
+    BOW(Range.RANGED, WeaponSlot.MAIN, WeaponClass.ARCHER),
+    STAFF(Range.MAGIC, WeaponSlot.MAIN, WeaponClass.MAGE),
+    GAUNTLET(Range.MELEE, WeaponSlot.MAIN, WeaponClass.MARTIAL_ARTIST),
+    CROSSBOW(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.SWORDSMAN),
+    DAGGER(Range.MELEE, WeaponSlot.SECONDARY, WeaponClass.ARCHER),
+    GUN(Range.MAGIC, WeaponSlot.SECONDARY, WeaponClass.MAGE),
+    TOKEN(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.MARTIAL_ARTIST);
 
     private final @Nonnull Range RANGE;
     private final @Nonnull WeaponSlot SLOT;
+    private final @Nonnull WeaponClass CLASS;
 
-    WeaponTypes(@Nonnull Range range, @Nonnull WeaponSlot slot) {
+    WeaponTypes(@Nonnull Range range, @Nonnull WeaponSlot slot, @Nonnull WeaponClass classx) {
         RANGE = range;
         SLOT = slot;
+        CLASS = classx;
     }
 
     public int getRange() {
@@ -31,5 +33,6 @@ public enum WeaponTypes {
     public @Nonnull WeaponSlot getSlot() {
         return SLOT;
     }
+    public @Nonnull WeaponClass getWeaponClass() { return CLASS; }
 
 }
