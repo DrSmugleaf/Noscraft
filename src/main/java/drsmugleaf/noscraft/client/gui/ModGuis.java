@@ -5,15 +5,20 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by DrSmugleaf on 01/02/2019
  */
 public class ModGuis {
 
+    private static final @Nonnull GuiSpellBar SPELL_BAR = new GuiSpellBar();
+
     @SubscribeEvent
-    public static void guiPostInit(GuiScreenEvent.InitGuiEvent.Post event) {
+    public static void onGuiPostInit(GuiScreenEvent.InitGuiEvent.Post event) {
         GuiScreen gui = event.getGui();
         String format;
         if (gui instanceof GuiInventory) {
@@ -27,6 +32,11 @@ public class ModGuis {
         format = I18n.format(format);
         GuiNoscraftButton button = new GuiNoscraftButton((GuiContainer) gui, 26, 8, 10, 10, format);
         event.getButtonList().add(button);
+    }
+
+    @SubscribeEvent
+    public static void onRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
+        SPELL_BAR.draw(event);
     }
 
 }
