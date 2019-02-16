@@ -37,8 +37,8 @@ public enum SpecialistCards {
     SEER(80, 70, Elements.DARKNESS, WeaponSlot.MAIN, Classes.MAGE),
     ARCHMAGE(70, 70, Elements.LIGHT, WeaponSlot.MAIN, Classes.MAGE),
 
-    DRAGON_FIST(81, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.MARTIAL_ARTIST),
-    MYSTIC_ART(81, 20, Elements.WATER, WeaponSlot.MAIN, Classes.MARTIAL_ARTIST),
+    DRAGON_FIST(81, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.MARTIALARTIST),
+    MYSTIC_ART(81, 20, Elements.WATER, WeaponSlot.MAIN, Classes.MARTIALARTIST),
 
     PAJAMA(27, 10, Elements.NONE, WeaponSlot.MAIN, Classes.values()),
     JAJAMARU(45, 38, Elements.FIRE, WeaponSlot.MAIN, Classes.values()),

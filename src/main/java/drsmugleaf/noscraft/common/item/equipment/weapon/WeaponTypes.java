@@ -10,11 +10,11 @@ public enum WeaponTypes {
     SWORD(Range.MELEE, WeaponSlot.MAIN, WeaponClass.SWORDSMAN),
     BOW(Range.RANGED, WeaponSlot.MAIN, WeaponClass.ARCHER),
     STAFF(Range.MAGIC, WeaponSlot.MAIN, WeaponClass.MAGE),
-    GAUNTLET(Range.MELEE, WeaponSlot.MAIN, WeaponClass.MARTIAL_ARTIST),
+    GAUNTLET(Range.MELEE, WeaponSlot.MAIN, WeaponClass.MARTIALARTIST),
     CROSSBOW(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.SWORDSMAN),
     DAGGER(Range.MELEE, WeaponSlot.SECONDARY, WeaponClass.ARCHER),
     GUN(Range.MAGIC, WeaponSlot.SECONDARY, WeaponClass.MAGE),
-    TOKEN(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.MARTIAL_ARTIST);
+    TOKEN(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.MARTIALARTIST);
 
     private final @Nonnull Range RANGE;
     private final @Nonnull WeaponSlot SLOT;

@@ -8,5 +8,5 @@ public enum WeaponClass {
     SWORDSMAN,
     ARCHER,
     MAGE,
-    MARTIAL_ARTIST;
+    MARTIALARTIST
 }

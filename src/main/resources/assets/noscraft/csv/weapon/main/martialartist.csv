@@ -1,0 +1,19 @@
+name,level,defense,evasion,ranged_evasion,magic_defense,fire_resistance,water_resistance,light_resistance,dark_resistance,all_resistance,attack,morale,speed,below_level_x_damage_received,below_level_x_damage_received_reduced,close_attacks_chance,close_attacks_received,attacks_chance,attacks_multiplier,crit_chance_reduced,critical_damage_received_reduced,ranged_damage_received,random_ranged_damage_received_chance,random_ranged_damage_received_reduced,random_magic_damage_received,random_magic_damage_received_chance,pvp_defense_reduced,effect_chance,effect_name,fire_damage,water_damage,light_damage,dark_damage,all_element_damage,increase_damage,increase_damage_chance,catsy_damage,high_level_plant_damage,high_level_pet_damage,high_level_monster_damage,all_resistance_decrease,fire_resistance_decrease,water_resistance_decrease,light_resistance_decrease,dark_resistance_decrease,pvp_damage_increase,critical_damage_increase,mp_removal,hit_rate_increase,random_damage_reduced,random_damage_reduced_chance,magic_damage_increase,mp_increase,defense_ignore,defense_ignore_chance
+Short knight glove,80,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5,,,,,,,,
+Steel fist,80,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,28,5,,,,,,,,,,,,,,,,,,,
+Black hand,82,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,100,,30,10,,,,,,,,,,,5,,,,,,,5,5
+Martial arts gloves,82,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,100,,,,,,,,,,,,,,,,,,,,,,,
+Glove in reinforced leather,84,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,100,,,,,,,,,,,,,,,,,,,,,6,5
+Martial arts glove in leather,84,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Apprentice's glove's glove,86,,,,,,,,,,,,,,,,,,,,,,,,,,,,,100,,,,,30,10,,,,,,,,,,,,,,,,,,5,7
+Powerful glove,86,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30,10,,,,,,,,,,8,6,,,,,,,6,6
+Dark fist,88,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Glove of cold steel,90,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,190,,,,40,25,,,,,,,15,,,,,,,,,,,5,6
+Tear of Ladine,90,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,190,,,,40,25,,,,,,,15,,,,,,,,,,,5,6
+Claw of Fenris,92,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,,,,40,25,,,,,,,15,,,,5,,,,,,,,
+Golem glove of fire,92,,,,,,,,,,,,,,,,,,,,,,,,,,,,,190,,,,,40,30,,,,,,20,,,,,,,,,,,,,
+Glove Scales of chaos,95,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,190,,,,40,30,,,,,,20,,,,,6,,,,,,,,
+Flame of the Frit,95,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,,,,40,35,,,,,19,,,,,,,,,,,,,6,6
+Fist of the goddess sealed,"25Hero
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,180,40,35,,,,,20,,,,,,,,,,,,,5,5
+Divine fist,45Hero,,,,,,,,,,,,,,,,,,,,,,,,,,,7,paradise gate,,,,,185,40,40,,,,,20,,,,,,,,,,,,,,

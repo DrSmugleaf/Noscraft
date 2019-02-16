@@ -14,7 +14,7 @@ public enum Classes {
     SWORDSMAN(WeaponTypes.SWORD, WeaponTypes.CROSSBOW, ArmorTypes.SWORDSMAN_ARMOR),
     ARCHER(WeaponTypes.BOW, WeaponTypes.DAGGER, ArmorTypes.ARCHER_ARMOR),
     MAGE(WeaponTypes.STAFF, WeaponTypes.GUN, ArmorTypes.MAGE_ARMOR),
-    MARTIAL_ARTIST(WeaponTypes.GAUNTLET, WeaponTypes.TOKEN, ArmorTypes.MARTIAL_ARTIST_ARMOR);
+    MARTIALARTIST(WeaponTypes.GAUNTLET, WeaponTypes.TOKEN, ArmorTypes.MARTIAL_ARTIST_ARMOR);
 
     private final @Nonnull WeaponTypes MAIN;
     private final @Nonnull WeaponTypes SECONDARY;
