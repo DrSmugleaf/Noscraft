@@ -1,6 +1,6 @@
 package drsmugleaf.noscraft.util;
 
-import drsmugleaf.noscraft.common.item.IModellable;
+import drsmugleaf.noscraft.common.IModellable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

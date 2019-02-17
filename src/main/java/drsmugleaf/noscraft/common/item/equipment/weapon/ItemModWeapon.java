@@ -28,7 +28,7 @@ public class ItemModWeapon extends ItemMod {
     }
 
     @Override
-    public String getItemStackDisplayName(ItemStack stack) {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return getName();
     }
 

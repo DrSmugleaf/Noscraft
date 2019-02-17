@@ -1,6 +1,6 @@
 package drsmugleaf.noscraft.util;
 
-import drsmugleaf.noscraft.common.item.IModellable;
+import drsmugleaf.noscraft.common.IModellable;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;

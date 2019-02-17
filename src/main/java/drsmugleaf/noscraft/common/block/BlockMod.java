@@ -1,11 +1,9 @@
 package drsmugleaf.noscraft.common.block;
 
-import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.item.IModellable;
+import drsmugleaf.noscraft.common.IModellable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
@@ -19,9 +17,7 @@ public abstract class BlockMod extends Block implements IModellable {
     public BlockMod(@Nonnull String name) {
         super(Material.ROCK);
         NAME = name;
-        name = IModellable.toRegistryName(name);
-        setRegistryName(new ResourceLocation(Noscraft.MOD_ID, name));
-        setUnlocalizedName(getRegistryName().toString());
+        register(this);
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     }
 

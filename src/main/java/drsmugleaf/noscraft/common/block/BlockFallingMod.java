@@ -1,10 +1,8 @@
 package drsmugleaf.noscraft.common.block;
 
-import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.item.IModellable;
+import drsmugleaf.noscraft.common.IModellable;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
@@ -18,9 +16,7 @@ public abstract class BlockFallingMod extends BlockFalling implements IModellabl
     public BlockFallingMod(@Nonnull String name) {
         super();
         NAME = name;
-        name = IModellable.toRegistryName(name);
-        setRegistryName(new ResourceLocation(Noscraft.MOD_ID, name));
-        setUnlocalizedName(getRegistryName().toString());
+        register(this);
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     }
 
