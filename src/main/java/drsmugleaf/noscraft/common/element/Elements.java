@@ -1,4 +1,4 @@
-package drsmugleaf.noscraft.common.elements;
+package drsmugleaf.noscraft.common.element;
 
 import javax.annotation.Nonnull;
 

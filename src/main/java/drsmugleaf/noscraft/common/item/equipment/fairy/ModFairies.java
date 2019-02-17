@@ -1,9 +1,6 @@
 package drsmugleaf.noscraft.common.item.equipment.fairy;
 
-import drsmugleaf.noscraft.Noscraft;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -18,11 +15,6 @@ public class ModFairies {
             ItemFairy fairy = new ItemFairy(eFairy);
             event.getRegistry().register(fairy);
         }
-    }
-
-    @SubscribeEvent
-    public static void registerSlot(TextureStitchEvent.Pre event) {
-        event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "items/slot/empty_fairy"));
     }
 
 }

@@ -1,6 +1,6 @@
 package drsmugleaf.noscraft.common.item.equipment.fairy;
 
-import drsmugleaf.noscraft.common.elements.Elements;
+import drsmugleaf.noscraft.common.element.Elements;
 
 import javax.annotation.Nonnull;
 

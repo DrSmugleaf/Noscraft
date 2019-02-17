@@ -1,6 +1,6 @@
 package drsmugleaf.noscraft.common.classes;
 
-import drsmugleaf.noscraft.common.elements.Elements;
+import drsmugleaf.noscraft.common.element.Elements;
 import drsmugleaf.noscraft.common.item.equipment.weapon.WeaponSlot;
 
 import javax.annotation.Nonnull;

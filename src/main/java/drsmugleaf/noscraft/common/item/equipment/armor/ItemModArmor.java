@@ -31,7 +31,7 @@ public class ItemModArmor extends ItemArmor implements IModellable {
         setUnlocalizedName(getRegistryName().toString());
         setCreativeTab(CreativeTabs.COMBAT);
 
-        if (!Noscraft.getProxy().isServer()) {
+        if (Noscraft.getProxy().isClient()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("noscraft:" + FILE_NAME, "inventory"));
         }
     }

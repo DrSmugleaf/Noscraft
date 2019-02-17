@@ -22,7 +22,7 @@ public abstract class ItemMod extends Item implements IModellable {
         setRegistryName(new ResourceLocation(Noscraft.MOD_ID, name));
         setUnlocalizedName(getRegistryName().toString());
 
-        if (!Noscraft.getProxy().isServer()) {
+        if (Noscraft.getProxy().isClient()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("noscraft:" + name, "inventory"));
         }
     }

@@ -1,9 +1,13 @@
 package drsmugleaf.noscraft.common.item.equipment.fairy;
 
-import drsmugleaf.noscraft.common.elements.Elements;
+import drsmugleaf.noscraft.common.element.Elements;
 import drsmugleaf.noscraft.common.item.ItemMod;
 import drsmugleaf.noscraft.common.item.NoscraftFairyTab;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
@@ -31,7 +35,7 @@ public class ItemFairy extends ItemMod implements IFairy {
     }
 
     @Override
-    public @Nonnull String getItemStackDisplayName(ItemStack stack) {
+    public @Nonnull String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return FAIRY.getName();
     }
 
@@ -43,6 +47,12 @@ public class ItemFairy extends ItemMod implements IFairy {
     @Override
     public @Nonnull Elements getElement() {
         return FAIRY.getElement();
+    }
+
+    @Nonnull
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
 }

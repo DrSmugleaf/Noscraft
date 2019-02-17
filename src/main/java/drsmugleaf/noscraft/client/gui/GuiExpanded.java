@@ -3,7 +3,7 @@ package drsmugleaf.noscraft.client.gui;
 import drsmugleaf.noscraft.common.container.ContainerExpanded;
 import drsmugleaf.noscraft.common.container.FairyCapabilities;
 import drsmugleaf.noscraft.common.container.FairyContainer;
-import drsmugleaf.noscraft.common.elements.Elements;
+import drsmugleaf.noscraft.common.element.Elements;
 import drsmugleaf.noscraft.common.item.equipment.fairy.ItemFairy;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;

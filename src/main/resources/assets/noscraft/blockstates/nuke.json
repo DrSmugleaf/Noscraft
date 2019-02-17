@@ -1,0 +1,13 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "noscraft:nuke.obj"
+     },
+    "textures": {
+        "#None": "noscraft:blocks/nuke"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}]
+    }
+}
