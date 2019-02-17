@@ -3,7 +3,6 @@ package drsmugleaf.noscraft.common.item.equipment.armor;
 import drsmugleaf.noscraft.common.item.equipment.Effects;
 import drsmugleaf.noscraft.common.item.equipment.Optimization;
 import drsmugleaf.noscraft.common.item.equipment.Rarity;
-import drsmugleaf.noscraft.common.item.equipment.Optimization;
 
 import javax.annotation.Nonnull;
 
@@ -14,22 +13,22 @@ public enum Armors {
 
     ADVENTURER_1(12, 14, 12, 24, 1, ArmorTypes.ADVENTURER_ARMOR, Effects.NONE);
 
-    private final @Nonnull Integer MELEE_DEF;
-    private final @Nonnull Integer RANGE_DEF;
-    private final @Nonnull Integer MAGIC_DEF;
-    private final @Nonnull Integer DODGE;
-    private final @Nonnull Integer LEVEL;
+    private final int MELEE_DEF;
+    private final int RANGE_DEF;
+    private final int MAGIC_DEF;
+    private final int DODGE;
+    private final int LEVEL;
     private final @Nonnull Effects[] EFFECT;
     private final @Nonnull ArmorTypes TYPE;
     private final @Nonnull Rarity RARITY;
     private final @Nonnull Optimization OPTIMIZATION;
 
     Armors(
-            @Nonnull Integer meleeDef,
-            @Nonnull Integer rangeDef,
-            @Nonnull Integer magicDef,
-            @Nonnull Integer dodge,
-            @Nonnull Integer level,
+            int meleeDef,
+            int rangeDef,
+            int magicDef,
+            int dodge,
+            int level,
             @Nonnull ArmorTypes type,
             @Nonnull Effects... effect
     ) {
@@ -41,15 +40,15 @@ public enum Armors {
         EFFECT = effect;
         TYPE = type;
         RARITY = Rarity.NONE;
-        OPTIMIZATION = Optimization.OPTIMIZATION_0;
+        OPTIMIZATION = Optimization.ZERO;
     }
 
     Armors(
-            @Nonnull Integer meleeDef,
-            @Nonnull Integer rangeDef,
-            @Nonnull Integer magicDef,
-            @Nonnull Integer dodge,
-            @Nonnull Integer level,
+            int meleeDef,
+            int rangeDef,
+            int magicDef,
+            int dodge,
+            int level,
             @Nonnull ArmorTypes type,
             @Nonnull Rarity rarity,
             @Nonnull Optimization optimization,
@@ -102,20 +101,7 @@ public enum Armors {
 
     public int getStatIncrease() {
         int rarityCapacity = (LEVEL / 5) + 1; // This being an int is intentional; the original game truncates decimals.
-        return (rarityCapacity * RARITY.getStrengtheningFactor()) - RARITY.getStatDecrease();
-    }
-    public int optimizeItem() {
-        final double RANDVALUE = Math.random();
-
-        if (RANDVALUE > (1 - OPTIMIZATION.getOptimizationChance())) {
-            return (OPTIMIZATION.getOptimizationLevel() + 1);
-        } else if (RANDVALUE < (1 - OPTIMIZATION.getOptimizationChance()) && RANDVALUE > OPTIMIZATION.getBreakChance()){
-            // TODO: 01/02/2019 LOCK THE ITEM
-            return OPTIMIZATION.getOptimizationLevel();
-        } else {
-            // TODO: 01/02/2019 BREAK THE ITEM
-            return 0;
-        }
+        return (rarityCapacity * RARITY.getStrengtheningFactor()) - RARITY.getStatModifier();
     }
 
 }

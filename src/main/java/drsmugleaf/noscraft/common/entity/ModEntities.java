@@ -23,7 +23,6 @@ public class ModEntities {
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
         event.getRegistry().register(NUKE);
-//        EntityRegistry.registerModEntity(new ResourceLocation(Noscraft.MOD_ID, "nuke"), EntityNuke.class, Noscraft.MOD_ID + ":nuke", 0, Noscraft.getInstance(), 64, 3, true);
     }
 
 }

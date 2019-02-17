@@ -37,7 +37,7 @@ public enum Fairies {
     private final int AMPLIFIED_LEVEL;
     private final @Nonnull Elements ELEMENT;
 
-    Fairies(String name, int startingLevel, int maxLevel, int amplifiedLevel, @Nonnull Elements element) {
+    Fairies(@Nonnull String name, int startingLevel, int maxLevel, int amplifiedLevel, @Nonnull Elements element) {
         NAME = name;
         STARTING_LEVEL = startingLevel;
         MAX_LEVEL = maxLevel;

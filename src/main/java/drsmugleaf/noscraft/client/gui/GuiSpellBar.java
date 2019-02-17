@@ -26,8 +26,8 @@ public class GuiSpellBar extends Gui {
         }
 
         Minecraft mc = Minecraft.getMinecraft();
-
         mc.getTextureManager().bindTexture(WIDGETS);
+
         GlStateManager.color(1, 1, 1, 1);
         GlStateManager.disableLighting();
         GlStateManager.enableBlend();

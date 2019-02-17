@@ -32,12 +32,14 @@ import java.util.List;
  */
 public abstract class OBJRender<T extends Entity> extends Render<T> {
 
+    @Nullable
     private IBakedModel model;
 
-    protected OBJRender(RenderManager renderManager) {
+    protected OBJRender(@Nonnull RenderManager renderManager) {
         super(renderManager);
     }
 
+    @Nonnull
     protected abstract ResourceLocation getEntityModel();
 
     @Nullable
@@ -46,7 +48,7 @@ public abstract class OBJRender<T extends Entity> extends Render<T> {
         return null;
     }
 
-    protected abstract boolean preRender(T entity, BufferBuilder buffer, double x, double y, double z, float entityYaw, float partialTicks);
+    protected abstract boolean preRender(@Nonnull T entity, @Nonnull BufferBuilder buffer, double x, double y, double z, float entityYaw, float partialTicks);
 
     @Override
     public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks) {

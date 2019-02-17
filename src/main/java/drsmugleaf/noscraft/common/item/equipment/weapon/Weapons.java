@@ -20,11 +20,10 @@ public enum Weapons {
     MAGE_MAIN_15(96, 70, 0, 0, 15, WeaponTypes.STAFF, Effects.NONE),
     MAGE_SECONDARY_15(91, 93, 0, 0, 15, WeaponTypes.GUN, Effects.NONE);
 
-
     private final int DAMAGE;
-    private final int HITRATE;
-    private final int CRITCHANCE;
-    private final int CRITMULTIPLIER;
+    private final int HIT_RATE;
+    private final int CRIT_CHANCE;
+    private final int CRIT_MULTIPLIER;
     private final int LEVEL;
     private final @Nonnull WeaponTypes TYPE;
     private final @Nonnull Rarity RARITY;
@@ -41,17 +40,18 @@ public enum Weapons {
             @Nonnull Effects... effect
     ) {
         DAMAGE = damage;
-        HITRATE = hitRate;
-        CRITCHANCE = critChance;
-        CRITMULTIPLIER = critMultiplier;
+        HIT_RATE = hitRate;
+        CRIT_CHANCE = critChance;
+        CRIT_MULTIPLIER = critMultiplier;
         LEVEL = level;
         EFFECT = effect;
         TYPE = type;
         RARITY = Rarity.NONE;
-        OPTIMIZATION = Optimization.OPTIMIZATION_0;
+        OPTIMIZATION = Optimization.ZERO;
     }
 
-    Weapons(int damage,
+    Weapons(
+            int damage,
             int hitRate,
             int critChance,
             int critMultiplier,
@@ -62,9 +62,9 @@ public enum Weapons {
             @Nonnull Effects... effect
     ) {
         DAMAGE = damage;
-        HITRATE = hitRate;
-        CRITCHANCE = critChance;
-        CRITMULTIPLIER = critMultiplier;
+        HIT_RATE = hitRate;
+        CRIT_CHANCE = critChance;
+        CRIT_MULTIPLIER = critMultiplier;
         LEVEL = level;
         EFFECT = effect;
         TYPE = type;
@@ -77,15 +77,15 @@ public enum Weapons {
     }
 
     public int getHitRate() {
-        return (int) Math.floor((HITRATE + 0.5 * getStatIncrease()) * OPTIMIZATION.getExtraStats());
+        return (int) Math.floor((HIT_RATE + 0.5 * getStatIncrease()) * OPTIMIZATION.getExtraStats());
     }
 
     public int getCritChance() {
-        return CRITCHANCE;
+        return CRIT_CHANCE;
     }
 
     public int getCritMultiplier() {
-        return CRITMULTIPLIER;
+        return CRIT_MULTIPLIER;
     }
 
     public int getLevel() {
@@ -108,25 +108,13 @@ public enum Weapons {
         return TYPE.getRange();
     }
 
-    public @Nonnull Optimization getOptimization() { return OPTIMIZATION;}
+    public @Nonnull Optimization getOptimization() {
+        return OPTIMIZATION;
+    }
 
     public int getStatIncrease() {
         int rarityCapacity = (LEVEL / 5) + 1; //This being an int is intentional; the original game truncates decimals.
-        return (rarityCapacity * RARITY.getStrengtheningFactor()) - RARITY.getStatDecrease();
-    }
-
-    public int optimizeItem() {
-        final double RANDVALUE = Math.random();
-
-        if (RANDVALUE > (1 - OPTIMIZATION.getOptimizationChance())) {
-            return (OPTIMIZATION.getOptimizationLevel() + 1);
-        } else if (RANDVALUE < (1 - OPTIMIZATION.getOptimizationChance()) && RANDVALUE > OPTIMIZATION.getBreakChance()){
-            // TODO: 01/02/2019 LOCK THE ITEM
-            return OPTIMIZATION.getOptimizationLevel();
-        } else {
-            // TODO: 01/02/2019 BREAK THE ITEM
-            return 0;
-        }
+        return (rarityCapacity * RARITY.getStrengtheningFactor()) - RARITY.getStatModifier();
     }
 
 }

@@ -9,12 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  */
 public class ModBlocks {
 
-//    public static final BlockNuke BLOCK_NUKE = new BlockNuke("Nuke");
-
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> event) {
-//        event.getRegistry().register(BLOCK_NUKE);
-//        BLOCK_NUKE.initModel();
-    }
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {}
 
 }

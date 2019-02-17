@@ -1,92 +1,70 @@
 package drsmugleaf.noscraft.common.item.equipment;
 
-import javax.annotation.Nonnull;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Josde on 01/02/2019
  **/
 public enum Optimization {
-    OPTIMIZATION_0(0),
-    OPTIMIZATION_1(1),
-    OPTIMIZATION_2(2),
-    OPTIMIZATION_3(3),
-    OPTIMIZATION_4(4),
-    OPTIMIZATION_5(5),
-    OPTIMIZATION_6(6),
-    OPTIMIZATION_7(7),
-    OPTIMIZATION_8(8),
-    OPTIMIZATION_9(9),
-    OPTIMIZATION_10(10);
 
-    private final @Nonnull Integer LEVEL;
-    private final @Nonnull Double OPTIMIZATIONCHANCE;
-    private final @Nonnull Double LOCKCHANCE;
-    private final @Nonnull Double BREAKCHANCE;
-    private final @Nonnull Double EXTRASTATS;
+    ZERO(0, 1, 0, 0, 1),
+    ONE(1, 1, 0, 0, 1.1),
+    TWO(2, 0.9, 0.1, 0, 1.15),
+    THREE(3, 0.8, 0.15, 0.05, 1.22),
+    FOUR(4, 0.6, 0.2, 0.2, 1.32),
+    FIVE(5, 0.4, 0.2, 0.4, 1.42),
+    SIX(6, 0.2, 0.2, 0.6, 1.54),
+    SEVEN(7, 0.05, 0.2, 0.75, 1.65),
+    EIGHT(8, 0.02, 0.2, 0.78, 1.90),
+    NINE(9, 0.01, 0.2, 0.79, 2.2),
+    TEN(10, 0, 1, 0, 3);
 
-    Optimization(@Nonnull Integer level) {
+    private final int LEVEL;
+    private final double OPTIMIZATION_CHANCE;
+    private final double LOCK_CHANCE;
+    private final double BREAK_CHANCE;
+    private final double EXTRA_STATS;
+
+    Optimization(int level, double optimizationChance, double lockChance, double breakChance, double extraStats) {
         LEVEL = level;
-        if (level == 1) {
-            EXTRASTATS = 1.1;
-            OPTIMIZATIONCHANCE = 1.0;
-            LOCKCHANCE = BREAKCHANCE = 0.0;
-        } else if (level == 2) {
-            EXTRASTATS = 1.15;
-            OPTIMIZATIONCHANCE = 0.9;
-            LOCKCHANCE = 0.1;
-            BREAKCHANCE = 0.0;
-        } else if (level == 3) {
-            EXTRASTATS = 1.22;
-            OPTIMIZATIONCHANCE = 0.8;
-            LOCKCHANCE = 0.15;
-            BREAKCHANCE = 0.05;
-        } else if (level == 4) {
-            EXTRASTATS = 1.32;
-            OPTIMIZATIONCHANCE = 0.6;
-            LOCKCHANCE = 0.2;
-            BREAKCHANCE = 0.2;
-        } else if (level == 5) {
-            EXTRASTATS = 1.42;
-            OPTIMIZATIONCHANCE = 0.4;
-            LOCKCHANCE = 0.2;
-            BREAKCHANCE = 0.4;
-        } else if (level == 6) {
-            EXTRASTATS = 1.54;
-            OPTIMIZATIONCHANCE = 0.2;
-            LOCKCHANCE = 0.2;
-            BREAKCHANCE = 0.6;
-        } else if (level == 7) {
-            EXTRASTATS = 1.65;
-            OPTIMIZATIONCHANCE = 0.05;
-            LOCKCHANCE = 0.2;
-            BREAKCHANCE = 0.75;
-        } else if (level == 8) {
-            EXTRASTATS = 1.90;
-            OPTIMIZATIONCHANCE = 0.02;
-            LOCKCHANCE = 0.2;
-            BREAKCHANCE = 0.78;
-        } else if (level == 9) {
-            EXTRASTATS = 2.2;
-            OPTIMIZATIONCHANCE = 0.01;
-            LOCKCHANCE = 0.2;
-            BREAKCHANCE = 0.79;
-        } else if (level == 10) {
-            EXTRASTATS = 3.0;
-            OPTIMIZATIONCHANCE = 0.0; //cannot upgrade past +10
-            LOCKCHANCE = 1.0;
-            BREAKCHANCE = 0.0;
-        } else {
-            EXTRASTATS = 1.0;
-            OPTIMIZATIONCHANCE = 1.0;
-            LOCKCHANCE = BREAKCHANCE = 0.0;
-        }
+        OPTIMIZATION_CHANCE = optimizationChance;
+        LOCK_CHANCE = lockChance;
+        BREAK_CHANCE = breakChance;
+        EXTRA_STATS = extraStats;
+    }
+
+    public int getOptimizationLevel() {
+        return LEVEL;
+    }
+
+    public double getOptimizationChance() {
+        return OPTIMIZATION_CHANCE;
+    }
+
+    public double getLockChance() {
+        return LOCK_CHANCE;
+    }
+
+    public double getBreakChance() {
+        return BREAK_CHANCE;
     }
 
     public double getExtraStats() {
-        return EXTRASTATS;
+        return EXTRA_STATS;
     }
-    public int getOptimizationLevel() { return LEVEL; }
-    public double getOptimizationChance() { return OPTIMIZATIONCHANCE; }
-    public double getLockChance() { return LOCKCHANCE; }
-    public double getBreakChance() { return BREAKCHANCE; }
+
+    public int optimizeItem() {
+        double random = ThreadLocalRandom.current().nextDouble();
+
+        if (random < getOptimizationChance()) {
+            return getOptimizationLevel() + 1;
+        } else if (random >= getOptimizationChance() && random > getBreakChance()){
+            // TODO: 01/02/2019 LOCK THE ITEM
+            return getOptimizationLevel();
+        } else {
+            // TODO: 01/02/2019 BREAK THE ITEM
+            return 0;
+        }
+    }
+
 }

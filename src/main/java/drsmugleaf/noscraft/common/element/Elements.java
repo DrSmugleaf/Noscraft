@@ -124,6 +124,10 @@ public enum Elements {
 
     public abstract @Nonnull Elements getWeakTo();
 
+    public double damageMultiplierFrom(@Nonnull Elements element) {
+        return element.damageMultiplierTo(this);
+    }
+
     public double damageMultiplierTo(@Nonnull Elements element) {
         if (element == getOpposite()) {
             return 2.0;

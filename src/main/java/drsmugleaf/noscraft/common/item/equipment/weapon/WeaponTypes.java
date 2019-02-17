@@ -20,10 +20,10 @@ public enum WeaponTypes {
     private final @Nonnull WeaponSlot SLOT;
     private final @Nonnull WeaponClass CLASS;
 
-    WeaponTypes(@Nonnull Range range, @Nonnull WeaponSlot slot, @Nonnull WeaponClass classx) {
+    WeaponTypes(@Nonnull Range range, @Nonnull WeaponSlot slot, @Nonnull WeaponClass wClass) {
         RANGE = range;
         SLOT = slot;
-        CLASS = classx;
+        CLASS = wClass;
     }
 
     public int getRange() {
@@ -33,6 +33,9 @@ public enum WeaponTypes {
     public @Nonnull WeaponSlot getSlot() {
         return SLOT;
     }
-    public @Nonnull WeaponClass getWeaponClass() { return CLASS; }
+
+    public @Nonnull WeaponClass getWeaponClass() {
+        return CLASS;
+    }
 
 }

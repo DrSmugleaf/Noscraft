@@ -58,8 +58,8 @@ public enum SpecialistCards {
         CLASSES = classes;
         WEAPON = weapon;
     }
-    public WeaponSlot getWeaponSlot() { return WEAPON; }
 
+    public @Nonnull WeaponSlot getWeaponSlot() { return WEAPON; }
 
     public int getLvlObtained() {
         return LVL_OBTAINED;

@@ -18,7 +18,7 @@ public class NoscraftFairyTab extends CreativeTabs {
 
     public static final @Nonnull NoscraftFairyTab INSTANCE = new NoscraftFairyTab();
 
-    public NoscraftFairyTab() {
+    private NoscraftFairyTab() {
         super("Fairies");
     }
 
@@ -27,6 +27,7 @@ public class NoscraftFairyTab extends CreativeTabs {
         return true;
     }
 
+    @Nonnull
     @Override
     public ItemStack getTabIconItem() {
         return new ItemStack(FIRE_FAIRY);
