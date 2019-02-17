@@ -1,7 +1,7 @@
 package drsmugleaf.noscraft.util;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.IModellable;
+import drsmugleaf.noscraft.common.IRegistrable;
 
 import javax.annotation.Nonnull;
 import javax.imageio.ImageIO;
@@ -18,7 +18,7 @@ public class Image {
 
     @Nonnull
     private static BufferedImage getImage(@Nonnull String name) {
-        name = IModellable.toRegistryName(name);
+        name = IRegistrable.toRegistryName(name);
         String path = Noscraft.ASSETS + "textures/items/armor/swordsman/" + name + ".png";
 
         BufferedImage image;

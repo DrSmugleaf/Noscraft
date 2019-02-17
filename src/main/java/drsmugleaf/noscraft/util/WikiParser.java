@@ -1,6 +1,6 @@
 package drsmugleaf.noscraft.util;
 
-import drsmugleaf.noscraft.common.IModellable;
+import drsmugleaf.noscraft.common.IRegistrable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -42,7 +42,7 @@ public class WikiParser {
                     BufferedImage image = ImageIO.read(new File(path + imageAttr.replaceFirst(".", "")));
                     String name = elements.get(2).getElementsByTag("a").get(0).attr("title");
 //                    File saveFile = new File(savePath + "/" + folder + "/" + type + "/" + name.toLowerCase().replaceAll(" ", "_").replaceAll(":", "") + ".png");
-                    File saveFile = new File(savePath + "/" + folder + "/" + IModellable.toRegistryName(name) + ".png");
+                    File saveFile = new File(savePath + "/" + folder + "/" + IRegistrable.toRegistryName(name) + ".png");
                     ImageIO.write(image, "png", saveFile);
                 }
 
