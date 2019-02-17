@@ -5,14 +5,14 @@ import javax.annotation.Nonnull;
  */
 public enum WeaponTypes {
 
-    ADVENTURER_MAIN(Range.MELEE, WeaponSlot.MAIN, WeaponClass.ADVENTURER),
+    ADVENTURER_MAIN(Range.CLOSE, WeaponSlot.MAIN, WeaponClass.ADVENTURER),
     ADVENTURER_SECONDARY(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.ADVENTURER),
-    SWORD(Range.MELEE, WeaponSlot.MAIN, WeaponClass.SWORDSMAN),
+    SWORD(Range.CLOSE, WeaponSlot.MAIN, WeaponClass.SWORDSMAN),
     BOW(Range.RANGED, WeaponSlot.MAIN, WeaponClass.ARCHER),
     STAFF(Range.MAGIC, WeaponSlot.MAIN, WeaponClass.MAGE),
-    GAUNTLET(Range.MELEE, WeaponSlot.MAIN, WeaponClass.MARTIALARTIST),
+    GAUNTLET(Range.CLOSE, WeaponSlot.MAIN, WeaponClass.MARTIALARTIST),
     CROSSBOW(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.SWORDSMAN),
-    DAGGER(Range.MELEE, WeaponSlot.SECONDARY, WeaponClass.ARCHER),
+    DAGGER(Range.CLOSE, WeaponSlot.SECONDARY, WeaponClass.ARCHER),
     GUN(Range.MAGIC, WeaponSlot.SECONDARY, WeaponClass.MAGE),
     TOKEN(Range.RANGED, WeaponSlot.SECONDARY, WeaponClass.MARTIALARTIST);
 
