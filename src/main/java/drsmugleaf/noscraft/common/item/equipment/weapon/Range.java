@@ -5,7 +5,7 @@ package drsmugleaf.noscraft.common.item.equipment.weapon;
  **/
 public enum Range {
 
-    MELEE(1),
+    CLOSE(1),
     RANGED(5),
     MAGIC(4);
 
