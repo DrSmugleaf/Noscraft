@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/weapon/main/mage/wand_of_the_lava_ghost"
+    }
+}

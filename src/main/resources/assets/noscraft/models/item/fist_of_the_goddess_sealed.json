@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/weapon/main/martialartist/fist_of_the_goddess_sealed"
+    }
+}

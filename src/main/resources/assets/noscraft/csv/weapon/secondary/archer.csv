@@ -1,0 +1,28 @@
+name,level,defense,evasion,ranged_evasion,magic_defense,fire_resistance,water_resistance,light_resistance,dark_resistance,all_resistance,attack,morale,speed,below_level_x_damage_received,below_level_x_damage_received_reduced,close_attacks_chance,close_attacks_received,attacks_chance,attacks_multiplier,crit_chance_reduced,critical_damage_received_reduced,ranged_damage_received,random_ranged_damage_received_chance,random_ranged_damage_received_reduced,random_magic_damage_received,random_magic_damage_received_chance,pvp_defense_reduced,effect_chance,effect_name,fire_damage,water_damage,light_damage,dark_damage,all_element_damage,increase_damage,increase_damage_chance,catsy_damage,high_level_plant_damage,high_level_pet_damage,high_level_monster_damage,all_resistance_decrease,fire_resistance_decrease,water_resistance_decrease,light_resistance_decrease,dark_resistance_decrease,pvp_damage_increase,critical_damage_increase,mp_removal,hit_rate_increase
+Beginner's Dagger,15,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Dagger,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Highlander dagger,21,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Dagger of torment,27,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Refined dagger,33,,,,,,,,,,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Masterpiece dagger,41,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Scrammer,44,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,45,,20,10,,,,,,,,,,,,,
+Brass dagger,47,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Dagger-dagger,48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30,,,,,,,,,,,,,,,,
+Ruby dagger,53,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27,,,,,,,,,,,,,,,,,,,
+Dagger of the spirit,58,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,20,,,,,,,,,,,,,,,
+Mystic knife,64,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Kriss of the shadow,67,,,,,,,,,,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,20,,,,100,
+Ornate knife,72,,,,,,,,,,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30,,
+Ecaracci,74,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,50,,,,,,,,,,,,,,,
+Dagger of the desert scorpion,80,,30,,,,,,,,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,80
+Honorable: Calvina Blue Tooth Dagger,82,,,,,,,,,,80,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,10,,80,
+Hero's scrammer,85,,,,,,,,,,35,,,,,,,,,,35,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Calvinas Blue Tooth Dagger,88,,,,,,,,,,100,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,100,
+Honorable: Knife of the great commander,88,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,50,5,,,,,4,,,,,10,,,80
+Great leader's knife,90,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,60,5,,,,,6,,,,,,,,100
+Dagger of the forgotten hero (+10),90,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,60,4,,,,,5,,,,,,,,100
+Glowing dog's tusk,92,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,8,60,6,,,,,8,,,,,,,,100
+Tusk of Kertos,95,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,10,65,6,,,,,10,,,,,,,,100
+Inferno dagger sealed,25Hero,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,10,65,6,,,,,10,,,,,,,,100
+Paradise dagger sealed,25Hero,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,10,65,6,,,,,10,,,,,,,,100
+Dagger of the abyss of krem,45Hero,,,,,,,,,,,,,,,,,,,,,,,,,,,,autonomy of krem (secondary),7,,,,10,70,6,,,,,10,,,,,,,,

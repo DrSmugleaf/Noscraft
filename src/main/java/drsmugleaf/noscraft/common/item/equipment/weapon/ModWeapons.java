@@ -7,6 +7,7 @@ import com.opencsv.CSVReaderHeaderAwareBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.common.classes.Classes;
+import drsmugleaf.noscraft.util.Json;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -41,6 +42,7 @@ public class ModWeapons {
                     Map<String, String> line;
                     while ((line = reader.readMap()) != null) {
                         ItemModWeapon weapon = new ItemModWeapon(line.get("name"), clazz, slot);
+                        Json.createJson(weapon, "C:\\Users\\WINDOWS\\IdeaProjects\\Noscraft\\src\\main\\resources\\assets\\noscraft\\models\\item");
                         event.getRegistry().register(weapon);
                     }
                 } catch (FileNotFoundException e) {
