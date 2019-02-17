@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/armor/mage/honorable_golden_robe_of_the_bandits_band"
+    }
+}

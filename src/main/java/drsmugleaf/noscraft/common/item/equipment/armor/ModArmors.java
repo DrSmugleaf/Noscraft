@@ -7,6 +7,7 @@ import com.opencsv.CSVReaderHeaderAwareBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.common.classes.Classes;
+import drsmugleaf.noscraft.util.Json;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;

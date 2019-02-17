@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/armor/martialartist/martial_arts_apprentice_uniform"
+    }
+}
