@@ -4,15 +4,17 @@ import com.google.common.collect.ImmutableMap;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.client.gui.GuiExpanded;
 import drsmugleaf.noscraft.client.gui.ModGuis;
-import drsmugleaf.noscraft.client.renderer.entity.RenderNuke;
+import drsmugleaf.noscraft.client.keybinding.ModKeys;
+import drsmugleaf.noscraft.client.render.entity.RenderNuke;
+import drsmugleaf.noscraft.client.render.entity.RenderNukeCircle;
 import drsmugleaf.noscraft.common.CommonProxy;
 import drsmugleaf.noscraft.common.entity.EntityNuke;
+import drsmugleaf.noscraft.common.entity.EntityNukeCircle;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.client.model.obj.OBJModel;
@@ -24,7 +26,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -39,7 +40,7 @@ import javax.annotation.Nullable;
 public class ClientProxy extends CommonProxy {
 
     @Nonnull
-    public static ImmutableMap<String, TextureAtlasSprite> getTextures(OBJModel model) {
+    public static ImmutableMap<String, TextureAtlasSprite> getTextures(@Nonnull OBJModel model) {
         ImmutableMap.Builder<String, TextureAtlasSprite> builder = ImmutableMap.builder();
         builder.put(ModelLoader.White.LOCATION.toString(), ModelLoader.White.INSTANCE);
         TextureAtlasSprite missing = ModelLoader.defaultTextureGetter().apply(new ResourceLocation("missingno"));
@@ -76,6 +77,7 @@ public class ClientProxy extends CommonProxy {
 
         OBJLoader.INSTANCE.addDomain(Noscraft.MOD_ID);
         RenderingRegistry.registerEntityRenderingHandler(EntityNuke.class, RenderNuke::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityNukeCircle.class, RenderNukeCircle::new);
     }
 
     @Override
@@ -93,6 +95,7 @@ public class ClientProxy extends CommonProxy {
         super.registerEventHandlers();
 
         MinecraftForge.EVENT_BUS.register(ModGuis.class);
+        MinecraftForge.EVENT_BUS.register(ModKeys.class);
     }
 
     @Override
@@ -103,11 +106,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public @Nonnull World getClientWorld() {
         return FMLClientHandler.instance().getClient().world;
-    }
-
-    @SubscribeEvent
-    public void onStitchEventPre(TextureStitchEvent.Pre event) {
-        event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "block/nuke"));
     }
 
 }

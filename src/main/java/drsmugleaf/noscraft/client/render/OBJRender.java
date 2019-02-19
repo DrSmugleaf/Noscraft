@@ -1,4 +1,4 @@
-package drsmugleaf.noscraft.client.renderer;
+package drsmugleaf.noscraft.client.render;
 
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.client.ClientProxy;
@@ -35,12 +35,20 @@ public abstract class OBJRender<T extends Entity> extends Render<T> {
     @Nullable
     private IBakedModel model;
 
-    protected OBJRender(@Nonnull RenderManager renderManager) {
+    public OBJRender(@Nonnull RenderManager renderManager) {
         super(renderManager);
     }
 
     @Nonnull
     protected abstract ResourceLocation getEntityModel();
+
+    protected float[] getColor(@Nonnull T entity) {
+        return new float[]{1.0F, 1.0F, 1.0F, 1.0F};
+    }
+
+    protected int getQuadColor(@Nonnull T entity) {
+        return -1;
+    }
 
     @Nullable
     @Override
@@ -55,8 +63,9 @@ public abstract class OBJRender<T extends Entity> extends Render<T> {
         if (model == null) {
             IModel model = ModelLoaderRegistry.getModelOrLogError(getEntityModel(), Noscraft.MOD_NAME + " is missing a model. Please report this to the mod authors.");
             IBakedModel bakedModel = model.bake(model.getDefaultState(), DefaultVertexFormats.ITEM, ModelLoader.defaultTextureGetter());
-            if (bakedModel instanceof OBJModel.OBJBakedModel && model instanceof OBJModel)
+            if (bakedModel instanceof OBJModel.OBJBakedModel && model instanceof OBJModel){
                 this.model = new ItemBakedModel((OBJModel) model, ((OBJModel.OBJBakedModel) bakedModel).getState(), DefaultVertexFormats.ITEM, ClientProxy.getTextures((OBJModel) model));
+            }
         }
 
         if (model == null) {
@@ -66,7 +75,8 @@ public abstract class OBJRender<T extends Entity> extends Render<T> {
         GlStateManager.shadeModel(GL11.GL_SMOOTH);
         Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        float[] color = getColor(entity);
+        GlStateManager.color(color[0], color[1], color[2], color[3]);
         GlStateManager.enableRescaleNormal();
         GlStateManager.alphaFunc(516, 0.1F);
         GlStateManager.enableBlend();
@@ -92,11 +102,19 @@ public abstract class OBJRender<T extends Entity> extends Render<T> {
         );
 
         if (preRender(entity, buffer, x, y, z, entityYaw, partialTicks)) {
+            GlStateManager.rotate(
+                    -(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks),
+                    1.0F,
+                    0.0F,
+                    0.0F
+            );
+            int quadColor = getQuadColor(entity);
+
             for (EnumFacing side : EnumFacing.values()) {
                 List<BakedQuad> quads = model.getQuads(null, side, 0);
                 if (!quads.isEmpty()) {
                     for (BakedQuad quad : quads) {
-                        LightUtil.renderQuadColor(buffer, quad, -1);
+                        LightUtil.renderQuadColor(buffer, quad, quadColor);
                     }
                 }
             }
@@ -104,7 +122,7 @@ public abstract class OBJRender<T extends Entity> extends Render<T> {
             List<BakedQuad> quads = model.getQuads(null, null, 0);
             if (!quads.isEmpty()) {
                 for (BakedQuad quad : quads) {
-                    LightUtil.renderQuadColor(buffer, quad, -1);
+                    LightUtil.renderQuadColor(buffer, quad, quadColor);
                 }
             }
         }

@@ -18,6 +18,7 @@ public class PacketHandler {
         INSTANCE.registerMessage(PacketOpenNormalInventory.class, PacketOpenNormalInventory.class, 0, Side.SERVER);
         INSTANCE.registerMessage(PacketOpenNoscraftInventory.class, PacketOpenNoscraftInventory.class, 1, Side.SERVER);
         INSTANCE.registerMessage(PacketSync.Handler.class, PacketSync.class, 2, Side.CLIENT);
+        INSTANCE.registerMessage(PacketHellDrop.class, PacketHellDrop.class, 3, Side.SERVER);
     }
 
 }

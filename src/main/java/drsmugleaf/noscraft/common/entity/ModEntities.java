@@ -20,9 +20,18 @@ public class ModEntities {
             .tracker(64, 5, true)
             .build();
 
+    public static final EntityEntry NUKE_CIRCLE = EntityEntryBuilder
+            .create()
+            .entity(EntityNukeCircle.class)
+            .id(new ResourceLocation(Noscraft.MOD_ID, "nuke_circle"), 1)
+            .name("nuke_circle")
+            .tracker(64, 5, true)
+            .build();
+
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
         event.getRegistry().register(NUKE);
+        event.getRegistry().register(NUKE_CIRCLE);
     }
 
 }
