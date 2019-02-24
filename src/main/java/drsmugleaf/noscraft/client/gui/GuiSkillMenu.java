@@ -95,6 +95,14 @@ public class GuiSkillMenu extends InventoryEffectRenderer {
         for (GuiButton button : buttonList) {
             button.drawButtonForegroundLayer(mouseX, mouseY);
         }
+
+        if (BUTTON_DRAGGED == null || BUTTON_DRAGGED.getSkill() == null) {
+            return;
+        }
+
+        int x = mouseX - guiLeft - SLOT_WIDTH / 2;
+        int y = mouseY - guiTop - SLOT_HEIGHT / 2;
+        BUTTON_DRAGGED.draw(mc, mouseX, mouseY, mc.getRenderPartialTicks(), x, y);
     }
 
     @Override
@@ -123,41 +131,34 @@ public class GuiSkillMenu extends InventoryEffectRenderer {
         }
 
         if (BUTTON_DRAGGED.getSkill() == null) {
-            return;
+            BUTTON_DRAGGED = null;
         }
-
-        ResourceLocation texture = BUTTON_DRAGGED.getSkill().getTexture();
-        ResourceLocation location = new ResourceLocation(texture.getResourceDomain(), "textures/" + texture.getResourcePath() + ".png");
-        mc.getTextureManager().bindTexture(location);
-        drawModalRectWithCustomSizedTexture(
-                mouseX,
-                mouseY,
-                0,
-                0,
-                GuiSkillMenu.SLOT_REAL_WIDTH - 1,
-                GuiSkillMenu.SLOT_REAL_HEIGHT - 1,
-                GuiSkillMenu.SLOT_REAL_WIDTH - 1,
-                GuiSkillMenu.SLOT_REAL_HEIGHT - 1
-        );
     }
 
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
-        if (BUTTON_DRAGGED == null || BUTTON_DRAGGED.getSkill() == null) {
-            BUTTON_DRAGGED = null;
-            return;
-        }
-
-        GuiButton button = getButtonUnderMouse();
-        if (!(button instanceof GuiSkillHotbarButton)) {
-            BUTTON_DRAGGED = null;
-            return;
-        }
-
-        GuiSkillHotbarButton hotbarButton = (GuiSkillHotbarButton) button;
-        hotbarButton.setSkill(BUTTON_DRAGGED.getSkill());
-        ModGuis.getSkillBar().setSkill(hotbarButton.id + 1, BUTTON_DRAGGED.getSkill());
+        GuiSkillButton button = BUTTON_DRAGGED;
         BUTTON_DRAGGED = null;
+        if (button == null || button.getSkill() == null) {
+            return;
+        }
+
+        ISkill skill = button.getSkill();
+
+        if (button instanceof GuiSkillHotbarButton) {
+            GuiSkillHotbarButton previousButton = (GuiSkillHotbarButton) button;
+            previousButton.setSkill(null);
+            ModGuis.getSkillBar().setSkill(previousButton.id + 1, null);
+        }
+
+        GuiButton buttonUnderMouse = getButtonUnderMouse();
+        if (!(buttonUnderMouse instanceof GuiSkillHotbarButton)) {
+            return;
+        }
+
+        GuiSkillHotbarButton hotbarButton = (GuiSkillHotbarButton) buttonUnderMouse;
+        hotbarButton.setSkill(skill);
+        ModGuis.getSkillBar().setSkill(hotbarButton.id + 1, skill);
     }
 
 }

@@ -41,8 +41,7 @@ public class GuiSkillButton extends GuiButton {
         }
     }
 
-    @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+    public void draw(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks, int x, int y) {
         hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
 
         if (visible && SKILL != null) {
@@ -62,6 +61,11 @@ public class GuiSkillButton extends GuiButton {
 
             mouseDragged(mc, mouseX, mouseY);
         }
+    }
+
+    @Override
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+        draw(mc, mouseX, mouseY, partialTicks, x, y);
     }
 
 }

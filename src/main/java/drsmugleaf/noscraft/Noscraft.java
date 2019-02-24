@@ -82,10 +82,6 @@ public class Noscraft {
                 new SkillCapabilities.CapabilitySkills(),
                 SkillsLearned::new
         );
-//        CapabilityManager.INSTANCE.register(
-//                ,
-//                new SkillCapabilities.CapabilitySkillStorage(),
-//        );
 
         PROXY.registerEventHandlers();
         ModPackets.init();

@@ -16,9 +16,6 @@ public class SkillCapabilities {
     @CapabilityInject(SkillsLearned.class)
     public static final Capability<SkillsLearned> CAPABILITY_SKILLS = null;
 
-//    @CapabilityInject(ISkill.class)
-//    public static final Capability<ISkill> CAPABILITY_SKILL = null;
-
     public static class CapabilitySkills implements Capability.IStorage<SkillsLearned> {
 
         @Nullable
@@ -33,18 +30,5 @@ public class SkillCapabilities {
         }
 
     }
-
-//    public static class CapabilitySkillStorage implements Capability.IStorage<ISkill> {
-//
-//        @Nullable
-//        @Override
-//        public NBTBase writeNBT(Capability<ISkill> capability, ISkill instance, EnumFacing side) {
-//            return null;
-//        }
-//
-//        @Override
-//        public void readNBT(Capability<ISkill> capability, ISkill instance, EnumFacing side, NBTBase nbt) {}
-//
-//    }
 
 }

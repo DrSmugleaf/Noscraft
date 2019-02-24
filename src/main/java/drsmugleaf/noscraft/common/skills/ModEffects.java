@@ -19,6 +19,8 @@ public class ModEffects {
     @Nonnull
     private static Map<String, IEffect> registerEffects() {
         EFFECTS = new HashMap<>();
+
+        // Destroyer
         register(FireTheShotgun.class);
         register(FastShot.class);
         register(LuckyWideshot.class);
@@ -30,6 +32,7 @@ public class ModEffects {
         register(BoomShot.class);
         register(FireMine.class);
         register(HellDrop.class);
+
         return EFFECTS;
     }
 

@@ -32,12 +32,7 @@ public class GuiSkillBar extends Gui {
     @Nonnull
     private final Map<KeyBinding, ISkill> SKILLS = new HashMap<>();
 
-    public GuiSkillBar() {
-        for (int slot = 1; slot < 11; slot++) {
-            KeyBindingSkill bind = ModKeys.getBind(slot);
-//            SKILLS.put(bind, new SkillMod("", HOTBAR_SLOT_SIZE * slot, 0));
-        }
-    }
+    public GuiSkillBar() {}
 
     @Nullable
     public ISkill getSkill(int id) {
@@ -49,7 +44,7 @@ public class GuiSkillBar extends Gui {
         return SKILLS.get(bind);
     }
 
-    public void setSkill(int id, @Nonnull ISkill skill) {
+    public void setSkill(int id, @Nullable ISkill skill) {
         KeyBindingSkill bind = ModKeys.getBind(id);
         if (bind == null) {
             return;

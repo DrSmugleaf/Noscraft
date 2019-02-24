@@ -14,7 +14,7 @@ public class GuiSkillHotbarButton extends GuiSkillButton {
         super(parentGui, skill, buttonId, x, y, widthIn, heightIn, buttonText);
     }
 
-    public void setSkill(@Nonnull ISkill skill) {
+    public void setSkill(@Nullable ISkill skill) {
         SKILL = skill;
     }
 

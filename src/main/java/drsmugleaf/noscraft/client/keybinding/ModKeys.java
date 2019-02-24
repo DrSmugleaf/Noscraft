@@ -44,19 +44,6 @@ public class ModKeys {
                 ModGuis.getSkillBar().cast(bind);
             }
         }
-
-//        if (ABILITY_10.isPressed()) {
-//            RayTraceResult result = player.rayTrace(50, Minecraft.getMinecraft().getTickLength());
-//            if (result == null) {
-//                return;
-//            }
-//
-//            World world = player.world;
-//            BlockPos pos = result.getBlockPos();
-//            ModPackets.INSTANCE.sendToServer(new PacketHellDrop(1, pos)); // ID from ModEntities
-//            EntityNukeCircle circle = new EntityNukeCircle(world, pos.getX(), pos.getY(), pos.getZ());
-//            world.spawnEntity(circle);
-//        }
     }
 
     @Nullable
