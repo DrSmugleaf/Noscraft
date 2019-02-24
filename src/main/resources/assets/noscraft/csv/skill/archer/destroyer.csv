@@ -1,0 +1,12 @@
+name,lvl,range,target,cast_time,cooldown,mp,damage_bonus,element_bonus,element,description,skill_effects
+Fire the Shotgun,1,8,single,0.2,0.8,0,150,180,fire,Basic skill for destroyers,"Ranged attack +150, fire element +180"
+Fast Shot,1,8,single,0.2,7,45,300,350,fire,,"Ranged attack +300, fire element +350, 30% chance to cast blackout: (Disabled movement and attacks for 5 seconds)"
+Lucky Wideshot,1,6,special,0.4,40,70,700,700,fire,,"Ranged attack +700, fire element +700, 100% chance of critical attack"
+Booster On,1,0,single,0.2,120,180,0,0,none,,100% chance to cast booster on: (movement speed +3 for 42 seconds)
+Claymore,1,0,single,1,0.5,50,0,0,fire,,Set up a Claymore at your feet
+Gas Shell,1,6,around_1,0.5,60,90,0,0,none,,"100% chance to cast gas poison: [Chance of receiving critical hit 50%, defense level -2 for 20 seconds, 50% chance to cast 2nd gas poison: (Disables attacks for 5 seconds)]"
+Burst Shot,4,8,single,0.5,23,110,300,1500,fire,,"Ranged attack +300, fire element +1500, pushes enemy away 4 cells"
+Health Pack,8,0,single,0.4,180,85,0,0,none,,Removes bad effects Lv. 3 or lower
+Boom Shot,12,8,around_1,0.5,35,150,900,1100,fire,,"Ranged attack +900, fire element +1100, 40% chance to cast serious bleeding: [Lose HP every 2 seconds (Caster Lv. *4) for 20 seconds, 30% chance of casting broken heart disease: (Lose MP every 4 seconds (Caster Lv./3), movement speed -20% for 30 seconds]"
+Fire Mine,16,0,single,1,60,160,0,0,fire,,"Release 3 Fire Mines at your feet.The mines will find and chase its target on its own, though the target is selected at random within a certain area"
+Hell Drop,20,8,around_2,1.2,120,200,1000,1500,fire,,"Ranged attack +1000, fire element +1500, 80% chance to cast deadly blackout: (Disables movement and attack for 6 seconds, dodge reduced to 0 for .5 seconds)"

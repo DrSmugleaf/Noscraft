@@ -1,8 +1,8 @@
 package drsmugleaf.noscraft.common.network;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.container.FairyCapabilities;
-import drsmugleaf.noscraft.common.container.FairyContainer;
+import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
+import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

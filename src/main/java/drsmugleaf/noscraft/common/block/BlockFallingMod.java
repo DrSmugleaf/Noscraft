@@ -16,8 +16,9 @@ public abstract class BlockFallingMod extends BlockFalling implements IModellabl
     public BlockFallingMod(@Nonnull String name) {
         super();
         NAME = name;
-        register(this);
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+
+        register(this);
     }
 
     @Nonnull

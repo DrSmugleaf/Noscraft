@@ -1,6 +1,9 @@
 package drsmugleaf.noscraft.common.entity;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by DrSmugleaf on 18/02/2019
@@ -15,6 +18,10 @@ public class EntityNukeCircle extends EntityMod {
 
     public EntityNukeCircle(World worldIn, double x, double y, double z) {
         super(worldIn, x, y + 1, z);
+    }
+
+    public EntityNukeCircle(World worldIn, @Nonnull BlockPos pos) {
+        super(worldIn, pos.getX(), pos.getY(), pos.getZ());
     }
 
     @Override

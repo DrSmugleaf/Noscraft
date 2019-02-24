@@ -18,8 +18,8 @@ public abstract class ItemMod extends Item implements IModellable {
     public ItemMod(@Nonnull String name) {
         super();
         NAME = name;
-        register(this);
 
+        name = register(this);
         if (Noscraft.getProxy().isClient()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("noscraft:" + name, "inventory"));
         }

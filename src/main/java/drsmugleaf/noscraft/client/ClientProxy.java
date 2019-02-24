@@ -3,6 +3,7 @@ package drsmugleaf.noscraft.client;
 import com.google.common.collect.ImmutableMap;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.client.gui.GuiExpanded;
+import drsmugleaf.noscraft.client.gui.GuiSkillMenu;
 import drsmugleaf.noscraft.client.gui.ModGuis;
 import drsmugleaf.noscraft.client.keybinding.ModKeys;
 import drsmugleaf.noscraft.client.render.entity.RenderNuke;
@@ -65,6 +66,8 @@ public class ClientProxy extends CommonProxy {
             switch (ID) {
                 case GuiExpanded.ID:
                     return new GuiExpanded(player);
+                case GuiSkillMenu.ID:
+                    return new GuiSkillMenu(player);
             }
         }
 
@@ -75,6 +78,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
 
+        ModKeys.init();
         OBJLoader.INSTANCE.addDomain(Noscraft.MOD_ID);
         RenderingRegistry.registerEntityRenderingHandler(EntityNuke.class, RenderNuke::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityNukeCircle.class, RenderNukeCircle::new);

@@ -1,8 +1,9 @@
 package drsmugleaf.noscraft.client.gui;
 
-import drsmugleaf.noscraft.common.container.ContainerExpanded;
-import drsmugleaf.noscraft.common.container.FairyCapabilities;
-import drsmugleaf.noscraft.common.container.FairyContainer;
+import drsmugleaf.noscraft.Noscraft;
+import drsmugleaf.noscraft.common.container.noscraft.ContainerExpanded;
+import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
+import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
 import drsmugleaf.noscraft.common.element.Elements;
 import drsmugleaf.noscraft.common.item.equipment.fairy.ItemFairy;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -21,7 +22,7 @@ import javax.annotation.Nonnull;
 public class GuiExpanded extends InventoryEffectRenderer {
 
     public static final int ID = 0;
-    public static final @Nonnull ResourceLocation background = new ResourceLocation("noscraft", "textures/gui/expanded_inventory.png");
+    public static final @Nonnull ResourceLocation BACKGROUND = new ResourceLocation(Noscraft.MOD_ID, "textures/gui/expanded_inventory.png");
     private float oldMouseX;
     private float oldMouseY;
     private final @Nonnull EntityPlayer PLAYER;
@@ -72,7 +73,7 @@ public class GuiExpanded extends InventoryEffectRenderer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.getTextureManager().bindTexture(background);
+        mc.getTextureManager().bindTexture(BACKGROUND);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
         for (Slot slot : inventorySlots.inventorySlots) {

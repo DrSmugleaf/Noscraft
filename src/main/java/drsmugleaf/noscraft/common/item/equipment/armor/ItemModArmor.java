@@ -23,10 +23,10 @@ public class ItemModArmor extends ItemArmor implements IModellable {
     public ItemModArmor(@Nonnull EntityEquipmentSlot slot, @Nonnull String name, @Nonnull Classes clazz) {
         super(ArmorMaterial.LEATHER, 0, slot);
         NAME = name;
-        name = register(this);
         CLASS = clazz;
         setCreativeTab(CreativeTabs.COMBAT);
 
+        name = register(this);
         if (Noscraft.getProxy().isClient()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("noscraft:" + name, "inventory"));
         }

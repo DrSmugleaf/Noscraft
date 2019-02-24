@@ -2,13 +2,16 @@ package drsmugleaf.noscraft.common;
 
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.client.gui.GuiExpanded;
+import drsmugleaf.noscraft.client.gui.GuiSkillMenu;
 import drsmugleaf.noscraft.common.block.ModBlocks;
-import drsmugleaf.noscraft.common.container.ContainerExpanded;
+import drsmugleaf.noscraft.common.container.noscraft.ContainerExpanded;
+import drsmugleaf.noscraft.common.container.skill.ContainerSkillMenu;
 import drsmugleaf.noscraft.common.entity.ModEntities;
 import drsmugleaf.noscraft.common.event.EventHandlerEntity;
 import drsmugleaf.noscraft.common.event.EventHandlerItem;
 import drsmugleaf.noscraft.common.item.ModItems;
 import drsmugleaf.noscraft.common.item.equipment.fairy.ModFairies;
+import drsmugleaf.noscraft.common.skills.ModSkills;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -32,6 +35,8 @@ public class CommonProxy implements IGuiHandler {
         switch (ID) {
             case GuiExpanded.ID:
                 return new ContainerExpanded(player);
+            case GuiSkillMenu.ID:
+                return new ContainerSkillMenu(player);
             default:
                 return null;
         }
@@ -58,6 +63,7 @@ public class CommonProxy implements IGuiHandler {
         MinecraftForge.EVENT_BUS.register(ModBlocks.class);
         MinecraftForge.EVENT_BUS.register(ModItems.class);
         MinecraftForge.EVENT_BUS.register(ModEntities.class);
+        MinecraftForge.EVENT_BUS.register(ModSkills.class);
     }
 
     public final boolean isClient() {

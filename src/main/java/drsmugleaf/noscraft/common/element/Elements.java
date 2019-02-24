@@ -114,6 +114,17 @@ public enum Elements {
         HEX_COLOR = hexColor;
     }
 
+    @Nonnull
+    public static Elements from(@Nonnull String name) {
+        for (Elements element : values()) {
+            if (element.name().equalsIgnoreCase(name)) {
+                return element;
+            }
+        }
+
+        throw new IllegalArgumentException("No element enum found with name " + name);
+    }
+
     public int getHexColor() {
         return HEX_COLOR;
     }

@@ -1,7 +1,7 @@
 package drsmugleaf.noscraft.common.event;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.container.FairyCapabilities;
+import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
 import drsmugleaf.noscraft.common.item.equipment.fairy.IFairy;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;

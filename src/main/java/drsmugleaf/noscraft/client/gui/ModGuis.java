@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
  */
 public class ModGuis {
 
-    private static final @Nonnull GuiSpellBar SPELL_BAR = new GuiSpellBar();
+    private static final @Nonnull GuiSkillBar SKILL_BAR = new GuiSkillBar();
 
     @SubscribeEvent
     public static void onGuiPostInit(GuiScreenEvent.InitGuiEvent.Post event) {
@@ -34,17 +34,24 @@ public class ModGuis {
 
         format = I18n.format(format);
         GuiNoscraftButton button = new GuiNoscraftButton((GuiContainer) gui, 26, 8, 10, 10, format);
+        GuiSkillMenuButton button2 = new GuiSkillMenuButton((GuiContainer) gui, 46, 8, 10, 10, format);
         event.getButtonList().add(button);
+        event.getButtonList().add(button2);
     }
 
     @SubscribeEvent
     public static void onRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
-        SPELL_BAR.draw(event);
+        SKILL_BAR.draw(event);
     }
 
     @SubscribeEvent
     public static void onTextureStitchEventPre(TextureStitchEvent.Pre event) {
         event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "items/slot/empty_fairy"));
+    }
+
+    @Nonnull
+    public static GuiSkillBar getSkillBar() {
+        return SKILL_BAR;
     }
 
 }

@@ -2,3 +2,16 @@ button.noscraft=Noscraft
 button.normal=Normal
 
 itemGroup.Fairies=Fairies
+
+key.ability1=Ability Slot 1
+key.ability2=Ability Slot 2
+key.ability3=Ability Slot 3
+key.ability4=Ability Slot 4
+key.ability5=Ability Slot 5
+key.ability6=Ability Slot 6
+key.ability7=Ability Slot 7
+key.ability8=Ability Slot 8
+key.ability9=Ability Slot 9
+key.ability10=Ability Slot 10
+
+gui.skill_menu=Skill Menu

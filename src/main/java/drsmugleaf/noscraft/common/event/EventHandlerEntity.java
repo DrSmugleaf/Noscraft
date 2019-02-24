@@ -1,11 +1,14 @@
 package drsmugleaf.noscraft.common.event;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.container.FairyCapabilities;
-import drsmugleaf.noscraft.common.container.FairyCapabilityProvider;
-import drsmugleaf.noscraft.common.container.FairyContainer;
+import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
+import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilityProvider;
+import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
+import drsmugleaf.noscraft.common.container.skill.SkillCapabilities;
+import drsmugleaf.noscraft.common.container.skill.SkillCapabilityProvider;
+import drsmugleaf.noscraft.common.container.skill.SkillsLearned;
 import drsmugleaf.noscraft.common.item.equipment.fairy.IFairy;
-import drsmugleaf.noscraft.common.network.PacketHandler;
+import drsmugleaf.noscraft.common.network.ModPackets;
 import drsmugleaf.noscraft.common.network.PacketSync;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -40,13 +43,22 @@ public class EventHandlerEntity {
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
+        if (!event.isWasDeath()) {
+            return;
+        }
+
         try {
             FairyContainer container = event.getOriginal().getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
             NBTTagCompound nbt = container.serializeNBT();
             FairyContainer container2 = event.getEntityPlayer().getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
             container2.deserializeNBT(nbt);
+
+            SkillsLearned skills = event.getOriginal().getCapability(SkillCapabilities.CAPABILITY_SKILLS, null);
+            NBTTagCompound nbtSkills = skills.serializeNBT();
+            SkillsLearned skills2 = event.getEntityPlayer().getCapability(SkillCapabilities.CAPABILITY_SKILLS, null);
+            skills2.deserializeNBT(nbtSkills);
         } catch (Exception e) {
-            Noscraft.LOG.error("Could not clone player " + event.getOriginal().getName() + " items when changing dimensions");
+            Noscraft.LOG.error("Could not clone player " + event.getOriginal().getName() + " data after death");
         }
     }
 
@@ -54,8 +66,12 @@ public class EventHandlerEntity {
     public static void attachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof EntityPlayer) {
             event.addCapability(
-                    new ResourceLocation(Noscraft.MOD_ID,"container"),
+                    new ResourceLocation(Noscraft.MOD_ID, "container"),
                     new FairyCapabilityProvider(new FairyContainer())
+            );
+            event.addCapability(
+                    new ResourceLocation(Noscraft.MOD_ID, "skills"),
+                    new SkillCapabilityProvider(new SkillsLearned())
             );
         }
     }
@@ -144,7 +160,7 @@ public class EventHandlerEntity {
     private static void syncSlot(EntityPlayer player, int slot, ItemStack stack, Set<? extends EntityPlayer> receivers) {
         PacketSync packet = new PacketSync(player, slot, stack);
         for (EntityPlayer receiver : receivers) {
-            PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) receiver);
+            ModPackets.INSTANCE.sendTo(packet, (EntityPlayerMP) receiver);
         }
     }
 

@@ -1,6 +1,6 @@
 package drsmugleaf.noscraft.client.gui;
 
-import drsmugleaf.noscraft.common.network.PacketHandler;
+import drsmugleaf.noscraft.common.network.ModPackets;
 import drsmugleaf.noscraft.common.network.PacketOpenNormalInventory;
 import drsmugleaf.noscraft.common.network.PacketOpenNoscraftInventory;
 import net.minecraft.client.Minecraft;
@@ -33,10 +33,10 @@ public class GuiNoscraftButton extends GuiButton {
 
         if (pressed) {
             if (PARENT_GUI instanceof GuiInventory) {
-                PacketHandler.INSTANCE.sendToServer(new PacketOpenNoscraftInventory());
+                ModPackets.INSTANCE.sendToServer(new PacketOpenNoscraftInventory());
             } else {
                 ((GuiExpanded) PARENT_GUI).displayNormalInventory();
-                PacketHandler.INSTANCE.sendToServer(new PacketOpenNormalInventory());
+                ModPackets.INSTANCE.sendToServer(new PacketOpenNormalInventory());
             }
         }
 
@@ -49,7 +49,7 @@ public class GuiNoscraftButton extends GuiButton {
             int x = this.x + PARENT_GUI.getGuiLeft();
             FontRenderer font = mc.fontRenderer;
 
-            mc.getTextureManager().bindTexture(GuiExpanded.background);
+            mc.getTextureManager().bindTexture(GuiExpanded.BACKGROUND);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
             hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
@@ -61,9 +61,8 @@ public class GuiNoscraftButton extends GuiButton {
             GlStateManager.pushMatrix();
             GlStateManager.translate(0, 0, 200);
 
-
             drawTexturedModalRect(x, y, 200, 48, 10, 10);
-            if (hoverState != 1) {
+            if (hoverState == 2) {
                 drawCenteredString(font, I18n.format(displayString), x + 5, y + height, 0xFFFFFF);
             }
 

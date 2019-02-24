@@ -1,12 +1,17 @@
 package drsmugleaf.noscraft;
 
 import drsmugleaf.noscraft.common.CommonProxy;
-import drsmugleaf.noscraft.common.container.FairyCapabilities;
-import drsmugleaf.noscraft.common.container.FairyContainer;
+import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
+import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
+import drsmugleaf.noscraft.common.container.skill.SkillCapabilities;
+import drsmugleaf.noscraft.common.container.skill.SkillsLearned;
 import drsmugleaf.noscraft.common.item.equipment.fairy.FairyItem;
 import drsmugleaf.noscraft.common.item.equipment.fairy.IFairy;
-import drsmugleaf.noscraft.common.network.PacketHandler;
+import drsmugleaf.noscraft.common.network.ModPackets;
+import drsmugleaf.noscraft.common.skills.ModSkills;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -72,9 +77,20 @@ public class Noscraft {
                 FairyItem::new
         );
 
+        CapabilityManager.INSTANCE.register(
+                SkillsLearned.class,
+                new SkillCapabilities.CapabilitySkills(),
+                SkillsLearned::new
+        );
+//        CapabilityManager.INSTANCE.register(
+//                ,
+//                new SkillCapabilities.CapabilitySkillStorage(),
+//        );
+
         PROXY.registerEventHandlers();
-        PacketHandler.init();
+        ModPackets.init();
         PROXY.preInit(event);
+        MinecraftForge.EVENT_BUS.post(new RegistryEvent.Register<>(ModSkills.SKILLS_REGISTRY_NAME, ModSkills.SKILLS));
     }
 
     @Mod.EventHandler

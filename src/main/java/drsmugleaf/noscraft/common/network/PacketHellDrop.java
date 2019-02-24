@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
 /**
  * Created by DrSmugleaf on 19/02/2019
  */
-public class PacketHellDrop implements IMessage, IMessageHandler<PacketHellDrop, IMessage> {
+public class PacketHellDrop implements IMessage, IMessageHandler<PacketHellDrop, PacketCooldownOutOfSync> {
 
     public int entity;
     private BlockPos pos;
@@ -41,7 +41,7 @@ public class PacketHellDrop implements IMessage, IMessageHandler<PacketHellDrop,
     }
 
     @Override
-    public IMessage onMessage(PacketHellDrop message, MessageContext ctx) {
+    public PacketCooldownOutOfSync onMessage(PacketHellDrop message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         WorldServer mainThread = (WorldServer) player.world;
         BlockPos pos = message.pos;

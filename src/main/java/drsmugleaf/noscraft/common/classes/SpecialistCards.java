@@ -1,65 +1,90 @@
 package drsmugleaf.noscraft.common.classes;
 
+import drsmugleaf.noscraft.common.IRegistrable;
+import drsmugleaf.noscraft.common.skills.ISkill;
+import drsmugleaf.noscraft.common.skills.ModSkills;
 import drsmugleaf.noscraft.common.element.Elements;
 import drsmugleaf.noscraft.common.item.equipment.weapon.WeaponSlot;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by DrSmugleaf on 31/01/2019
  */
-public enum SpecialistCards {
+public enum SpecialistCards implements ITransformation, IRegistrable {
 
-    WARRIOR(36, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.SWORDSMAN),
-    BLADE(46, 35, Elements.WATER, WeaponSlot.MAIN, Classes.SWORDSMAN),
-    CRUSADER(55, 50, Elements.LIGHT, WeaponSlot.SECONDARY, Classes.SWORDSMAN),
-    BERSERKER(65, 55, Elements.DARKNESS, WeaponSlot.MAIN, Classes.SWORDSMAN),
-    GLADIATOR(75, 60, Elements.FIRE, WeaponSlot.MAIN, Classes.SWORDSMAN),
-    BATTLE_MONK(80, 70, Elements.WATER, WeaponSlot.MAIN, Classes.SWORDSMAN),
-    DEATH_REAPER(80, 70, Elements.DARKNESS, WeaponSlot.MAIN, Classes.SWORDSMAN),
-    RENEGADE(70, 70, Elements.LIGHT, WeaponSlot.MAIN, Classes.SWORDSMAN), // TODO: Switch to darkness
+    WARRIOR("The Warrior", 36, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.SWORDSMAN),
+    NINJA("The Ninja", 46, 35, Elements.WATER, WeaponSlot.MAIN, Classes.SWORDSMAN),
+    CRUSADER("Crusader", 55, 50, Elements.LIGHT, WeaponSlot.SECONDARY, Classes.SWORDSMAN),
+    BERSERKER("The Berserker", 65, 55, Elements.DARKNESS, WeaponSlot.MAIN, Classes.SWORDSMAN),
+    GLADIATOR("Gladiator", 75, 60, Elements.FIRE, WeaponSlot.MAIN, Classes.SWORDSMAN),
+    BATTLE_MONK("Battle Monk", 80, 70, Elements.WATER, WeaponSlot.MAIN, Classes.SWORDSMAN),
+    DEATH_REAPER("Death Reaper", 80, 70, Elements.DARKNESS, WeaponSlot.MAIN, Classes.SWORDSMAN),
+    RENEGADE("Renegade", 70, 70, Elements.LIGHT, WeaponSlot.MAIN, Classes.SWORDSMAN), // TODO: Switch to darkness
 
-    RANGER(36, 20, Elements.WATER, WeaponSlot.MAIN, Classes.ARCHER),
-    ASSASSIN(46, 35, Elements.DARKNESS, WeaponSlot.SECONDARY, Classes.ARCHER),
-    DESTROYER(55, 50, Elements.FIRE, WeaponSlot.MAIN, Classes.ARCHER),
-    WILDKEEPER(65, 55, Elements.LIGHT, WeaponSlot.MAIN, Classes.ARCHER),
-    CANNONNER(75, 60, Elements.FIRE, WeaponSlot.MAIN, Classes.ARCHER),
-    SCOUT(80, 70, Elements.WATER, WeaponSlot.MAIN, Classes.ARCHER),
-    DEATH_HUNTER(80, 70, Elements.DARKNESS, WeaponSlot.MAIN, Classes.ARCHER),
-    AVENGING_ANGEL(70, 70, Elements.LIGHT, WeaponSlot.SECONDARY, Classes.ARCHER),
+    RANGER("The Ranger", 36, 20, Elements.WATER, WeaponSlot.MAIN, Classes.ARCHER),
+    ASSASSIN("The Assassin", 46, 35, Elements.DARKNESS, WeaponSlot.SECONDARY, Classes.ARCHER),
+    DESTROYER("The Destroyer", 55, 50, Elements.FIRE, WeaponSlot.MAIN, Classes.ARCHER),
+    WILDKEEPER("The Wild Keeper", 65, 55, Elements.LIGHT, WeaponSlot.MAIN, Classes.ARCHER),
+    CANNONNER("Fire Cannoneer", 75, 60, Elements.FIRE, WeaponSlot.MAIN, Classes.ARCHER),
+    SCOUT("Scout", 80, 70, Elements.WATER, WeaponSlot.MAIN, Classes.ARCHER),
+    DEMON_HUNTER("Demon Hunter", 80, 70, Elements.DARKNESS, WeaponSlot.MAIN, Classes.ARCHER),
+    AVENGING_ANGEL("Avenging Angel", 70, 70, Elements.LIGHT, WeaponSlot.SECONDARY, Classes.ARCHER),
 
-    RED_MAGICIAN(36, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.MAGE),
-    HOLY_MAGE(46, 35, Elements.LIGHT, WeaponSlot.MAIN, Classes.MAGE),
-    BLUE_MAGICIAN(55, 50, Elements.WATER, WeaponSlot.MAIN, Classes.MAGE),
-    DARK_GUNNER(65, 55, Elements.DARKNESS, WeaponSlot.SECONDARY, Classes.MAGE),
-    VOLCANO(75, 60, Elements.FIRE, WeaponSlot.MAIN, Classes.MAGE),
-    TIDE_LORD(80, 70, Elements.WATER, WeaponSlot.MAIN, Classes.MAGE),
-    SEER(80, 70, Elements.DARKNESS, WeaponSlot.MAIN, Classes.MAGE),
-    ARCHMAGE(70, 70, Elements.LIGHT, WeaponSlot.MAIN, Classes.MAGE),
+    RED_MAGICIAN("The Red Magician", 36, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.MAGE),
+    HOLY_MAGE("The Holy Mage", 46, 35, Elements.LIGHT, WeaponSlot.MAIN, Classes.MAGE),
+    BLUE_MAGICIAN("Blue Magician", 55, 50, Elements.WATER, WeaponSlot.MAIN, Classes.MAGE),
+    DARK_GUNNER("The Dark Gunner", 65, 55, Elements.DARKNESS, WeaponSlot.SECONDARY, Classes.MAGE),
+    VOLCANO("Volcano", 75, 60, Elements.FIRE, WeaponSlot.MAIN, Classes.MAGE),
+    TIDE_LORD("Tide Lord", 80, 70, Elements.WATER, WeaponSlot.MAIN, Classes.MAGE),
+    SEER("Seer", 80, 70, Elements.DARKNESS, WeaponSlot.MAIN, Classes.MAGE),
+    ARCHMAGE("Archmage", 70, 70, Elements.LIGHT, WeaponSlot.MAIN, Classes.MAGE),
 
-    DRAGON_FIST(81, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.MARTIALARTIST),
-    MYSTIC_ART(81, 20, Elements.WATER, WeaponSlot.MAIN, Classes.MARTIALARTIST),
+    DRACONIC_FIST("Draconic Fist", 81, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.MARTIALARTIST),
+//    MYSTIC_ARTIST("Mystic Artist", 81, 20, Elements.WATER, WeaponSlot.MAIN, Classes.MARTIALARTIST), // TODO: 21/02/2019 Research this
 
-    PAJAMA(27, 10, Elements.NONE, WeaponSlot.MAIN, Classes.values()),
-    JAJAMARU(45, 38, Elements.FIRE, WeaponSlot.MAIN, Classes.values()),
-    CHICKEN_COSTUME(0, 1, Elements.NONE, WeaponSlot.MAIN, Classes.values()),
-    PIRATE(0, 10, Elements.NONE, WeaponSlot.MAIN, Classes.values());
+    PYJAMA("The Pyjama", 27, 10, Elements.NONE, WeaponSlot.MAIN, Classes.values()),
+    JAJAMARU("The Jajamaru", 45, 38, Elements.FIRE, WeaponSlot.MAIN, Classes.values()),
+    CHICKEN("The Chicken", 0, 1, Elements.NONE, WeaponSlot.MAIN, Classes.values()),
+    PIRATE("The Pirate", 0, 10, Elements.NONE, WeaponSlot.MAIN, Classes.values());
 
+    private final @Nonnull String NAME;
     private final int LVL_OBTAINED;
     private final int JOB_LEVEL_REQUIRED;
     private final @Nonnull Elements ELEMENT;
-    private final @Nonnull Classes[] CLASSES;
     private final @Nonnull WeaponSlot WEAPON;
+    private final @Nonnull Set<ISkill> SKILLS;
+    private final @Nonnull Set<Classes> CLASSES;
 
-    SpecialistCards(int lvlObtained, int jobLevelRequired, @Nonnull Elements element, @Nonnull WeaponSlot weapon, @Nonnull Classes... classes) {
+    SpecialistCards(
+            @Nonnull String name,
+            int lvlObtained,
+            int jobLevelRequired,
+            @Nonnull Elements element,
+            @Nonnull WeaponSlot weapon,
+            @Nonnull Classes... classes) {
+        NAME = name;
         LVL_OBTAINED = lvlObtained;
         JOB_LEVEL_REQUIRED = jobLevelRequired;
         ELEMENT = element;
-        CLASSES = classes;
         WEAPON = weapon;
+        SKILLS = ModSkills.getSPSkills(this);
+        CLASSES = new HashSet<>(Arrays.asList(classes));
     }
 
-    public @Nonnull WeaponSlot getWeaponSlot() { return WEAPON; }
+    @Override
+    public @Nonnull String getName() {
+        return NAME;
+    }
+
+    @Nonnull
+    @Override
+    public String getFileName() {
+        return IRegistrable.toRegistryName(name());
+    }
 
     public int getLvlObtained() {
         return LVL_OBTAINED;
@@ -73,10 +98,31 @@ public enum SpecialistCards {
         return ELEMENT;
     }
 
-    public @Nonnull Classes[] getClasses() {
-        return CLASSES.clone();
+    public @Nonnull WeaponSlot getWeaponSlot() {
+        return WEAPON;
     }
 
+    @Override
+    public @Nonnull Set<ISkill> getSkills() {
+        return new HashSet<>(SKILLS);
+    }
+
+    @Override
+    public @Nonnull Set<Classes> getClasses() {
+        return new HashSet<>(CLASSES);
+    }
+
+    @Nonnull
+    @Override
+    public String getClassFolderName() {
+        if (CLASSES.size() == 1) {
+            return IRegistrable.toRegistryName(CLASSES.iterator().next().name().toLowerCase());
+        } else {
+            return "all";
+        }
+    }
+
+    @Override
     public boolean canEquip(@Nonnull Classes clazz) {
         for (Classes validClass : CLASSES) {
             if (clazz == validClass) {

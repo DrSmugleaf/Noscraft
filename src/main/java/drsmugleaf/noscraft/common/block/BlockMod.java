@@ -17,8 +17,9 @@ public abstract class BlockMod extends Block implements IModellable {
     public BlockMod(@Nonnull String name) {
         super(Material.ROCK);
         NAME = name;
-        register(this);
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+
+        register(this);
     }
 
     @Nonnull
