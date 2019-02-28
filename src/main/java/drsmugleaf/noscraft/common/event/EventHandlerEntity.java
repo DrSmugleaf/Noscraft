@@ -24,6 +24,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -37,6 +38,7 @@ import java.util.UUID;
 /**
  * Created by DrSmugleaf on 05/02/2019
  */
+@Mod.EventBusSubscriber(modid = Noscraft.MOD_ID)
 public class EventHandlerEntity {
 
     private static final @Nonnull HashMap<UUID, ItemStack> fairy = new HashMap<>();

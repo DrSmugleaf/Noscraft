@@ -75,8 +75,14 @@ public enum SpecialistCards implements ITransformation, IRegistrable {
         CLASSES = new HashSet<>(Arrays.asList(classes));
     }
 
+    @Nonnull
     @Override
-    public @Nonnull String getName() {
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public @Nonnull String getNameToRegister() {
         return NAME;
     }
 

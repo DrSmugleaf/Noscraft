@@ -2,8 +2,9 @@ package drsmugleaf.noscraft.common.item.equipment.armor;
 
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.common.IModellable;
+import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.common.classes.Classes;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import drsmugleaf.noscraft.common.classes.IClassSpecific;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
@@ -15,7 +16,7 @@ import javax.annotation.Nonnull;
 /**
  * Created by DrSmugleaf on 01/02/2019
  */
-public class ItemModArmor extends ItemArmor implements IModellable {
+public class ItemModArmor extends ItemArmor implements IModellable, IClassSpecific {
 
     private final @Nonnull String NAME;
     private final @Nonnull Classes CLASS;
@@ -26,25 +27,33 @@ public class ItemModArmor extends ItemArmor implements IModellable {
         CLASS = clazz;
         setCreativeTab(CreativeTabs.COMBAT);
 
-        name = register(this);
+        register(this);
         if (Noscraft.getProxy().isClient()) {
-            ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation("noscraft:" + name, "inventory"));
+            ModelLoader.setCustomModelResourceLocation(this, 0, getModelResourceLocation());
         }
     }
 
     @Override
     public @Nonnull String getLayer0Path() {
-        return LAYER0_PREFIX + "armor/" + CLASS.name().toLowerCase() + "/" + toRegistryName();
+        return LAYER0_PREFIX + "armor/" + CLASS.name().toLowerCase() + "/" + IRegistrable.toRegistryName(NAME);
     }
 
+    @Nonnull
     @Override
-    public @Nonnull String getName() {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return NAME;
     }
 
+    @Nonnull
     @Override
-    public String getItemStackDisplayName(ItemStack stack) {
-        return NAME;
+    public Classes getUsableBy() {
+        return CLASS;
+    }
+
+    @Nonnull
+    @Override
+    public String getNameToRegister() {
+        return CLASS.name() + "." + NAME;
     }
 
 }

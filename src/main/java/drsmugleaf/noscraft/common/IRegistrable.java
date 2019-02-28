@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public interface IRegistrable {
 
-    @Nonnull String getName();
+    @Nonnull String getNameToRegister();
 
     static @Nonnull String toRegistryName(@Nonnull String name) {
         return name
@@ -24,17 +24,22 @@ public interface IRegistrable {
     }
 
     default @Nonnull String toRegistryName() {
-        return toRegistryName(getName());
+        return toRegistryName(getNameToRegister());
+    }
+
+    default @Nonnull ResourceLocation toResourceLocation(@Nonnull String name) {
+        return new ResourceLocation(Noscraft.MOD_ID, toRegistryName(name));
     }
 
     default @Nonnull ResourceLocation toResourceLocation() {
         return new ResourceLocation(Noscraft.MOD_ID, toRegistryName());
     }
 
+    @SuppressWarnings("unchecked")
     default @Nonnull <T extends IForgeRegistryEntry.Impl & IRegistrable> String registerEntry(T entry) {
         ResourceLocation location = toResourceLocation();
         entry.setRegistryName(location);
-        return Objects.requireNonNull(entry.getRegistryName()).toString();
+        return Objects.requireNonNull(entry.getRegistryName()).getResourcePath();
     }
 
     default @Nonnull <T extends Block & IRegistrable> String register(@Nonnull T block) {

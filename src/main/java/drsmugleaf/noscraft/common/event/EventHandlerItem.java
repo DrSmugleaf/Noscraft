@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -18,6 +19,7 @@ import javax.annotation.Nullable;
 /**
  * Created by DrSmugleaf on 05/02/2019
  */
+@Mod.EventBusSubscriber(modid = Noscraft.MOD_ID)
 public class EventHandlerItem {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

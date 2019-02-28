@@ -3,6 +3,7 @@ package drsmugleaf.noscraft.common.entity;
 import drsmugleaf.noscraft.Noscraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 /**
  * Created by DrSmugleaf on 16/02/2019
  */
+@Mod.EventBusSubscriber(modid = Noscraft.MOD_ID)
 public class ModEntities {
 
     public static final EntityEntry NUKE = EntityEntryBuilder

@@ -12,6 +12,7 @@ import drsmugleaf.noscraft.common.registry.ModRegistries;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -27,6 +28,7 @@ import java.util.Set;
 /**
  * Created by DrSmugleaf on 20/02/2019
  */
+@Mod.EventBusSubscriber(modid = Noscraft.MOD_ID)
 public class ModSkills {
 
     private static final @Nonnull String CSV_PATH = Noscraft.ASSETS + "/csv/skill/";

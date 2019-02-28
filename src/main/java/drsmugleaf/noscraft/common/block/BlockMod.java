@@ -30,7 +30,7 @@ public abstract class BlockMod extends Block implements IModellable {
 
     @Nonnull
     @Override
-    public String getName() {
+    public String getNameToRegister() {
         return NAME;
     }
 

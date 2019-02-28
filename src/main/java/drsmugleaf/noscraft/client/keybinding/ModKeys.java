@@ -5,6 +5,7 @@ import drsmugleaf.noscraft.client.gui.ModGuis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
@@ -16,6 +17,7 @@ import java.util.Map;
 /**
  * Created by DrSmugleaf on 18/02/2019
  */
+@Mod.EventBusSubscriber(modid = Noscraft.MOD_ID)
 public class ModKeys {
 
     @Nonnull

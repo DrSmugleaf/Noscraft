@@ -78,6 +78,12 @@ public class SkillMod extends IForgeRegistryEntry.Impl<ISkill> implements ISkill
         return NAME;
     }
 
+    @Nonnull
+    @Override
+    public String getNameToRegister() {
+        return NAME;
+    }
+
     @Override
     public int getJobLevel() {
         return LEVEL;

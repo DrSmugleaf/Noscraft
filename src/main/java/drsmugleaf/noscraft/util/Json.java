@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Json {
 
-    public static void createJson(@Nonnull IModellable modellable, @Nonnull String jsonPath) {
+    public static void writeJson(@Nonnull IModellable modellable, @Nonnull String jsonPath, @Nonnull String fileName) {
         List<String> lines = new ArrayList<>();
 
         lines.add("{");
@@ -27,8 +27,8 @@ public class Json {
         lines.add("    }");
         lines.add("}");
 
-        String name = modellable.toRegistryName();
-        Path filePath = Paths.get(jsonPath + "/" + name + ".json");
+//        String name = modellable.toRegistryName();
+        Path filePath = Paths.get(jsonPath + "/" + fileName + ".json");
         try {
             Files.createFile(filePath);
         } catch (IOException e) {

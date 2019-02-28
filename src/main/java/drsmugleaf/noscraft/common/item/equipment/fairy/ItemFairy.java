@@ -15,7 +15,7 @@ public class ItemFairy extends ItemMod implements IFairy {
     private final @Nonnull Fairies FAIRY;
 
     public ItemFairy(@Nonnull Fairies fairy) {
-        super(fairy.getName());
+        super(fairy.getName(), fairy.getName());
         FAIRY = fairy;
         setCreativeTab(NoscraftFairyTab.INSTANCE);
         maxStackSize = 1;

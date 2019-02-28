@@ -3,18 +3,10 @@ package drsmugleaf.noscraft.common;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.client.gui.GuiExpanded;
 import drsmugleaf.noscraft.client.gui.GuiSkillMenu;
-import drsmugleaf.noscraft.common.block.ModBlocks;
 import drsmugleaf.noscraft.common.container.noscraft.ContainerExpanded;
 import drsmugleaf.noscraft.common.container.skill.ContainerSkillMenu;
-import drsmugleaf.noscraft.common.entity.ModEntities;
-import drsmugleaf.noscraft.common.event.EventHandlerEntity;
-import drsmugleaf.noscraft.common.event.EventHandlerItem;
-import drsmugleaf.noscraft.common.item.ModItems;
-import drsmugleaf.noscraft.common.item.equipment.fairy.ModFairies;
-import drsmugleaf.noscraft.common.skills.ModSkills;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -54,17 +46,7 @@ public class CommonProxy implements IGuiHandler {
 
     public void postInit(FMLPostInitializationEvent event) {}
 
-    public void registerEventHandlers() {
-        MinecraftForge.EVENT_BUS.register(EventHandlerEntity.class);
-        MinecraftForge.EVENT_BUS.register(EventHandlerItem.class);
-//        MinecraftForge.EVENT_BUS.register(ModArmors.class);
-//        MinecraftForge.EVENT_BUS.register(ModWeapons.class);
-        MinecraftForge.EVENT_BUS.register(ModFairies.class);
-        MinecraftForge.EVENT_BUS.register(ModBlocks.class);
-        MinecraftForge.EVENT_BUS.register(ModItems.class);
-        MinecraftForge.EVENT_BUS.register(ModEntities.class);
-        MinecraftForge.EVENT_BUS.register(ModSkills.class);
-    }
+    public void registerEventHandlers() {}
 
     public final boolean isClient() {
         return !isServer();
