@@ -1,30 +1,22 @@
 package drsmugleaf.noscraft.common.network;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by DrSmugleaf on 20/02/2019
  */
-public class PacketCooldownOutOfSync implements IMessage, IMessageHandler<PacketCooldownOutOfSync, IMessage> {
+public class PacketCooldownOutOfSync extends PacketMod<PacketCooldownOutOfSync, IMessage> {
 
     public PacketCooldownOutOfSync() {}
 
+    @Nullable
     @Override
-    public void fromBytes(ByteBuf buf) {
-
-    }
-
-    @Override
-    public void toBytes(ByteBuf buf) {
-
-    }
-
-    @Override
-    public IMessage onMessage(PacketCooldownOutOfSync message, MessageContext ctx) {
-        return null;
+    public IMessage handleOnClient(@Nonnull PacketCooldownOutOfSync message, @Nonnull MessageContext ctx) {
+        return super.handleOnClient(message, ctx);
     }
 
 }

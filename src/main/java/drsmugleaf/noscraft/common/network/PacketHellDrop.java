@@ -5,18 +5,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by DrSmugleaf on 19/02/2019
  */
-public class PacketHellDrop implements IMessage, IMessageHandler<PacketHellDrop, PacketCooldownOutOfSync> {
+public class PacketHellDrop extends PacketMod<PacketHellDrop, PacketCooldownOutOfSync> {
 
-    public int entity;
+    private int entity;
     private BlockPos pos;
 
     public PacketHellDrop() {}
@@ -40,8 +39,9 @@ public class PacketHellDrop implements IMessage, IMessageHandler<PacketHellDrop,
         buf.writeInt(pos.getZ());
     }
 
+    @Nullable
     @Override
-    public PacketCooldownOutOfSync onMessage(PacketHellDrop message, MessageContext ctx) {
+    public PacketCooldownOutOfSync handleOnServer(@Nonnull PacketHellDrop message, @Nonnull MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         WorldServer mainThread = (WorldServer) player.world;
         BlockPos pos = message.pos;

@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/weapon/main/adventurer/piece_of_wood"
+    }
+}

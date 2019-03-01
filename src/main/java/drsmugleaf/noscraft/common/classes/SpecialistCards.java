@@ -1,13 +1,13 @@
 package drsmugleaf.noscraft.common.classes;
 
+import com.google.common.collect.ImmutableSet;
 import drsmugleaf.noscraft.common.IRegistrable;
-import drsmugleaf.noscraft.common.skills.ISkill;
-import drsmugleaf.noscraft.common.skills.ModSkills;
 import drsmugleaf.noscraft.common.element.Elements;
 import drsmugleaf.noscraft.common.item.equipment.weapon.WeaponSlot;
+import drsmugleaf.noscraft.common.skills.ISkill;
+import drsmugleaf.noscraft.common.skills.ModSkills;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,7 +57,7 @@ public enum SpecialistCards implements ITransformation, IRegistrable {
     private final @Nonnull Elements ELEMENT;
     private final @Nonnull WeaponSlot WEAPON;
     private final @Nonnull Set<ISkill> SKILLS;
-    private final @Nonnull Set<Classes> CLASSES;
+    private final @Nonnull ImmutableSet<Classes> CLASSES;
 
     SpecialistCards(
             @Nonnull String name,
@@ -72,7 +72,7 @@ public enum SpecialistCards implements ITransformation, IRegistrable {
         ELEMENT = element;
         WEAPON = weapon;
         SKILLS = ModSkills.getSPSkills(this);
-        CLASSES = new HashSet<>(Arrays.asList(classes));
+        CLASSES = Classes.setOf(classes);
     }
 
     @Nonnull
@@ -114,29 +114,8 @@ public enum SpecialistCards implements ITransformation, IRegistrable {
     }
 
     @Override
-    public @Nonnull Set<Classes> getClasses() {
-        return new HashSet<>(CLASSES);
-    }
-
-    @Nonnull
-    @Override
-    public String getClassFolderName() {
-        if (CLASSES.size() == 1) {
-            return IRegistrable.toRegistryName(CLASSES.iterator().next().name().toLowerCase());
-        } else {
-            return "all";
-        }
-    }
-
-    @Override
-    public boolean canEquip(@Nonnull Classes clazz) {
-        for (Classes validClass : CLASSES) {
-            if (clazz == validClass) {
-                return true;
-            }
-        }
-
-        return false;
+    public @Nonnull ImmutableSet<Classes> getClasses() {
+        return CLASSES;
     }
 
 }

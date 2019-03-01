@@ -31,6 +31,7 @@ import java.util.Set;
 @Mod.EventBusSubscriber(modid = Noscraft.MOD_ID)
 public class ModSkills {
 
+    private static int nextID = 0;
     private static final @Nonnull String CSV_PATH = Noscraft.ASSETS + "/csv/skill/";
     public static final @Nonnull ResourceLocation TRANSFORMATION_SKILLS = new ResourceLocation(Noscraft.MOD_ID, "transformationtoskills");
     public static final @Nonnull ResourceLocation SKILLS_REGISTRY_NAME = new ResourceLocation(Noscraft.MOD_ID, "skills");
@@ -90,12 +91,10 @@ public class ModSkills {
                         .build()
         ) {
             Map<String, String> line;
-            int id = 0;
             while ((line = reader.readMap()) != null) {
-                SkillBuilder builder = SkillBuilder.fromCSVLine(id, line, transformation);
-                SkillMod skill = new SkillMod(builder);
+                SkillMod skill = SkillMod.fromCSV(nextID, transformation, line);
                 skills.add(skill);
-                id++;
+                nextID++;
             }
         } catch (FileNotFoundException e) {
             Noscraft.LOG.error("File " + filePath + " not found", e); // TODO: 20/02/2019 Remove when all skill csvs are added

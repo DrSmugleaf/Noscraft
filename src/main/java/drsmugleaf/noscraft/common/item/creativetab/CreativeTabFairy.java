@@ -1,4 +1,4 @@
-package drsmugleaf.noscraft.common.item;
+package drsmugleaf.noscraft.common.item.creativetab;
 
 import drsmugleaf.noscraft.Noscraft;
 import net.minecraft.creativetab.CreativeTabs;
@@ -11,15 +11,17 @@ import javax.annotation.Nonnull;
 /**
  * Created by DrSmugleaf on 06/02/2019
  */
-public class NoscraftFairyTab extends CreativeTabs {
+public class CreativeTabFairy extends CreativeTabs {
 
     @GameRegistry.ObjectHolder(Noscraft.MOD_ID + ":fire_fairy")
-    private static final @Nonnull Item FIRE_FAIRY = null;
+    @Nonnull
+    private static final Item FIRE_FAIRY = null;
 
-    public static final @Nonnull NoscraftFairyTab INSTANCE = new NoscraftFairyTab();
+    @Nonnull
+    public static final CreativeTabFairy INSTANCE = new CreativeTabFairy();
 
-    private NoscraftFairyTab() {
-        super("Fairies");
+    private CreativeTabFairy() {
+        super("fairies");
     }
 
     @Override

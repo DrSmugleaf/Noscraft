@@ -1,7 +1,12 @@
 button.noscraft=Noscraft
 button.normal=Normal
 
-itemGroup.Fairies=Fairies
+itemGroup.adventurer=Adventurer
+itemGroup.archer=Archer
+itemGroup.mage=Mage
+itemGroup.martialartist=Martial Artist
+itemGroup.swordsman=Swordsman
+itemGroup.fairies=Fairies
 
 key.ability1=Ability Slot 1
 key.ability2=Ability Slot 2

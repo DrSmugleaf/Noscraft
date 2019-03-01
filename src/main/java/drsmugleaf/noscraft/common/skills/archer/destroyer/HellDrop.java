@@ -1,8 +1,7 @@
 package drsmugleaf.noscraft.common.skills.archer.destroyer;
 
-import drsmugleaf.noscraft.common.skills.IEffect;
-import drsmugleaf.noscraft.common.network.ModPackets;
 import drsmugleaf.noscraft.common.network.PacketHellDrop;
+import drsmugleaf.noscraft.common.skills.IEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -15,7 +14,7 @@ public class HellDrop implements IEffect {
 
     @Override
     public void use(@Nonnull World world, @Nonnull BlockPos pos) {
-        ModPackets.INSTANCE.sendToServer(new PacketHellDrop(1, pos));
+        new PacketHellDrop(1, pos).sendToServer();
     }
 
 }

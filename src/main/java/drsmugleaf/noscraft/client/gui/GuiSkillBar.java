@@ -85,7 +85,6 @@ public class GuiSkillBar extends Gui {
         int width = (resolution.getScaledWidth() / 2) - 101;
         int height = resolution.getScaledHeight() - 22;
         drawTexturedModalRect(width, height, 0, 0, HOTBAR_WIDTH, HOTBAR_HEIGHT);
-        mc.getTextureManager().bindTexture(new ResourceLocation(Noscraft.MOD_ID, "textures/skills/destroyer_small.png"));
 
         for (int slot = 1; slot < 11; slot++) {
             KeyBindingSkill bind = ModKeys.getBind(slot);

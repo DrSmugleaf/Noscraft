@@ -1,7 +1,9 @@
 package drsmugleaf.noscraft.common.classes;
 
-import drsmugleaf.noscraft.common.item.equipment.armor.ArmorTypes;
+import com.google.common.collect.ImmutableSet;
+import drsmugleaf.noscraft.common.item.creativetab.*;
 import drsmugleaf.noscraft.common.item.equipment.weapon.WeaponTypes;
+import net.minecraft.creativetab.CreativeTabs;
 
 import javax.annotation.Nonnull;
 
@@ -10,20 +12,41 @@ import javax.annotation.Nonnull;
  */
 public enum Classes {
 
-    ADVENTURER(WeaponTypes.ADVENTURER_MAIN, WeaponTypes.ADVENTURER_SECONDARY, ArmorTypes.ADVENTURER_ARMOR),
-    SWORDSMAN(WeaponTypes.SWORD, WeaponTypes.CROSSBOW, ArmorTypes.SWORDSMAN_ARMOR),
-    ARCHER(WeaponTypes.BOW, WeaponTypes.DAGGER, ArmorTypes.ARCHER_ARMOR),
-    MAGE(WeaponTypes.STAFF, WeaponTypes.GUN, ArmorTypes.MAGE_ARMOR),
-    MARTIALARTIST(WeaponTypes.GAUNTLET, WeaponTypes.TOKEN, ArmorTypes.MARTIAL_ARTIST_ARMOR);
+    ADVENTURER(CreativeTabAdventurer.INSTANCE),
+    SWORDSMAN(CreativeTabSwordsman.INSTANCE),
+    ARCHER(CreativeTabArcher.INSTANCE),
+    MAGE(CreativeTabMage.INSTANCE),
+    MARTIALARTIST(CreativeTabMartialArtist.INSTANCE);
 
-    private final @Nonnull WeaponTypes MAIN;
-    private final @Nonnull WeaponTypes SECONDARY;
-    private final @Nonnull ArmorTypes ARMOR;
+    static {
+        ADVENTURER.MAIN = WeaponTypes.ADVENTURER_MAIN;
+        ADVENTURER.SECONDARY = WeaponTypes.ADVENTURER_SECONDARY;
+        SWORDSMAN.MAIN = WeaponTypes.SWORD;
+        SWORDSMAN.SECONDARY = WeaponTypes.CROSSBOW;
+        ARCHER.MAIN = WeaponTypes.BOW;
+        ARCHER.SECONDARY = WeaponTypes.DAGGER;
+        MAGE.MAIN = WeaponTypes.STAFF;
+        MAGE.SECONDARY = WeaponTypes.GUN;
+        MARTIALARTIST.MAIN = WeaponTypes.GAUNTLET;
+        MARTIALARTIST.SECONDARY = WeaponTypes.TOKEN;
+    }
 
-    Classes(@Nonnull WeaponTypes main, @Nonnull WeaponTypes secondary, @Nonnull ArmorTypes armor) {
-        MAIN = main;
-        SECONDARY = secondary;
-        ARMOR = armor;
+    private @Nonnull WeaponTypes MAIN;
+    private @Nonnull WeaponTypes SECONDARY;
+    private final @Nonnull CreativeTabs CREATIVE_TAB;
+
+    Classes(@Nonnull CreativeTabs tab) {
+        CREATIVE_TAB = tab;
+    }
+
+    @Nonnull
+    public static ImmutableSet<Classes> setOf(@Nonnull Classes... classes) {
+        return ImmutableSet.copyOf(classes);
+    }
+
+    @Nonnull
+    public ImmutableSet<Classes> setOf() {
+        return setOf(this);
     }
 
     @Nonnull
@@ -37,8 +60,8 @@ public enum Classes {
     }
 
     @Nonnull
-    public ArmorTypes getArmor() {
-        return ARMOR;
+    public CreativeTabs getCreativeTab() {
+        return CREATIVE_TAB;
     }
 
 }

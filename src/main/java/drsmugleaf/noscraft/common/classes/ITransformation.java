@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by DrSmugleaf on 21/02/2019
  */
-public interface ITransformation {
+public interface ITransformation extends IClassSpecific {
 
     @Nonnull
     String getName();
@@ -18,13 +18,5 @@ public interface ITransformation {
 
     @Nonnull
     Set<ISkill> getSkills();
-
-    @Nonnull
-    Set<Classes> getClasses();
-
-    @Nonnull
-    String getClassFolderName();
-
-    boolean canEquip(@Nonnull Classes clazz);
 
 }

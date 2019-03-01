@@ -13,6 +13,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
  * Created by DrSmugleaf on 17/02/2019
@@ -39,22 +40,38 @@ public class SkillMod extends IForgeRegistryEntry.Impl<ISkill> implements ISkill
 
     private final @Nonnull ResourceLocation TEXTURE;
 
-    public SkillMod(@Nonnull SkillBuilder ability) {
-        ID = ability.getId();
-        NAME = ability.getName();
-        LEVEL = ability.getLevel();
-        ELEMENT = ability.getElement();
-        DESCRIPTION = ability.getDescription();
-        SKILL_EFFECTS = ability.getSkillEffects();
-        CP = ability.getCp() != null ? ability.getCp() : 0;
-        CAST_TIME = ability.getCastTime();
-        RANGE = ability.getRange();
-        COOLDOWN = ability.getCooldown();
-        TARGET = ability.getTarget();
-        MP = ability.getMp();
-        DAMAGE_BONUS = ability.getDamageBonus();
-        ELEMENT_BONUS = ability.getElementBonus();
-        TRANSFORMATION = ability.getTransformation();
+    private SkillMod(
+            int id,
+            @Nonnull String name,
+            int level,
+            @Nonnull Elements element,
+            @Nonnull String description,
+            @Nonnull String skillEffect,
+            @Nonnull Integer cp,
+            double castTime,
+            int range,
+            double cooldown,
+            @Nonnull Target target,
+            int mp,
+            int damageBonus,
+            int elementBonus,
+            @Nullable ITransformation transformation
+    ) {
+        ID = id;
+        NAME = name;
+        LEVEL = level;
+        ELEMENT = element;
+        DESCRIPTION = description;
+        SKILL_EFFECTS = skillEffect;
+        CP = cp;
+        CAST_TIME = castTime;
+        RANGE = range;
+        COOLDOWN = cooldown;
+        TARGET = target;
+        MP = mp;
+        DAMAGE_BONUS = damageBonus;
+        ELEMENT_BONUS = elementBonus;
+        TRANSFORMATION = transformation;
 
         registerEntry(this);
 
@@ -65,6 +82,30 @@ public class SkillMod extends IForgeRegistryEntry.Impl<ISkill> implements ISkill
             throw new IllegalArgumentException("No effect name found for " + NAME);
         }
         EFFECT = effect;
+    }
+
+    @Nonnull
+    public static SkillMod fromCSV(int id, @Nullable ITransformation transformation, @Nonnull Map<String, String> line) {
+        String description = line.get("description");
+        String cp = line.get("cp");
+
+        return new SkillMod(
+                id,
+                line.get("name"),
+                Integer.valueOf(line.get("lvl")),
+                Elements.from(line.get("element")),
+                description != null ? description : "",
+                line.get("skill_effects"),
+                cp != null ? Integer.valueOf(cp) : 0,
+                Double.valueOf(line.get("cast_time")),
+                Integer.valueOf(line.get("range")),
+                Double.valueOf(line.get("cooldown")),
+                Target.from(line.get("target")),
+                Integer.valueOf(line.get("mp")),
+                Integer.valueOf(line.get("damage_bonus")),
+                Integer.valueOf(line.get("element_bonus")),
+                transformation
+        );
     }
 
     @Override

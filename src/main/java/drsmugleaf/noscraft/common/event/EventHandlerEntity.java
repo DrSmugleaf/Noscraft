@@ -8,7 +8,6 @@ import drsmugleaf.noscraft.common.container.skill.SkillCapabilities;
 import drsmugleaf.noscraft.common.container.skill.SkillCapabilityProvider;
 import drsmugleaf.noscraft.common.container.skill.SkillsLearned;
 import drsmugleaf.noscraft.common.item.equipment.fairy.IFairy;
-import drsmugleaf.noscraft.common.network.ModPackets;
 import drsmugleaf.noscraft.common.network.PacketSync;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -162,7 +161,7 @@ public class EventHandlerEntity {
     private static void syncSlot(EntityPlayer player, int slot, ItemStack stack, Set<? extends EntityPlayer> receivers) {
         PacketSync packet = new PacketSync(player, slot, stack);
         for (EntityPlayer receiver : receivers) {
-            ModPackets.INSTANCE.sendTo(packet, (EntityPlayerMP) receiver);
+            packet.sendTo((EntityPlayerMP) receiver);
         }
     }
 

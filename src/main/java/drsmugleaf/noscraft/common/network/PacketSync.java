@@ -11,15 +11,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by DrSmugleaf on 05/02/2019
  */
-public class PacketSync implements IMessage {
+public class PacketSync extends PacketMod<PacketSync, IMessage> {
 
     private int playerID;
     private byte slot;
@@ -27,7 +27,7 @@ public class PacketSync implements IMessage {
 
     public PacketSync() {}
 
-    public PacketSync(@Nonnull EntityPlayer player, int slot, ItemStack stack) {
+    public PacketSync(@Nonnull EntityPlayer player, int slot, @Nonnull ItemStack stack) {
         playerID = player.getEntityId();
         this.slot = (byte) slot;
         this.stack = stack;
@@ -47,25 +47,28 @@ public class PacketSync implements IMessage {
         ByteBufUtils.writeItemStack(buf, stack);
     }
 
-    public static class Handler implements IMessageHandler<PacketSync, IMessage> {
-        @Override
-        public IMessage onMessage(PacketSync message, MessageContext ctx) {
-            Minecraft.getMinecraft().addScheduledTask(() -> {
-                World world = Noscraft.getProxy().getClientWorld();
+    @Nullable
+    @Override
+    public IMessage handleOnServer(@Nonnull PacketSync message, @Nonnull MessageContext ctx) {
+        Minecraft.getMinecraft().addScheduledTask(() -> {
+            World world = Noscraft.getProxy().getClientWorld();
 
-                if (world == null) {
+            if (world == null) {
+                return;
+            }
+
+            Entity player = world.getEntityByID(message.playerID);
+            if (player instanceof EntityPlayer) {
+                FairyContainer container = player.getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
+                if (container == null) {
                     return;
                 }
 
-                Entity player = world.getEntityByID(message.playerID);
-                if (player instanceof EntityPlayer) {
-                    FairyContainer container = player.getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
-                    container.setStackInSlot(message.slot, message.stack);
-                }
-            });
+                container.setStackInSlot(message.slot, message.stack);
+            }
+        });
 
-            return null;
-        }
+        return null;
     }
 
 }

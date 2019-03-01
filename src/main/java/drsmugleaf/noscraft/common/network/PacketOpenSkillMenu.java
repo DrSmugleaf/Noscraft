@@ -2,28 +2,24 @@ package drsmugleaf.noscraft.common.network;
 
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.client.gui.GuiSkillMenu;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by DrSmugleaf on 22/02/2019
  */
-public class PacketOpenSkillMenu implements IMessage, IMessageHandler<PacketOpenSkillMenu, IMessage> {
+public class PacketOpenSkillMenu  extends PacketMod<PacketOpenSkillMenu, IMessage> {
 
     public PacketOpenSkillMenu() {}
 
+    @Nullable
     @Override
-    public void fromBytes(ByteBuf buf) {}
-
-    @Override
-    public void toBytes(ByteBuf buf) {}
-
-    @Override
-    public IMessage onMessage(PacketOpenSkillMenu message, MessageContext ctx) {
+    public IMessage handleOnServer(@Nonnull PacketOpenSkillMenu message, @Nonnull MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         WorldServer world = (WorldServer) player.world;
 

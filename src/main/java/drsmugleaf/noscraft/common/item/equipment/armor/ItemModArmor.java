@@ -5,13 +5,14 @@ import drsmugleaf.noscraft.common.IModellable;
 import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.common.classes.Classes;
 import drsmugleaf.noscraft.common.classes.IClassSpecific;
-import net.minecraft.creativetab.CreativeTabs;
+import drsmugleaf.noscraft.util.Json;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 
 /**
  * Created by DrSmugleaf on 01/02/2019
@@ -25,13 +26,36 @@ public class ItemModArmor extends ItemArmor implements IModellable, IClassSpecif
         super(ArmorMaterial.LEATHER, 0, slot);
         NAME = name;
         CLASS = clazz;
-        setCreativeTab(CreativeTabs.COMBAT);
+        setCreativeTab(getClassCreativeTab());
 
         register(this);
         if (Noscraft.getProxy().isClient()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, getModelResourceLocation());
         }
+
+        Json.writeJson(this, "D:\\Projects\\Java\\Noscraft\\src\\main\\resources\\assets\\noscraft\\models\\item\\" + IRegistrable.toRegistryName(clazz.name()), IRegistrable.toRegistryName(name));
     }
+
+//    public int getMeleeDef() {
+//        return (int) Math.floor((MELEE_DEF + 0.25 * getStatIncrease()) * OPTIMIZATION.getExtraStats());
+//    }
+//
+//    public int getRangeDef() {
+//        return (int) Math.floor((RANGE_DEF + 0.25 * getStatIncrease())* OPTIMIZATION.getExtraStats());
+//    }
+//
+//    public int getMagicDef() {
+//        return (int) Math.floor((MAGIC_DEF + 0.25 * getStatIncrease()) * OPTIMIZATION.getExtraStats());
+//    }
+//
+//    public int getDodge() {
+//        return (int) Math.floor((DODGE + 0.25 * getStatIncrease()) * OPTIMIZATION.getExtraStats());
+//    }
+//
+//    public int getStatIncrease() {
+//        int rarityCapacity = (LEVEL / 5) + 1; // This being an int is intentional; the original game truncates decimals.
+//        return (rarityCapacity * RARITY.getStrengtheningFactor()) - RARITY.getStatModifier();
+//    }
 
     @Override
     public @Nonnull String getLayer0Path() {
@@ -46,8 +70,8 @@ public class ItemModArmor extends ItemArmor implements IModellable, IClassSpecif
 
     @Nonnull
     @Override
-    public Classes getUsableBy() {
-        return CLASS;
+    public Set<Classes> getClasses() {
+        return CLASS.setOf();
     }
 
     @Nonnull

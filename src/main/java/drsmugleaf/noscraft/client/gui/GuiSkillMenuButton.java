@@ -1,6 +1,5 @@
 package drsmugleaf.noscraft.client.gui;
 
-import drsmugleaf.noscraft.common.network.ModPackets;
 import drsmugleaf.noscraft.common.network.PacketOpenSkillMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -26,7 +25,7 @@ public class GuiSkillMenuButton extends GuiButton {
         boolean pressed = super.mousePressed(mc, mouseX, mouseY);
 
         if (pressed) {
-            ModPackets.INSTANCE.sendToServer(new PacketOpenSkillMenu());
+            new PacketOpenSkillMenu().sendToServer();
         }
 
         return pressed;

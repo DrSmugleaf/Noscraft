@@ -1,6 +1,5 @@
 package drsmugleaf.noscraft.client.gui;
 
-import drsmugleaf.noscraft.common.network.ModPackets;
 import drsmugleaf.noscraft.common.network.PacketOpenNormalInventory;
 import drsmugleaf.noscraft.common.network.PacketOpenNoscraftInventory;
 import net.minecraft.client.Minecraft;
@@ -33,10 +32,10 @@ public class GuiNoscraftButton extends GuiButton {
 
         if (pressed) {
             if (PARENT_GUI instanceof GuiInventory) {
-                ModPackets.INSTANCE.sendToServer(new PacketOpenNoscraftInventory());
+                new PacketOpenNoscraftInventory().sendToServer();
             } else {
                 ((GuiExpanded) PARENT_GUI).displayNormalInventory();
-                ModPackets.INSTANCE.sendToServer(new PacketOpenNormalInventory());
+                new PacketOpenNormalInventory().sendToServer();
             }
         }
 
