@@ -46,7 +46,7 @@ public class ModArmors {
                     event.getRegistry().register(armor);
                 }
             } catch (FileNotFoundException e) {
-                Noscraft.LOG.error("File " + filePath + " not found", e); // TODO: 09/02/2019 Remove when all armor csvs are added
+                throw new IllegalStateException("File " + filePath + " not found", e);
             } catch (IOException e) {
                 throw new IllegalStateException("Error reading file " + filePath, e);
             }

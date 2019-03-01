@@ -1,4 +1,4 @@
-package drsmugleaf.noscraft.util;
+package drsmugleaf.noscraft.util.parser;
 
 import drsmugleaf.noscraft.common.IRegistrable;
 import org.jsoup.Jsoup;
