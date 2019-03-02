@@ -19,7 +19,9 @@ public interface IRegistrable {
     static @Nonnull String toRegistryName(@Nonnull String name) {
         return name
                 .replace(' ', '_')
-                .replaceAll(":", "")
+                .replaceAll("[\\\\/]", "-")
+                .replaceAll("[^A-Za-z0-9_\\-.]", "")
+                .replaceAll("_{2,}", "_")
                 .toLowerCase();
     }
 

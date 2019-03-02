@@ -1,7 +1,10 @@
 package drsmugleaf.noscraft.util.parser;
 
-import com.opencsv.CSVWriterBuilder;
-import com.opencsv.ICSVWriter;
+import com.opencsv.*;
+import com.opencsv.enums.CSVReaderNullFieldIndicator;
+import drsmugleaf.noscraft.common.IRegistrable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,10 +14,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +26,9 @@ import java.util.regex.Pattern;
  * Created by DrSmugleaf on 01/03/2019
  */
 public class NostaleClubParser {
+
+    @Nonnull
+    private static final Logger LOG = LogManager.getLogger(NostaleClubParser.class.getSimpleName());
 
     @Nonnull
     private static final Pattern ID = Pattern.compile("\\[(?<id>\\d+)]\\[");
@@ -102,9 +108,9 @@ public class NostaleClubParser {
     }
 
     public static void main(String[] args) {
-        String directory = "D:\\Downloaded Htmls";
-        String filePath = "parsed item.html";
-        String outputPath = "D:\\Downloaded Htmls";
+        String directory = "F:\\Downloaded Htmls\\NosTale";
+        String filePath = "items.html";
+        String outputPath = "F:\\Downloaded Htmls\\NosTale\\output";
 
         NostaleClubParser.parse(directory, filePath, outputPath);
     }
@@ -151,8 +157,8 @@ public class NostaleClubParser {
                     ICSVWriter writer = builder.build()
             ) {
                 writer.writeNext(new String[]{
-                        "id", "name", "category", "inventory_tab", "slot",
-                        "visual_change", "gold_price", "reputation_price",
+                        "id", "name", "registry_name", "category", "inventory_tab",
+                        "slot", "visual_change", "gold_price", "reputation_price",
                         "classes", "level", "type", "minimum_damage",
                         "maximum_damage", "critical_chance", "critical_bonus_damage",
                         "hitrate", "effects", "description"
@@ -236,9 +242,31 @@ public class NostaleClubParser {
                     String effects = effectsBuilder.toString();
 
                     String description = item.getElementsByTag("i").last().text();
+
+                    String fileName = IRegistrable.toRegistryName(name);
+                    String filePath = outputPath + "/" + fileName + ".png";
+                    File imageFile = new File(filePath);
+
+                    while (imageFile.exists()) {
+                        int nextNumber = 1;
+                        if (fileName.matches(".*_\\d+$")) {
+                            int underscoreIndex = fileName.lastIndexOf("_");
+                            String suffix = fileName.substring(underscoreIndex + 1, fileName.length());
+                            nextNumber += Integer.parseInt(suffix);
+                            fileName = fileName.substring(0, underscoreIndex);
+                        }
+
+                        fileName += "_" + nextNumber;
+                        filePath = outputPath + "/" + fileName + ".png";
+                        imageFile = new File(filePath);
+                    }
+
+                    String registryName = fileName;
+                    ImageIO.write(image, "png", imageFile);
+
                     writer.writeNext(new String[]{
-                            id, name, category, inventoryTab, slot,
-                            visualChange, goldPrice, reputationPrice,
+                            id, name, registryName, category, inventoryTab,
+                            slot, visualChange, goldPrice, reputationPrice,
                             classes, level, type, minDmg,
                             maxDmg, critChance, critBonusDamage,
                             hitrate, effects, description
@@ -249,6 +277,28 @@ public class NostaleClubParser {
             }
         } catch (IOException e) {
             throw new IllegalStateException("Error creating file writer for file " + csvFile, e);
+        }
+
+        FileReader fileReader;
+        try {
+            fileReader = new FileReader(csvFile);
+        } catch (FileNotFoundException e) {
+            throw new IllegalStateException("File " + csvFile.getAbsolutePath() + " not found");
+        }
+
+        List<String> namesSeen = new ArrayList<>();
+        CSVReaderBuilder builder = new CSVReaderHeaderAwareBuilder(fileReader).withFieldAsNull(CSVReaderNullFieldIndicator.EMPTY_SEPARATORS);
+        try (CSVReaderHeaderAware reader = (CSVReaderHeaderAware) builder.build()) {
+            Map<String, String> line;
+            while ((line = reader.readMap()) != null) {
+                String registryName = line.get("registry_name");
+                boolean changed = namesSeen.add(registryName);
+                if (!changed) {
+                    LOG.error("Repeat registry name found: " + registryName);
+                }
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException("Error closing csv reader", e);
         }
     }
 
