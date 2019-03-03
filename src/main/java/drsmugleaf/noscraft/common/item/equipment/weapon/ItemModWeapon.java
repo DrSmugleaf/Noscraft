@@ -4,7 +4,6 @@ import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.common.classes.Classes;
 import drsmugleaf.noscraft.common.classes.IClassSpecific;
 import drsmugleaf.noscraft.common.item.ItemMod;
-import drsmugleaf.noscraft.util.Json;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -27,8 +26,6 @@ public class ItemModWeapon extends ItemMod implements IClassSpecific {
         CLASS = clazz;
         SLOT = slot;
         setCreativeTab(getClassCreativeTab());
-
-        Json.writeJson(this, "D:\\Projects\\Java\\Noscraft\\src\\main\\resources\\assets\\noscraft\\models\\item\\" + IRegistrable.toRegistryName(clazz.name()), IRegistrable.toRegistryName(name));
     }
 
     @Override

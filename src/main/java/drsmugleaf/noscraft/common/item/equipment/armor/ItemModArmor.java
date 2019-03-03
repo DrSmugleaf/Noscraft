@@ -32,8 +32,6 @@ public class ItemModArmor extends ItemArmor implements IModellable, IClassSpecif
         if (Noscraft.getProxy().isClient()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, getModelResourceLocation());
         }
-
-        Json.writeJson(this, "D:\\Projects\\Java\\Noscraft\\src\\main\\resources\\assets\\noscraft\\models\\item\\" + IRegistrable.toRegistryName(clazz.name()), IRegistrable.toRegistryName(name));
     }
 
 //    public int getMeleeDef() {
