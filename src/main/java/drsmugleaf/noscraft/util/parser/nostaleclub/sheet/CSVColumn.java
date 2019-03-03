@@ -2,6 +2,7 @@ package drsmugleaf.noscraft.util.parser.nostaleclub.sheet;
 
 import drsmugleaf.noscraft.util.parser.nostaleclub.parsers.regex.ParsingMode;
 import drsmugleaf.noscraft.util.parser.nostaleclub.parsers.regex.RegexPattern;
+import org.intellij.lang.annotations.Language;
 import org.jsoup.nodes.Element;
 
 import javax.annotation.Nonnull;
@@ -34,15 +35,18 @@ public class CSVColumn {
     }
 
     @Nonnull
-    public static CSVColumn from(@Nonnull String name, @Nonnull RegexPattern pattern, int id) {
-        ParsingMode mode = ParsingMode.from(name);
-        name = mode.removeSuffix(name);
+    public static CSVColumn from(@Nonnull String name, @Nonnull RegexPattern pattern, int id, @Nullable ParsingMode mode) {
+        if (mode == null) {
+            mode = ParsingMode.from(name);
+            name = mode.removeSuffix(name);
+        }
+
         return new CSVColumn(name, pattern, id, mode);
     }
 
     @Nonnull
     @SuppressWarnings("unchecked")
-    public static Set<CSVColumn> from(@Nonnull String... regexes) {
+    public static Set<CSVColumn> from(@Nullable ParsingMode mode, @Language("RegExp") @Nonnull String... regexes) {
         Set<CSVColumn> columns = new HashSet<>();
 
         for (String regex : regexes) {
@@ -64,15 +68,25 @@ public class CSVColumn {
 
                 List<String> keys = new ArrayList<>(groups.keySet());
                 for (String name : keys) {
-                    CSVColumn column = from(name, regexPattern, columns.size());
+                    CSVColumn column = from(name, regexPattern, columns.size(), mode);
                     columns.add(column);
+                    Integer id = groups.remove(name);
+                    groups.put(column.getName(), id);
                 }
+
+                namedGroups.set(pattern, groups);
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException("Error getting field namedGroups value", e);
             }
         }
 
         return columns;
+    }
+
+    @Nonnull
+    @SuppressWarnings("unchecked")
+    public static Set<CSVColumn> from(@Language("RegExp") @Nonnull String... regexes) {
+        return from(null, regexes);
     }
 
     @Nonnull
@@ -89,9 +103,9 @@ public class CSVColumn {
         return INDEX;
     }
 
-    @Nullable
-    public String parse(@Nonnull Element input) {
-        return REGEX.find(MODE.getInput(input), NAME + MODE.getName());
+    @Nonnull
+    public List<String> parse(@Nonnull Element input) {
+        return REGEX.find(MODE.getInput(input), NAME);
     }
 
 }

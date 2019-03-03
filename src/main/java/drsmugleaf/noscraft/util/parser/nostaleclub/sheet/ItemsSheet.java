@@ -53,7 +53,7 @@ public class ItemsSheet extends CSVSheet {
         }
     }
 
-    private static void createImages(@Nonnull File csv, @Nonnull File imagesFolder, @Nonnull File outputFolder) {
+    public static void createImages(@Nonnull File csv, @Nonnull File imagesFolder, @Nonnull File outputFolder) {
         try (FileReader fileReader = new FileReader(csv)) {
             CSVReaderHeaderAware reader = (CSVReaderHeaderAware) new CSVReaderHeaderAwareBuilder(fileReader)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.EMPTY_SEPARATORS)

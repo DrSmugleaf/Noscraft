@@ -2,11 +2,13 @@ package drsmugleaf.noscraft.util.parser.nostaleclub.parsers;
 
 import com.google.common.collect.ImmutableList;
 import drsmugleaf.noscraft.util.parser.nostaleclub.sheet.CSVColumn;
+import drsmugleaf.noscraft.util.parser.nostaleclub.sheet.CSVSheet;
 import org.jsoup.nodes.Element;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by DrSmugleaf on 03/03/2019
@@ -19,8 +21,12 @@ public abstract class ColumnParser {
     @Nonnull
     private final ImmutableList<CSVColumn> COLUMNS;
 
+    @Nonnull
+    private final List<String> COLUMN_NAMES;
+
     public ColumnParser(@Nonnull Collection<CSVColumn> columns) {
         COLUMNS = ImmutableList.copyOf(columns);
+        COLUMN_NAMES = COLUMNS.stream().map(CSVColumn::getName).collect(Collectors.toList());
     }
 
     @Nonnull
@@ -94,11 +100,21 @@ public abstract class ColumnParser {
     }
 
     @Nonnull
-    public String[] parse(@Nonnull String[] columns, int start, @Nonnull Element input) {
+    public Map<Integer, String> parse(@Nonnull Map<Integer, String> columns, int start, @Nonnull Element input, @Nonnull CSVSheet csvSheet) {
         for (CSVColumn column : COLUMNS) {
-            String parse = column.parse(input);
-            if (parse != null) {
-                columns[start + column.getIndex()] = parse;
+            List<String> results = column.parse(input);
+            if (results.isEmpty()) {
+                continue;
+            }
+
+            for (int i = 0; i < results.size(); i++) {
+                int index = i + start + column.getIndex();
+                if (i > 0) {
+                    String newColumn = resolveDuplicateName(COLUMN_NAMES, column.getName());
+                    index = csvSheet.addHeader(newColumn);
+                }
+
+                columns.put(index, results.get(i));
             }
         }
 

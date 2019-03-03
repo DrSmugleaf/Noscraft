@@ -1,8 +1,12 @@
 package drsmugleaf.noscraft.util.parser.nostaleclub.sheet;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
+import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import drsmugleaf.noscraft.util.parser.nostaleclub.parsers.ColumnParser;
+import drsmugleaf.noscraft.util.parser.nostaleclub.parsers.MissingParserException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,9 +14,7 @@ import org.jsoup.select.Elements;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -22,6 +24,9 @@ public class CSVSheet {
 
     @Nonnull
     private final List<ColumnParser> PARSERS = new ArrayList<>();
+
+    @Nonnull
+    private final List<String> ADDITIONAL_HEADERS = new ArrayList<>();
 
     public CSVSheet(@Nonnull Collection<ColumnParser> parsers) {
         PARSERS.addAll(parsers);
@@ -37,7 +42,7 @@ public class CSVSheet {
             i += parser.size();
         }
 
-        return i;
+        return i + ADDITIONAL_HEADERS.size();
     }
 
     private boolean matchesAny(@Nonnull String line) {
@@ -86,7 +91,8 @@ public class CSVSheet {
         return duplicateNames;
     }
 
-    private void writeHeaders(@Nonnull ICSVWriter writer) {
+    @Nonnull
+    private String[] getHeaders() {
         String[] headers = new String[size()];
 
         int i = 0;
@@ -98,7 +104,23 @@ public class CSVSheet {
             i += parser.size();
         }
 
-        writer.writeNext(headers);
+        for (int j = 0; j < ADDITIONAL_HEADERS.size(); j++) {
+            headers[i + j] = ADDITIONAL_HEADERS.get(j);
+        }
+
+        return headers;
+    }
+
+    private void writeHeaders(@Nonnull ICSVWriter writer) {
+        writer.writeNext(getHeaders());
+    }
+
+    public int addHeader(@Nonnull String header) {
+        if (!ADDITIONAL_HEADERS.contains(header)) {
+            ADDITIONAL_HEADERS.add(header);
+        }
+
+        return size() - ADDITIONAL_HEADERS.size() + ADDITIONAL_HEADERS.indexOf(header);
     }
 
     @Nullable
@@ -117,15 +139,21 @@ public class CSVSheet {
     }
 
     private void writeNext(@Nonnull ICSVWriter writer, @Nonnull Element item) {
-        String[] columns = new String[size()];
+        Map<Integer, String> columns = new HashMap<>(size());
 
         int i = 0;
         for (ColumnParser parser : PARSERS) {
-            columns = parser.parse(columns, i, item);
+            columns = parser.parse(columns, i, item, this);
             i += parser.size();
         }
 
-        writer.writeNext(columns);
+        for (int j = 0; j < size(); j++) {
+            if (!columns.containsKey(j)) {
+                columns.put(j, null);
+            }
+        }
+
+        writer.writeNext(columns.values().toArray(new String[size()]));
     }
 
     public void parseItems(@Nonnull File htmlInput, @Nonnull File csvOutput) {
@@ -154,10 +182,52 @@ public class CSVSheet {
 
                 for (Element item : items) {
                     writeNext(writer, item);
+
+                    for (Element bcard : item.getElementsByTag("bcard")) {
+                        String lineMissingParser = isMissingParser(bcard.text());
+                        if (lineMissingParser != null) {
+                            throw new MissingParserException(lineMissingParser);
+                        }
+                    }
                 }
             }
         } catch (IOException e) {
             throw new IllegalStateException("Error closing writer for file " + csvOutput.getAbsolutePath(), e);
+        }
+
+        csvOutput = new File(csvOutput.getAbsolutePath());
+        List<String[]> lines;
+        try (FileReader fileReader = new FileReader(csvOutput)) {
+            CSVReaderBuilder readerBuilder = new CSVReaderBuilder(fileReader)
+                    .withFieldAsNull(CSVReaderNullFieldIndicator.EMPTY_SEPARATORS)
+                    .withSkipLines(1);
+
+            try (CSVReader reader = readerBuilder.build()) {
+                lines = reader.readAll();
+            }
+        } catch (FileNotFoundException e) {
+            throw new IllegalStateException("Error finding file " + csvOutput.getAbsolutePath(), e);
+        } catch (IOException e) {
+            throw new IllegalStateException("Error closing reader for file " + csvOutput.getAbsolutePath());
+        }
+
+        try (FileWriter fileWriter = new FileWriter(csvOutput)) {
+            CSVWriterBuilder writerBuilder = new CSVWriterBuilder(fileWriter)
+                    .withQuoteChar('"')
+                    .withSeparator(',');
+
+            try (ICSVWriter writer = writerBuilder.build()) {
+                writer.writeNext(getHeaders());
+
+                String[] completeLine = new String[size()];
+                for (int i = 1; i < lines.size(); i++) {
+                    String[] line = lines.get(i);
+                    System.arraycopy(line, 0, completeLine, 0, line.length);
+                    writer.writeNext(completeLine);
+                }
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException("Error closing writer for file " + csvOutput.getAbsolutePath());
         }
     }
 

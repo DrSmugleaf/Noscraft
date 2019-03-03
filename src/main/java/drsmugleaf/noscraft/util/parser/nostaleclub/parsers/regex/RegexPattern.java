@@ -29,14 +29,16 @@ public class RegexPattern {
         return PATTERN;
     }
 
-    @Nullable
-    public String find(@Nonnull String input, @Nonnull String groupName) {
+    @Nonnull
+    public List<String> find(@Nonnull String input, @Nonnull String groupName) {
+        List<String> results = new ArrayList<>();
         Matcher matcher = PATTERN.matcher(input);
-        if (matcher.find()) {
-            return matcher.group(groupName);
+        while (matcher.find()) {
+            String match = matcher.group(groupName);
+            results.add(match);
         }
 
-        return null;
+        return results;
     }
 
     @Nonnull

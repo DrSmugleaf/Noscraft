@@ -2,6 +2,7 @@ package drsmugleaf.noscraft.util.parser.nostaleclub.parsers;
 
 import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.util.parser.nostaleclub.sheet.CSVColumn;
+import drsmugleaf.noscraft.util.parser.nostaleclub.sheet.CSVSheet;
 import org.jsoup.nodes.Element;
 
 import javax.annotation.Nonnull;
@@ -87,32 +88,32 @@ public class GeneralParser extends ColumnParser {
     }
 
     @Nonnull
-    private String[] doReplacements(@Nonnull String[] columns, int start) {
+    private Map<Integer, String> doReplacements(@Nonnull Map<Integer, String> columns, int start) {
         int index = start + SLOT_ID;
-        String slot = columns[index];
-        columns[index] = SLOT_MAP.get(slot);
+        String slot = columns.get(index);
+        columns.put(index, SLOT_MAP.get(slot));
 
         index = start + CLASS_ID;
-        String classes = columns[index];
+        String classes = columns.get(index);
         if (classes != null) {
             String[] classesArray = classes.split(", ");
             for (int i = 0; i < classesArray.length; i++) {
                 classesArray[i] = CLASS_MAP.get(classesArray[i]);
             }
-            columns[index] = String.join(", ", classesArray);
+            columns.put(index, String.join(", ", classesArray));
         }
 
         index = start + GOLD_PRICE_ID;
-        columns[index] = removeSpaces(columns[index]);
+        columns.put(index, removeSpaces(columns.get(index)));
 
         index = start + REPUTATION_PRICE_ID;
-        columns[index] = removeSpaces(columns[index]);
+        columns.put(index, removeSpaces(columns.get(index)));
 
         index = start + REGISTRY_NAME_ID;
-        columns[index] = IRegistrable.toRegistryName(columns[start + NAME_ID]);
-        if (!namesSeen.add(columns[index])) {
-            String newName = resolveDuplicateName(namesSeen, columns[index]);
-            columns[index] = newName;
+        columns.put(index, IRegistrable.toRegistryName(columns.get(start + NAME_ID)));
+        if (!namesSeen.add(columns.get(index))) {
+            String newName = resolveDuplicateName(namesSeen, columns.get(index));
+            columns.put(index, newName);
             namesSeen.add(newName);
         }
 
@@ -121,8 +122,8 @@ public class GeneralParser extends ColumnParser {
 
     @Nonnull
     @Override
-    public String[] parse(@Nonnull String[] columns, int start, @Nonnull Element input) {
-        columns = super.parse(columns, start, input);
+    public Map<Integer, String> parse(@Nonnull Map<Integer, String> columns, int start, @Nonnull Element input, CSVSheet csvSheet) {
+        columns = super.parse(columns, start, input, csvSheet);
         columns = doReplacements(columns, start);
         return columns;
     }
