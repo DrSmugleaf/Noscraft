@@ -20,6 +20,11 @@ import java.util.List;
  */
 public class Images {
 
+    public static void main(String[] args) {
+        String path = "D:\\Projects\\Java\\Noscraft\\src\\main\\resources\\assets\\noscraft\\textures\\items";
+        squareImages(new File(path));
+    }
+
     @Nonnull
     private static BufferedImage getImage(@Nonnull String name) {
         name = IRegistrable.toRegistryName(name);
@@ -95,32 +100,47 @@ public class Images {
         return allImages;
     }
 
-    public static void resizeAllTo32(@Nonnull String path) {
-        List<File> images = getAllImages(new File(path));
+    @Nonnull
+    public static BufferedImage squareDown(@Nonnull BufferedImage image, int maxSize) {
+        int size = Math.max(image.getHeight(), image.getWidth());
+        for (int i = maxSize; i > 0; i /= 2) {
+            if (size == i) {
+                return image;
+            }
+
+            if (size > i) {
+                Image scaledInstance = image.getScaledInstance(i, i, Image.SCALE_SMOOTH);
+                BufferedImage finalImage = new BufferedImage(scaledInstance.getWidth(null), scaledInstance.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D graphics = finalImage.createGraphics();
+                graphics.drawImage(scaledInstance, 0, 0, null);
+                graphics.dispose();
+
+                return finalImage;
+            }
+        }
+
+        throw new IllegalArgumentException("No valid size found below " + maxSize + " for image");
+    }
+
+    public static void squareImages(@Nonnull File directory) {
+        List<File> images = getAllImages(directory);
         if (images.isEmpty()) {
-            throw new IllegalArgumentException("No valid images found in path " + path);
+            throw new IllegalArgumentException("No valid images found in path " + directory.getAbsolutePath());
         }
 
         for (File imageFile : images) {
-            Image image;
+            BufferedImage image;
             try {
                 image = ImageIO.read(imageFile);
             } catch (IOException e) {
                 throw new IllegalStateException("Error reading image " + imageFile.getAbsolutePath(), e);
             }
 
-            if (image.getHeight(null) != 32 || image.getWidth(null) != 32) {
-                image = image.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
-                BufferedImage finalImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-                Graphics2D graphics = finalImage.createGraphics();
-                graphics.drawImage(image, 0, 0, null);
-                graphics.dispose();
-
-                try {
-                    ImageIO.write(finalImage, "png", imageFile);
-                } catch (IOException e) {
-                    throw new IllegalStateException("Error writing image " + imageFile.getAbsolutePath(), e);
-                }
+            image = squareDown(image, 512);
+            try {
+                ImageIO.write(image, "png", imageFile);
+            } catch (IOException e) {
+                throw new IllegalStateException("Error writing image " + imageFile.getAbsolutePath(), e);
             }
         }
     }

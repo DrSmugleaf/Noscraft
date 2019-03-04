@@ -48,7 +48,7 @@ public class ModGuis {
 
     @SubscribeEvent
     public static void onTextureStitchEventPre(TextureStitchEvent.Pre event) {
-        event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "items/slot/empty_fairy"));
+        event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "slot/empty_fairy"));
     }
 
     @Nonnull
