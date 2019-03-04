@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/top_tiger_costumes_amp_more"
+    }
+}

@@ -13,11 +13,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ModFairies {
 
     @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event) {
-        for (Fairies eFairy : Fairies.values()) {
-            ItemFairy fairy = new ItemFairy(eFairy);
-            event.getRegistry().register(fairy);
-        }
-    }
+    public static void registerItems(RegistryEvent.Register<Item> event) {}
 
 }

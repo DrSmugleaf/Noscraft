@@ -16,7 +16,7 @@ public interface IModellable extends IRegistrable {
 
     @Nonnull
     default ModelResourceLocation getModelResourceLocation() {
-        return new ModelResourceLocation(Noscraft.MOD_ID + ":" + IRegistrable.toRegistryName(getNameToRegister().replace('.', '/')), "inventory");
+        return new ModelResourceLocation(Noscraft.MOD_ID + ":" + getNameToRegister(), "inventory");
     }
 
 }

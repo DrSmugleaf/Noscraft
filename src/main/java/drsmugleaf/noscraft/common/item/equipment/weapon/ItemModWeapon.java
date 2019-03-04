@@ -22,7 +22,7 @@ public class ItemModWeapon extends ItemMod implements IClassSpecific {
     private final @Nonnull WeaponSlot SLOT;
 
     public ItemModWeapon(@Nonnull String name, @Nonnull Classes clazz, @Nonnull WeaponSlot slot) {
-        super(name, clazz + "." + name);
+        super(name);
         CLASS = clazz;
         SLOT = slot;
         setCreativeTab(getClassCreativeTab());
@@ -61,6 +61,12 @@ public class ItemModWeapon extends ItemMod implements IClassSpecific {
     @Override
     public Set<Classes> getClasses() {
         return CLASS.setOf();
+    }
+
+    @Nonnull
+    @Override
+    public String getNameToRegister() {
+        return IRegistrable.toRegistryName(getName());
     }
 
 }

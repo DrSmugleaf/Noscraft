@@ -1,6 +1,6 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "noscraft:items/fairy/ladine"
+        "layer0": "noscraft:items/ladine"
     }
 }

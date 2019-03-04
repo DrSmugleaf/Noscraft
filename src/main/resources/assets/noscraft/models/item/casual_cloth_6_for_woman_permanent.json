@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/casual_cloth_6_for_woman_permanent"
+    }
+}

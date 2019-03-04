@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/ticket_of_the_elemental_journey_through_time"
+    }
+}

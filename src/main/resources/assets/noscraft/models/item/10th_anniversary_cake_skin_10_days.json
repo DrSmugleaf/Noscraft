@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/10th_anniversary_cake_skin_10_days"
+    }
+}

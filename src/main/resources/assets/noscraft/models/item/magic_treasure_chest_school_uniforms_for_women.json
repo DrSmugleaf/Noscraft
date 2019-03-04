@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/magic_treasure_chest_school_uniforms_for_women"
+    }
+}

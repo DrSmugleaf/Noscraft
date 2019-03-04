@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/weapon/secondary/archer/honorable_knife_of_the_great_commander"
-    }
-}

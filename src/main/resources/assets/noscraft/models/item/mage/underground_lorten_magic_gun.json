@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/weapon/secondary/mage/underground_lorten_magic_gun"
-    }
-}

@@ -54,6 +54,9 @@ public class ItemsSheet extends CSVSheet {
     }
 
     public static void createImages(@Nonnull File csv, @Nonnull File imagesFolder, @Nonnull File outputFolder) {
+        String id = null;
+        String name = null;
+
         try (FileReader fileReader = new FileReader(csv)) {
             CSVReaderHeaderAware reader = (CSVReaderHeaderAware) new CSVReaderHeaderAwareBuilder(fileReader)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.EMPTY_SEPARATORS)
@@ -61,17 +64,17 @@ public class ItemsSheet extends CSVSheet {
 
             Map<String, String> line;
             while ((line = reader.readMap()) != null) {
-                String id = line.get("id");
-                String name = line.get("registryName");
-                File imageFile = new File(imagesFolder.getAbsolutePath() + "/" + "e" + id + ".png");
+                id = line.get("imageName");
+                name = line.get("registryName");
+                File imageFile = new File(imagesFolder.getAbsolutePath() + "/" + id + ".png");
                 BufferedImage image = ImageIO.read(imageFile);
-                String outputName = outputFolder.getAbsolutePath() + "/" + name;
+                String outputName = outputFolder.getAbsolutePath() + "/" + name + ".png";
                 ImageIO.write(image, "png", new File(outputName));
             }
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException("File " + csv.getAbsolutePath() + " not found", e);
         } catch (IOException e) {
-            throw new IllegalStateException("Error creating images for csv " + csv.getAbsolutePath(), e);
+            throw new IllegalStateException("Error creating images for csv " + csv.getAbsolutePath() + ". Image with id " + id + " and name " + name, e);
         }
     }
 

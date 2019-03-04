@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/glowing_pumpkin_hat_30_days_limited"
+    }
+}

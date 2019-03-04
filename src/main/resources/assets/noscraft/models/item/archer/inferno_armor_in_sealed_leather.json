@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/armor/archer/inferno_armor_in_sealed_leather"
-    }
-}

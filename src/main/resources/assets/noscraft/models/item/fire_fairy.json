@@ -1,6 +1,6 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "noscraft:items/fairy/fire_fairy"
+        "layer0": "noscraft:items/fire_fairy"
     }
 }

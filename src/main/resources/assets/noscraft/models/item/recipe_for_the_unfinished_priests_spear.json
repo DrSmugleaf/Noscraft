@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/recipe_for_the_unfinished_priests_spear"
+    }
+}

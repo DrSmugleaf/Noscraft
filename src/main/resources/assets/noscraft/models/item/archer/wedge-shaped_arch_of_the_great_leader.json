@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/weapon/main/archer/wedge-shaped_arch_of_the_great_leader"
-    }
-}

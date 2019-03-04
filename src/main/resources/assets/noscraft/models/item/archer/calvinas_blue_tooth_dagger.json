@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/weapon/secondary/archer/calvinas_blue_tooth_dagger"
-    }
-}

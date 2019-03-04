@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/wildflower_bow_skin_permanent_limited"
+    }
+}

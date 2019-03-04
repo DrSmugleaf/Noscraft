@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/armor/swordsman/honorable_golden_armor_of_the_bandits_band"
-    }
-}

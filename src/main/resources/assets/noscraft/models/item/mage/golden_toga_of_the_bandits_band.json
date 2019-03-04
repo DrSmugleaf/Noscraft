@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/armor/mage/golden_toga_of_the_bandits_band"
-    }
-}

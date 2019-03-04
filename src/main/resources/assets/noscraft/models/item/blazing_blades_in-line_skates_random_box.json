@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/blazing_blades_in-line_skates_random_box"
+    }
+}

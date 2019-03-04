@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/fluffy_rabbit_ears_f_30_days"
+    }
+}

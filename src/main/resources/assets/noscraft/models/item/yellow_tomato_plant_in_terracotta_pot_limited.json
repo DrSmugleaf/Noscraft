@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/yellow_tomato_plant_in_terracotta_pot_limited"
+    }
+}

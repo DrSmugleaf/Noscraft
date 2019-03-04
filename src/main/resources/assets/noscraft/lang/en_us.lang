@@ -1,6 +1,7 @@
 button.noscraft=Noscraft
 button.normal=Normal
 
+itemGroup.noscraft=Noscraft
 itemGroup.adventurer=Adventurer
 itemGroup.archer=Archer
 itemGroup.mage=Mage

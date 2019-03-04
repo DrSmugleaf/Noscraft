@@ -22,6 +22,7 @@ public interface IRegistrable {
                 .replaceAll("[\\\\/]", "-")
                 .replaceAll("[^A-Za-z0-9_\\-.]", "")
                 .replaceAll("_{2,}", "_")
+                .replaceAll("\\.$", "")
                 .toLowerCase();
     }
 

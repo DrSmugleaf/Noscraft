@@ -67,6 +67,7 @@ public class GeneralParser extends ColumnParser {
     private static Set<CSVColumn> getGeneralColumns() {
         return CSVColumn.from(
                 "(?m) \\[(?<id>\\d+)]\\[$",
+                "(?m)<img src=\".+/(?<imageName>\\d+).png\">$",
                 "(?m)<b>(?<name>.+)</b>$",
                 "(?m)<b>(?<registryName>.+)</b>$",
                 "(?m)Inventory: (?<inventory>.+)$",

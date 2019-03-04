@@ -1,6 +1,7 @@
 package drsmugleaf.noscraft.common.skills;
 
 import drsmugleaf.noscraft.Noscraft;
+import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.common.classes.ITransformation;
 import drsmugleaf.noscraft.common.element.Elements;
 import net.minecraft.client.Minecraft;
@@ -122,7 +123,7 @@ public class SkillMod extends IForgeRegistryEntry.Impl<ISkill> implements ISkill
     @Nonnull
     @Override
     public String getNameToRegister() {
-        return NAME;
+        return IRegistrable.toRegistryName(getName());
     }
 
     @Override

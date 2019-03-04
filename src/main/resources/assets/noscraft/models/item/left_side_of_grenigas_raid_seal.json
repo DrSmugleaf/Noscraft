@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/left_side_of_grenigas_raid_seal"
+    }
+}

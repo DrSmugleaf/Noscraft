@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/champion_amulet_for_increasing_rarity_1"
+    }
+}

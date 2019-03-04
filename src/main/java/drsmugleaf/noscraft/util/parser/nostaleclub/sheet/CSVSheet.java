@@ -195,7 +195,6 @@ public class CSVSheet {
             throw new IllegalStateException("Error closing writer for file " + csvOutput.getAbsolutePath(), e);
         }
 
-        csvOutput = new File(csvOutput.getAbsolutePath());
         List<String[]> lines;
         try (FileReader fileReader = new FileReader(csvOutput)) {
             CSVReaderBuilder readerBuilder = new CSVReaderBuilder(fileReader)

@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/aqua_bushtail_costume_7_days_limited"
+    }
+}

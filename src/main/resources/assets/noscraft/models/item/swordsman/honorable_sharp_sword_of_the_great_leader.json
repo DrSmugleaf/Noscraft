@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/weapon/main/swordsman/honorable_sharp_sword_of_the_great_leader"
-    }
-}

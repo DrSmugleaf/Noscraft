@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/weapon/secondary/martialartist/token_of_the_magical_black_turtle"
-    }
-}

@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/armor/archer/honorable_gold_tunic_of_the_banditi_band"
-    }
-}

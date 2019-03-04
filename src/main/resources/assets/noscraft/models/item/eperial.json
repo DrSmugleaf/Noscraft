@@ -1,6 +1,6 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "noscraft:items/fairy/eperial"
+        "layer0": "noscraft:items/eperial"
     }
 }

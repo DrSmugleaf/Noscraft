@@ -81,11 +81,6 @@ public enum SpecialistCards implements ITransformation, IRegistrable {
         return NAME;
     }
 
-    @Override
-    public @Nonnull String getNameToRegister() {
-        return NAME;
-    }
-
     @Nonnull
     @Override
     public String getFileName() {
@@ -116,6 +111,12 @@ public enum SpecialistCards implements ITransformation, IRegistrable {
     @Override
     public @Nonnull ImmutableSet<Classes> getClasses() {
         return CLASSES;
+    }
+
+    @Nonnull
+    @Override
+    public String getNameToRegister() {
+        return IRegistrable.toRegistryName(getName());
     }
 
 }

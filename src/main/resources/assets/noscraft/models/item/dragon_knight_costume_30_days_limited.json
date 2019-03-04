@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/dragon_knight_costume_30_days_limited"
+    }
+}

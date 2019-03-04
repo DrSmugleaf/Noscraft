@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/amulet_for_improving_fixed-level_weapons"
+    }
+}

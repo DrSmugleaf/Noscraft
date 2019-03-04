@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "noscraft:items/abyssal_eye_bandage_b_limited_1"
+    }
+}

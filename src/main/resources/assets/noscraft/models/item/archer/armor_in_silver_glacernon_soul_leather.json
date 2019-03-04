@@ -1,6 +1,0 @@
-{
-    "parent": "builtin/generated",
-    "textures": {
-        "layer0": "noscraft:items/armor/archer/armor_in_silver_glacernon_soul_leather"
-    }
-}
