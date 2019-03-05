@@ -2,7 +2,7 @@ package drsmugleaf.noscraft.common.item.equipment.fairy;
 
 import drsmugleaf.noscraft.common.element.Elements;
 import drsmugleaf.noscraft.common.item.ItemMod;
-import drsmugleaf.noscraft.common.item.creativetab.CreativeTabFairy;
+import drsmugleaf.noscraft.common.item.creativetab.CreativeTabsMod;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -17,7 +17,7 @@ public class ItemFairy extends ItemMod implements IFairy {
     public ItemFairy(@Nonnull Fairies fairy) {
         super(fairy.getName(), fairy.getName());
         FAIRY = fairy;
-        setCreativeTab(CreativeTabFairy.INSTANCE);
+        setCreativeTab(CreativeTabsMod.FAIRY);
         maxStackSize = 1;
     }
 

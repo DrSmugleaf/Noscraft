@@ -1,10 +1,9 @@
 package drsmugleaf.noscraft.client.gui;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.container.noscraft.ContainerExpanded;
+import drsmugleaf.noscraft.common.container.noscraft.ContainerCharacter;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
@@ -14,18 +13,16 @@ import javax.annotation.Nonnull;
 /**
  * Created by DrSmugleaf on 01/02/2019
  */
-public class GuiExpanded extends InventoryEffectRenderer {
+public class GuiCharacter extends GuiInventoryMod {
 
     public static final int ID = 0;
-    public static final @Nonnull ResourceLocation BACKGROUND = new ResourceLocation(Noscraft.MOD_ID, "textures/gui/expanded_inventory.png");
+    public static final @Nonnull ResourceLocation BACKGROUND = new ResourceLocation(Noscraft.MOD_ID, "textures/gui/character_inventory.png");
     private float oldMouseX;
     private float oldMouseY;
-    private final @Nonnull EntityPlayer PLAYER;
 
-    public GuiExpanded(@Nonnull EntityPlayer player) {
-        super(new ContainerExpanded(player));
+    public GuiCharacter(@Nonnull EntityPlayer player) {
+        super(new ContainerCharacter(player));
         allowUserInput = true;
-        PLAYER = player;
     }
 
     private void resetGui() {
@@ -80,11 +77,6 @@ public class GuiExpanded extends InventoryEffectRenderer {
         int x = guiLeft + 51;
         int y = guiTop + 75;
         GuiInventory.drawEntityOnScreen(x, y, 30, (float)(x) - oldMouseX, (float)(y - 50) - oldMouseY, mc.player);
-    }
-
-    public void displayNormalInventory() {
-        GuiInventory gui = new GuiInventory(mc.player);
-        mc.displayGuiScreen(gui);
     }
 
 }

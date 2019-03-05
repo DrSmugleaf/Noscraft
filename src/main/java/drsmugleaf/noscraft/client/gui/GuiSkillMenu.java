@@ -6,19 +6,19 @@ import drsmugleaf.noscraft.common.container.skill.SkillCapabilities;
 import drsmugleaf.noscraft.common.skills.ISkill;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
  * Created by DrSmugleaf on 22/02/2019
  */
-public class GuiSkillMenu extends InventoryEffectRenderer {
+public class GuiSkillMenu extends GuiInventoryMod {
 
     public static final int ID = 1;
     public static final @Nonnull ResourceLocation BACKGROUND = new ResourceLocation(Noscraft.MOD_ID, "textures/gui/skill_menu.png");
@@ -47,12 +47,13 @@ public class GuiSkillMenu extends InventoryEffectRenderer {
         Map<Integer, ISkill> skillsLearned = PLAYER.getCapability(SkillCapabilities.CAPABILITY_SKILLS, null).getSkills();
 
         int i = 0;
+        Iterator<Map.Entry<Integer, ISkill>> iterator = skillsLearned.entrySet().iterator();
         for (int row = 0; row < ROWS; row++) {
             int y = guiTop + BORDERS + SLOT_REAL_HEIGHT * row;
 
-            for (int column = 0; column < COLUMNS && i < skillsLearned.size(); column++) {
+            for (int column = 0; column < COLUMNS && iterator.hasNext(); column++) {
                 int x = guiLeft + BORDERS + SLOT_REAL_WIDTH * column;
-                ISkill skill = skillsLearned.get(i);
+                ISkill skill = iterator.next().getValue();
                 GuiSkillButton button = new GuiSkillButton(this, skill, COLUMNS + i, x, y, SLOT_WIDTH, SLOT_HEIGHT, skill.getName());
 
                 addButton(button);
@@ -125,12 +126,10 @@ public class GuiSkillMenu extends InventoryEffectRenderer {
 
     @Override
     protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-        if (BUTTON_DRAGGED == null) {
-            BUTTON_DRAGGED = (GuiSkillButton) getButtonUnderMouse();
-            return;
-        }
-
-        if (BUTTON_DRAGGED.getSkill() == null) {
+        GuiButton buttonUnderMouse = getButtonUnderMouse();
+        if (BUTTON_DRAGGED == null && buttonUnderMouse instanceof GuiSkillButton) {
+            BUTTON_DRAGGED = (GuiSkillButton) buttonUnderMouse;
+        } else if (BUTTON_DRAGGED != null && BUTTON_DRAGGED.getSkill() == null) {
             BUTTON_DRAGGED = null;
         }
     }

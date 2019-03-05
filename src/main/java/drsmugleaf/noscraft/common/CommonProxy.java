@@ -1,9 +1,9 @@
 package drsmugleaf.noscraft.common;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.client.gui.GuiExpanded;
+import drsmugleaf.noscraft.client.gui.GuiCharacter;
 import drsmugleaf.noscraft.client.gui.GuiSkillMenu;
-import drsmugleaf.noscraft.common.container.noscraft.ContainerExpanded;
+import drsmugleaf.noscraft.common.container.noscraft.ContainerCharacter;
 import drsmugleaf.noscraft.common.container.skill.ContainerSkillMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -25,8 +25,8 @@ public class CommonProxy implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (ID) {
-            case GuiExpanded.ID:
-                return new ContainerExpanded(player);
+            case GuiCharacter.ID:
+                return new ContainerCharacter(player);
             case GuiSkillMenu.ID:
                 return new ContainerSkillMenu(player);
             default:

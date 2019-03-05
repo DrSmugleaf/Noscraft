@@ -1,7 +1,7 @@
 package drsmugleaf.noscraft.common.network;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.client.gui.GuiExpanded;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -11,21 +11,37 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * Created by DrSmugleaf on 01/02/2019
+ * Created by DrSmugleaf on 05/03/2019
  */
-public class PacketOpenNoscraftInventory extends PacketMod<PacketOpenNoscraftInventory, IMessage> {
+public class PacketOpenInventory extends PacketMod<PacketOpenInventory, IMessage> {
 
-    public PacketOpenNoscraftInventory() {}
+    private int id;
+
+    public PacketOpenInventory() {}
+
+    public PacketOpenInventory(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        id = buf.readInt();
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(id);
+    }
 
     @Nullable
     @Override
-    public IMessage handleOnServer(@Nonnull PacketOpenNoscraftInventory message, @Nonnull MessageContext ctx) {
+    public IMessage handleOnServer(@Nonnull PacketOpenInventory message, @Nonnull MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().player;
         WorldServer world = (WorldServer) player.world;
 
         world.addScheduledTask(() -> {
             player.openContainer.onContainerClosed(player);
-            player.openGui(Noscraft.getInstance(), GuiExpanded.ID, world, 0, 0, 0);
+            player.openGui(Noscraft.getInstance(), message.id, world, 0, 0, 0);
         });
 
         return null;

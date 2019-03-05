@@ -2,7 +2,7 @@ package drsmugleaf.noscraft.common.item;
 
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.common.IModellable;
-import drsmugleaf.noscraft.common.item.creativetab.CreativeTabMod;
+import drsmugleaf.noscraft.common.item.creativetab.CreativeTabsMod;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
@@ -19,7 +19,7 @@ public abstract class ItemMod extends Item implements IModellable {
     public ItemMod(@Nonnull String name, @Nonnull String registryName) {
         super();
         NAME = name;
-        setCreativeTab(CreativeTabMod.INSTANCE);
+        setCreativeTab(CreativeTabsMod.NOSCRAFT);
         register(this, registryName);
 
         if (Noscraft.getProxy().isClient()) {

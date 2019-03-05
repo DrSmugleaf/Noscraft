@@ -5,7 +5,6 @@ import drsmugleaf.noscraft.common.item.equipment.Slots;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -26,20 +25,19 @@ public class ModGuis {
     @SubscribeEvent
     public static void onGuiPostInit(GuiScreenEvent.InitGuiEvent.Post event) {
         GuiScreen gui = event.getGui();
-        String format;
-        if (gui instanceof GuiInventory) {
-            format = "button.noscraft";
-        } else if (gui instanceof GuiExpanded) {
-            format = "button.normal";
-        } else {
+
+        if (!(gui instanceof GuiInventory || gui instanceof GuiInventoryMod)) {
             return;
         }
 
-        format = I18n.format(format);
-        GuiNoscraftButton button = new GuiNoscraftButton((GuiContainer) gui, 26, 8, 10, 10, format);
-        GuiSkillMenuButton button2 = new GuiSkillMenuButton((GuiContainer) gui, 46, 8, 10, 10, format);
-        event.getButtonList().add(button);
-        event.getButtonList().add(button2);
+        GuiContainer guiContainer = (GuiContainer) gui;
+        int x = 173 + (152 - guiContainer.getGuiLeft());
+        GuiInventoryButton inventory = new GuiInventoryButton(guiContainer, x - 16, -16, 16, 16);
+        GuiCharacterButton character = new GuiCharacterButton(guiContainer, x - 32, -16, 16, 16);
+        GuiSkillMenuButton skill = new GuiSkillMenuButton(guiContainer, x - 48, -16, 16, 16);
+        event.getButtonList().add(character);
+        event.getButtonList().add(inventory);
+        event.getButtonList().add(skill);
     }
 
     @SubscribeEvent

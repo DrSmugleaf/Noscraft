@@ -2,9 +2,8 @@ package drsmugleaf.noscraft.client;
 
 import com.google.common.collect.ImmutableMap;
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.client.gui.GuiExpanded;
+import drsmugleaf.noscraft.client.gui.GuiCharacter;
 import drsmugleaf.noscraft.client.gui.GuiSkillMenu;
-import drsmugleaf.noscraft.client.gui.ModGuis;
 import drsmugleaf.noscraft.client.keybinding.ModKeys;
 import drsmugleaf.noscraft.client.render.entity.RenderNuke;
 import drsmugleaf.noscraft.client.render.entity.RenderNukeCircle;
@@ -19,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.client.model.obj.OBJModel;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLLog;
@@ -64,8 +62,8 @@ public class ClientProxy extends CommonProxy {
     public @Nullable Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (world instanceof WorldClient) {
             switch (ID) {
-                case GuiExpanded.ID:
-                    return new GuiExpanded(player);
+                case GuiCharacter.ID:
+                    return new GuiCharacter(player);
                 case GuiSkillMenu.ID:
                     return new GuiSkillMenu(player);
             }

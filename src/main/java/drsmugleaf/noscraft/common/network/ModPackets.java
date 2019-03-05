@@ -22,13 +22,11 @@ public class ModPackets {
     }
 
     public static void init() {
-        register(PacketOpenNormalInventory.class);
-        register(PacketOpenNoscraftInventory.class);
-        register(PacketSync.class);
-        register(PacketHellDrop.class);
         register(PacketCooldownOutOfSync.class);
+        register(PacketHellDrop.class);
+        register(PacketOpenInventory.class);
         register(PacketOpenNormalInventory.class);
-        register(PacketOpenSkillMenu.class);
+        register(PacketSync.class);
     }
 
 }

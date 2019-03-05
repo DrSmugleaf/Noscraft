@@ -15,14 +15,14 @@ import java.util.Map;
 /**
  * Created by DrSmugleaf on 01/02/2019
  */
-public class ContainerExpanded extends Container {
+public class ContainerCharacter extends Container {
 
     private static final @Nonnull EntityEquipmentSlot[] slots = new EntityEquipmentSlot[]{EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET};
 
     @Nonnull
     private final Equipment EQUIPMENT;
 
-    public ContainerExpanded(@Nonnull EntityPlayer player) {
+    public ContainerCharacter(@Nonnull EntityPlayer player) {
         EQUIPMENT = player.getCapability(EquipmentCapabilities.CAPABILITY_EQUIPMENT, null);
 
         for (int i = 0; i < slots.length; i++) {

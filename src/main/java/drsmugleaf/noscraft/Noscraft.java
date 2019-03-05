@@ -7,8 +7,6 @@ import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
 import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
 import drsmugleaf.noscraft.common.container.skill.SkillCapabilities;
 import drsmugleaf.noscraft.common.container.skill.SkillsLearned;
-import drsmugleaf.noscraft.common.item.equipment.fairy.FairyItem;
-import drsmugleaf.noscraft.common.item.equipment.fairy.IFairy;
 import drsmugleaf.noscraft.common.network.ModPackets;
 import drsmugleaf.noscraft.common.skills.ModSkills;
 import net.minecraftforge.common.MinecraftForge;
@@ -72,11 +70,6 @@ public class Noscraft {
                 FairyContainer.class,
                 new FairyCapabilities.CapabilityFairy(),
                 FairyContainer::new
-        );
-        CapabilityManager.INSTANCE.register(
-                IFairy.class,
-                new FairyCapabilities.CapabilityItemFairyStorage(),
-                FairyItem::new
         );
 
         CapabilityManager.INSTANCE.register(

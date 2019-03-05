@@ -13,11 +13,11 @@ import java.util.Arrays;
  */
 public enum Classes {
 
-    ADVENTURER(CreativeTabAdventurer.INSTANCE),
-    SWORDSMAN(CreativeTabSwordsman.INSTANCE),
-    ARCHER(CreativeTabArcher.INSTANCE),
-    MAGE(CreativeTabMage.INSTANCE),
-    MARTIALARTIST(CreativeTabMartialArtist.INSTANCE);
+    ADVENTURER(CreativeTabsMod.ADVENTURER),
+    SWORDSMAN(CreativeTabsMod.SWORDSMAN),
+    ARCHER(CreativeTabsMod.ARCHER),
+    MAGE(CreativeTabsMod.MAGE),
+    MARTIALARTIST(CreativeTabsMod.MARTIAL_ARTIST);
 
     static {
         ADVENTURER.MAIN = WeaponTypes.ADVENTURER_MAIN;

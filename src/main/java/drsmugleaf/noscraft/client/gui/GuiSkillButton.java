@@ -3,7 +3,6 @@ package drsmugleaf.noscraft.client.gui;
 import drsmugleaf.noscraft.common.skills.ISkill;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -15,15 +14,24 @@ import javax.annotation.Nullable;
 /**
  * Created by DrSmugleaf on 22/02/2019
  */
-public class GuiSkillButton extends GuiButton {
+public class GuiSkillButton extends GuiButtonMod {
 
     protected @Nullable ISkill SKILL;
-    private final @Nonnull GuiSkillMenu PARENT_GUI;
 
     public GuiSkillButton(@Nonnull GuiSkillMenu parentGui, @Nullable ISkill skill, int buttonId, int x, int y, int widthIn, int heightIn, String buttonText) {
-        super(buttonId, x, y, widthIn, heightIn, buttonText);
+        super(parentGui, buttonId, x, y, widthIn, heightIn, buttonText);
         SKILL = skill;
-        PARENT_GUI = parentGui;
+    }
+
+    @Override
+    public boolean doesRender() {
+        return true;
+    }
+
+    @Nonnull
+    @Override
+    public ResourceLocation getTexture() {
+        return new ResourceLocation(SKILL.getTexture().getResourceDomain(), "textures/" + SKILL.getTexture().getResourcePath() + ".png");
     }
 
     @Nullable
@@ -42,11 +50,11 @@ public class GuiSkillButton extends GuiButton {
     }
 
     public void draw(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks, int x, int y) {
+        visible = doesRender();
         hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
 
         if (visible && SKILL != null) {
-            ResourceLocation location = new ResourceLocation(SKILL.getTexture().getResourceDomain(), "textures/" + SKILL.getTexture().getResourcePath() + ".png");
-            mc.getTextureManager().bindTexture(location);
+            mc.getTextureManager().bindTexture(getTexture());
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
             GlStateManager.enableBlend();
