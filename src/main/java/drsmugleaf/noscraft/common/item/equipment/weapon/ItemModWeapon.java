@@ -1,5 +1,6 @@
 package drsmugleaf.noscraft.common.item.equipment.weapon;
 
+import com.google.common.collect.ImmutableSet;
 import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.common.classes.Classes;
 import drsmugleaf.noscraft.common.classes.IClassSpecific;
@@ -11,19 +12,18 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by DrSmugleaf on 09/02/2019
  */
 public class ItemModWeapon extends ItemMod implements IClassSpecific {
 
-    private final @Nonnull Classes CLASS;
+    private final @Nonnull ImmutableSet<Classes> CLASS;
     private final @Nonnull WeaponSlot SLOT;
 
     public ItemModWeapon(@Nonnull String name, @Nonnull Classes clazz, @Nonnull WeaponSlot slot) {
-        super(name);
-        CLASS = clazz;
+        super(name, name);
+        CLASS = clazz.setOf();
         SLOT = slot;
         setCreativeTab(getClassCreativeTab());
     }
@@ -48,7 +48,7 @@ public class ItemModWeapon extends ItemMod implements IClassSpecific {
 
     @Override
     public @Nonnull String getLayer0Path() {
-        return LAYER0_PREFIX + "weapon/" + SLOT.name().toLowerCase() + "/" + CLASS.name().toLowerCase() + "/" + IRegistrable.toRegistryName(getName());
+        return LAYER0_PREFIX + "weapon/" + SLOT.name().toLowerCase() + "/" + CLASS.iterator().next().name().toLowerCase() + "/" + IRegistrable.toRegistryName(getName());
     }
 
     @Nonnull
@@ -59,14 +59,8 @@ public class ItemModWeapon extends ItemMod implements IClassSpecific {
 
     @Nonnull
     @Override
-    public Set<Classes> getClasses() {
-        return CLASS.setOf();
-    }
-
-    @Nonnull
-    @Override
-    public String getNameToRegister() {
-        return IRegistrable.toRegistryName(getName());
+    public ImmutableSet<Classes> getClasses() {
+        return CLASS;
     }
 
 }

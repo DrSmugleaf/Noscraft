@@ -1,5 +1,6 @@
 package drsmugleaf.noscraft.common.classes;
 
+import com.google.common.collect.ImmutableSet;
 import drsmugleaf.noscraft.common.IRegistrable;
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 public interface IClassSpecific {
 
     @Nonnull
-    Set<Classes> getClasses();
+    ImmutableSet<Classes> getClasses();
 
     @Nonnull
     default String getClassFolderName() {

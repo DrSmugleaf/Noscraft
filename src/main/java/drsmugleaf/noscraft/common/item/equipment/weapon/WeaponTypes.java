@@ -5,7 +5,6 @@ import drsmugleaf.noscraft.common.classes.Classes;
 import drsmugleaf.noscraft.common.classes.IClassSpecific;
 
 import javax.annotation.Nonnull;
-import java.util.Set;
 
 /**
  * Created by Josde on 31/01/2019
@@ -56,7 +55,7 @@ public enum WeaponTypes implements IClassSpecific {
 
     @Nonnull
     @Override
-    public Set<Classes> getClasses() {
+    public ImmutableSet<Classes> getClasses() {
         return CLASS;
     }
 

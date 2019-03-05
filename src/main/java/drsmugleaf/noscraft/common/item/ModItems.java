@@ -7,7 +7,6 @@ import com.opencsv.CSVReaderHeaderAwareBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import drsmugleaf.noscraft.Noscraft;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -28,19 +27,7 @@ public class ModItems {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new ItemMod("Logo Icon") {
-            @Nonnull
-            @Override
-            public String getNameToRegister() {
-                return "logo_icon";
-            }
-
-            @Nonnull
-            @Override
-            public String getLayer0Path() {
-                return LAYER0_PREFIX + toRegistryName();
-            }
-        });
+        event.getRegistry().register(new ItemMod("Logo Icon", "logo_icon") {});
 
         CSVParser parser = new CSVParserBuilder()
                 .withSeparator(',')
@@ -55,27 +42,14 @@ public class ModItems {
         ) {
             Map<String, String> line;
             while ((line = reader.readMap()) != null) {
-                String name = line.get("name");
-                String registryName = line.get("registryName");
-                event.getRegistry().register(new ItemMod(name) {
-                    @Nonnull
-                    @Override
-                    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-                        return name;
-                    }
+                ItemMod item = null;
+                if (line.get("slot") != null) {
+                    item = ItemEquippable.from(line);
+                }
 
-                    @Nonnull
-                    @Override
-                    public String getNameToRegister() {
-                        return registryName;
-                    }
-
-                    @Nonnull
-                    @Override
-                    public String getLayer0Path() {
-                        return LAYER0_PREFIX + toRegistryName();
-                    }
-                });
+                if (item != null) { // TODO: 04/03/2019 Remove = null when all item classes are created
+                    event.getRegistry().register(item);
+                }
             }
         } catch (FileNotFoundException e) {
             throw new IllegalStateException("File " + CSV_PATH + " not found", e);

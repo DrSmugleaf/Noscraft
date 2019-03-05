@@ -1,6 +1,8 @@
 package drsmugleaf.noscraft;
 
 import drsmugleaf.noscraft.common.CommonProxy;
+import drsmugleaf.noscraft.common.container.noscraft.Equipment;
+import drsmugleaf.noscraft.common.container.noscraft.EquipmentCapabilities;
 import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
 import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
 import drsmugleaf.noscraft.common.container.skill.SkillCapabilities;
@@ -81,6 +83,12 @@ public class Noscraft {
                 SkillsLearned.class,
                 new SkillCapabilities.CapabilitySkills(),
                 SkillsLearned::new
+        );
+
+        CapabilityManager.INSTANCE.register(
+                Equipment.class,
+                new EquipmentCapabilities.CapabilityEquipment(),
+                Equipment::new
         );
 
         PROXY.registerEventHandlers();

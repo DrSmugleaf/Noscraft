@@ -1,7 +1,6 @@
 package drsmugleaf.noscraft.common.skills;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.common.classes.ITransformation;
 import drsmugleaf.noscraft.common.element.Elements;
 import net.minecraft.client.Minecraft;
@@ -74,7 +73,7 @@ public class SkillMod extends IForgeRegistryEntry.Impl<ISkill> implements ISkill
         ELEMENT_BONUS = elementBonus;
         TRANSFORMATION = transformation;
 
-        registerEntry(this);
+        registerEntry(this, name);
 
         TEXTURE = new ResourceLocation(Noscraft.MOD_ID, getLayer0Path());
 
@@ -118,12 +117,6 @@ public class SkillMod extends IForgeRegistryEntry.Impl<ISkill> implements ISkill
     @Override
     public String getName() {
         return NAME;
-    }
-
-    @Nonnull
-    @Override
-    public String getNameToRegister() {
-        return IRegistrable.toRegistryName(getName());
     }
 
     @Override

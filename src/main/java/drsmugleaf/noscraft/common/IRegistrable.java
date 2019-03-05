@@ -7,14 +7,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
  * Created by DrSmugleaf on 17/02/2019
  */
 public interface IRegistrable {
-
-    @Nonnull String getNameToRegister();
 
     static @Nonnull String toRegistryName(@Nonnull String name) {
         return name
@@ -26,33 +25,28 @@ public interface IRegistrable {
                 .toLowerCase();
     }
 
-    default @Nonnull String toRegistryName() {
-        return toRegistryName(getNameToRegister());
-    }
+    @Nullable
+    ResourceLocation getRegistryName();
 
     default @Nonnull ResourceLocation toResourceLocation(@Nonnull String name) {
         return new ResourceLocation(Noscraft.MOD_ID, toRegistryName(name));
     }
 
-    default @Nonnull ResourceLocation toResourceLocation() {
-        return new ResourceLocation(Noscraft.MOD_ID, toRegistryName());
-    }
-
     @SuppressWarnings("unchecked")
-    default @Nonnull <T extends IForgeRegistryEntry.Impl & IRegistrable> String registerEntry(T entry) {
-        ResourceLocation location = toResourceLocation();
+    default @Nonnull <T extends IForgeRegistryEntry.Impl & IRegistrable> String registerEntry(T entry, @Nonnull String name) {
+        ResourceLocation location = toResourceLocation(name);
         entry.setRegistryName(location);
         return Objects.requireNonNull(entry.getRegistryName()).getResourcePath();
     }
 
-    default @Nonnull <T extends Block & IRegistrable> String register(@Nonnull T block) {
-        String name = registerEntry(block);
+    default @Nonnull <T extends Block & IRegistrable> String register(@Nonnull T block, @Nonnull String name) {
+        name = registerEntry(block, name);
         block.setUnlocalizedName(name);
         return name;
     }
 
-    default @Nonnull <T extends Item & IRegistrable> String register(@Nonnull T item) {
-        String name = registerEntry(item);
+    default @Nonnull <T extends Item & IRegistrable> String register(@Nonnull T item, @Nonnull String name) {
+        name = registerEntry(item, name);
         item.setUnlocalizedName(name);
         return name;
     }

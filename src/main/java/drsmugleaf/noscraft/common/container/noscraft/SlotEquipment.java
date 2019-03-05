@@ -1,17 +1,22 @@
 package drsmugleaf.noscraft.common.container.noscraft;
 
+import drsmugleaf.noscraft.Noscraft;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * Created by DrSmugleaf on 05/02/2019
+ * Created by DrSmugleaf on 05/03/2019
  */
-public class SlotFairy extends SlotItemHandler {
+public class SlotEquipment extends SlotItemHandler {
 
-    public SlotFairy(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+    private final @Nonnull String NAME;
+
+    public SlotEquipment(@Nonnull String name, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
+        NAME = name;
     }
 
     @Override
@@ -22,7 +27,7 @@ public class SlotFairy extends SlotItemHandler {
     @Nullable
     @Override
     public String getSlotTexture() {
-        return "noscraft:gui/slot/fairy";
+        return Noscraft.MOD_ID + ":gui/slot/" + NAME;
     }
 
 }

@@ -1,5 +1,6 @@
 package drsmugleaf.noscraft.common.container.noscraft;
 
+import drsmugleaf.noscraft.common.item.equipment.Slots;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
  * Created by DrSmugleaf on 01/02/2019
@@ -16,10 +18,12 @@ import javax.annotation.Nullable;
 public class ContainerExpanded extends Container {
 
     private static final @Nonnull EntityEquipmentSlot[] slots = new EntityEquipmentSlot[]{EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET};
-    private final @Nonnull FairyContainer fairy;
+
+    @Nonnull
+    private final Equipment EQUIPMENT;
 
     public ContainerExpanded(@Nonnull EntityPlayer player) {
-        fairy = player.getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
+        EQUIPMENT = player.getCapability(EquipmentCapabilities.CAPABILITY_EQUIPMENT, null);
 
         for (int i = 0; i < slots.length; i++) {
             EntityEquipmentSlot slot = slots[i];
@@ -42,11 +46,19 @@ public class ContainerExpanded extends Container {
             });
         }
 
-        addSlotToContainer(new SlotFairy(fairy, 0, 135, 8));
+        int x;
+        int y;
+        Map<Slots, EquipmentContainer> slots = EQUIPMENT.getSlots();
+        for (Slots slot : Slots.values()) {
+            EquipmentContainer container = slots.get(slot);
+            x = 124 + slot.getX();
+            y = 45 + slot.getY();
+            addSlotToContainer(slot.getSlot(container, x, y));
+        }
 
         for (int column = 0; column < 9; column++) {
-            int x = 8 + column * 18;
-            int y = 142;
+            x = 8 + column * 18;
+            y = 142;
             addSlotToContainer(new Slot(player.inventory, column, x, y));
 
             for (int row = 0; row < 3; row++) {
@@ -62,9 +74,40 @@ public class ContainerExpanded extends Container {
         return true;
     }
 
+    @Nonnull
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-        return ItemStack.EMPTY;
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = inventorySlots.get(index);
+
+        if (slot != null && slot.getHasStack()) {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+
+            int containerSlots = inventorySlots.size() - playerIn.inventory.mainInventory.size();
+
+            if (index < containerSlots) {
+                if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.mergeItemStack(itemstack1, 0, containerSlots, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemstack1.getCount() == 0) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+
+            if (itemstack1.getCount() == itemstack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, itemstack1);
+        }
+
+        return itemstack;
     }
 
 }

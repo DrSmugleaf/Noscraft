@@ -2,16 +2,11 @@ package drsmugleaf.noscraft.client.gui;
 
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.common.container.noscraft.ContainerExpanded;
-import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
-import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
-import drsmugleaf.noscraft.common.element.Elements;
-import drsmugleaf.noscraft.common.item.equipment.fairy.ItemFairy;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -57,17 +52,17 @@ public class GuiExpanded extends InventoryEffectRenderer {
         super.drawScreen(mouseX, mouseY, partialTicks);
         renderHoveredToolTip(mouseX, mouseY);
 
-        fontRenderer.drawString("13", guiLeft + 97, guiTop + 9, Elements.FIRE.getHexColor());
-        fontRenderer.drawString("40", guiLeft + 97, guiTop + 27, Elements.WATER.getHexColor());
-        fontRenderer.drawString("20", guiLeft + 97, guiTop + 45, Elements.LIGHT.getHexColor());
-        fontRenderer.drawString("31", guiLeft + 97, guiTop + 63, Elements.DARKNESS.getHexColor());
+//        fontRenderer.drawString("13", guiLeft + 97, guiTop + 9, Elements.FIRE.getHexColor());
+//        fontRenderer.drawString("40", guiLeft + 97, guiTop + 27, Elements.WATER.getHexColor());
+//        fontRenderer.drawString("20", guiLeft + 97, guiTop + 45, Elements.LIGHT.getHexColor());
+//        fontRenderer.drawString("31", guiLeft + 97, guiTop + 63, Elements.DARKNESS.getHexColor());
 
-        FairyContainer container = PLAYER.getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
-        ItemStack stack = container.getStackInSlot(0);
-        if (!stack.isEmpty()) {
-            ItemFairy fairy = (ItemFairy) stack.getItem();
-            fontRenderer.drawString(String.valueOf(fairy.getLevel()), guiLeft + 153, guiTop + 27, fairy.getElement().getHexColor());
-        }
+//        FairyContainer container = PLAYER.getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
+//        ItemStack stack = container.getStackInSlot(0);
+//        if (!stack.isEmpty()) {
+//            ItemFairy fairy = (ItemFairy) stack.getItem();
+//            fontRenderer.drawString(String.valueOf(fairy.getLevel()), guiLeft + 153, guiTop + 27, fairy.getElement().getHexColor());
+//        }
     }
 
     @Override

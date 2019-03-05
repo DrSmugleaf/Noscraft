@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * Created by DrSmugleaf on 31/01/2019
  */
-public enum SpecialistCards implements ITransformation, IRegistrable {
+public enum SpecialistCards implements ITransformation {
 
     WARRIOR("The Warrior", 36, 20, Elements.FIRE, WeaponSlot.MAIN, Classes.SWORDSMAN),
     NINJA("The Ninja", 46, 35, Elements.WATER, WeaponSlot.MAIN, Classes.SWORDSMAN),
@@ -108,15 +108,10 @@ public enum SpecialistCards implements ITransformation, IRegistrable {
         return new HashSet<>(SKILLS);
     }
 
-    @Override
-    public @Nonnull ImmutableSet<Classes> getClasses() {
-        return CLASSES;
-    }
-
     @Nonnull
     @Override
-    public String getNameToRegister() {
-        return IRegistrable.toRegistryName(getName());
+    public ImmutableSet<Classes> getClasses() {
+        return CLASSES;
     }
 
 }

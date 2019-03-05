@@ -1,6 +1,7 @@
 package drsmugleaf.noscraft.client.gui;
 
 import drsmugleaf.noscraft.Noscraft;
+import drsmugleaf.noscraft.common.item.equipment.Slots;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -48,7 +49,10 @@ public class ModGuis {
 
     @SubscribeEvent
     public static void onTextureStitchEventPre(TextureStitchEvent.Pre event) {
-        event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "slot/empty_fairy"));
+        for (Slots slot : Slots.values()) {
+            String slotName = slot.getName().toLowerCase().replaceAll(" ", "_");
+            event.getMap().registerSprite(new ResourceLocation(Noscraft.MOD_ID, "gui/slot/" + slotName));
+        }
     }
 
     @Nonnull

@@ -6,6 +6,7 @@ import drsmugleaf.noscraft.common.item.equipment.weapon.WeaponTypes;
 import net.minecraft.creativetab.CreativeTabs;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 /**
  * Created by Josde on 31/01/2019
@@ -40,8 +41,34 @@ public enum Classes {
     }
 
     @Nonnull
+    public static Classes from(@Nonnull String name) {
+        for (Classes clazz : values()) {
+            if (clazz.name().equalsIgnoreCase(name)) {
+                return clazz;
+            }
+        }
+
+        throw new IllegalArgumentException("No class found with name " + name);
+    }
+
+    @Nonnull
     public static ImmutableSet<Classes> setOf(@Nonnull Classes... classes) {
         return ImmutableSet.copyOf(classes);
+    }
+
+    @Nonnull
+    public static ImmutableSet<Classes> setOf(@Nonnull String... names) {
+        return setOf(Arrays.stream(names).map(Classes::from).toArray(Classes[]::new));
+    }
+
+    @Nonnull
+    public static ImmutableSet<Classes> setOf(@Nonnull String name) {
+        return from(name).setOf();
+    }
+
+    @Nonnull
+    public static ImmutableSet<Classes> all() {
+        return setOf(values());
     }
 
     @Nonnull

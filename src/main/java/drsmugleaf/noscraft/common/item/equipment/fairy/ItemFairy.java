@@ -1,6 +1,5 @@
 package drsmugleaf.noscraft.common.item.equipment.fairy;
 
-import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.common.element.Elements;
 import drsmugleaf.noscraft.common.item.ItemMod;
 import drsmugleaf.noscraft.common.item.creativetab.CreativeTabFairy;
@@ -16,7 +15,7 @@ public class ItemFairy extends ItemMod implements IFairy {
     private final @Nonnull Fairies FAIRY;
 
     public ItemFairy(@Nonnull Fairies fairy) {
-        super(fairy.getName());
+        super(fairy.getName(), fairy.getName());
         FAIRY = fairy;
         setCreativeTab(CreativeTabFairy.INSTANCE);
         maxStackSize = 1;
@@ -24,7 +23,7 @@ public class ItemFairy extends ItemMod implements IFairy {
 
     @Override
     public @Nonnull String getLayer0Path() {
-        return LAYER0_PREFIX + "fairy/" + toRegistryName();
+        return LAYER0_PREFIX + "fairy/" + getRegistryName().getResourcePath();
     }
 
     public @Nonnull Fairies getFairy() {
@@ -44,12 +43,6 @@ public class ItemFairy extends ItemMod implements IFairy {
     @Override
     public @Nonnull Elements getElement() {
         return FAIRY.getElement();
-    }
-
-    @Nonnull
-    @Override
-    public String getNameToRegister() {
-        return IRegistrable.toRegistryName(getName());
     }
 
 }

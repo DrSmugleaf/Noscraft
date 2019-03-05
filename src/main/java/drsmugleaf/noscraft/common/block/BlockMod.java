@@ -19,19 +19,13 @@ public abstract class BlockMod extends Block implements IModellable {
         NAME = name;
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 
-        register(this);
+        register(this, name);
     }
 
     @Nonnull
     @Override
     public String getLayer0Path() {
-        return LAYER0_PREFIX + "block/" + toRegistryName();
-    }
-
-    @Nonnull
-    @Override
-    public String getNameToRegister() {
-        return NAME;
+        return LAYER0_PREFIX + "block/" + getRegistryName().getResourcePath();
     }
 
 }

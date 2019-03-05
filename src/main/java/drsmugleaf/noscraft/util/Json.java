@@ -27,7 +27,6 @@ public class Json {
         lines.add("    }");
         lines.add("}");
 
-//        String name = modellable.toRegistryName();
         Path filePath = Paths.get(jsonPath + "/" + fileName + ".json");
         try {
             Files.createFile(filePath);

@@ -1,9 +1,7 @@
 package drsmugleaf.noscraft.common.event;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
-import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilityProvider;
-import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
+import drsmugleaf.noscraft.common.container.noscraft.*;
 import drsmugleaf.noscraft.common.container.skill.SkillCapabilities;
 import drsmugleaf.noscraft.common.container.skill.SkillCapabilityProvider;
 import drsmugleaf.noscraft.common.container.skill.SkillsLearned;
@@ -73,6 +71,10 @@ public class EventHandlerEntity {
             event.addCapability(
                     new ResourceLocation(Noscraft.MOD_ID, "skills"),
                     new SkillCapabilityProvider(new SkillsLearned())
+            );
+            event.addCapability(
+                    new ResourceLocation(Noscraft.MOD_ID, "equipment"),
+                    new EquipmentCapabilityProvider(new Equipment())
             );
         }
     }

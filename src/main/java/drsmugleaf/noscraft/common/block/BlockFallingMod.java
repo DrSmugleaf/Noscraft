@@ -18,7 +18,7 @@ public abstract class BlockFallingMod extends BlockFalling implements IModellabl
         NAME = name;
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 
-        register(this);
+        register(this, registryName);
     }
 
     @Nonnull
@@ -29,7 +29,7 @@ public abstract class BlockFallingMod extends BlockFalling implements IModellabl
     @Nonnull
     @Override
     public String getLayer0Path() {
-        return LAYER0_PREFIX + "block/" + toRegistryName();
+        return LAYER0_PREFIX + "block/" + getRegistryName().getResourcePath();
     }
 
 }

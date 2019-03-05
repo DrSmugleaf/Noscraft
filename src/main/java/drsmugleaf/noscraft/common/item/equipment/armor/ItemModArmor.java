@@ -1,8 +1,8 @@
 package drsmugleaf.noscraft.common.item.equipment.armor;
 
+import com.google.common.collect.ImmutableSet;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.common.IModellable;
-import drsmugleaf.noscraft.common.IRegistrable;
 import drsmugleaf.noscraft.common.classes.Classes;
 import drsmugleaf.noscraft.common.classes.IClassSpecific;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
-import java.util.Set;
 
 /**
  * Created by DrSmugleaf on 01/02/2019
@@ -19,15 +18,15 @@ import java.util.Set;
 public class ItemModArmor extends ItemArmor implements IModellable, IClassSpecific {
 
     private final @Nonnull String NAME;
-    private final @Nonnull Classes CLASS;
+    private final @Nonnull ImmutableSet<Classes> CLASS;
 
     public ItemModArmor(@Nonnull EntityEquipmentSlot slot, @Nonnull String name, @Nonnull Classes clazz) {
         super(ArmorMaterial.LEATHER, 0, slot);
         NAME = name;
-        CLASS = clazz;
+        CLASS = clazz.setOf();
         setCreativeTab(getClassCreativeTab());
 
-        register(this);
+        register(this, name);
         if (Noscraft.getProxy().isClient()) {
             ModelLoader.setCustomModelResourceLocation(this, 0, getModelResourceLocation());
         }
@@ -56,7 +55,7 @@ public class ItemModArmor extends ItemArmor implements IModellable, IClassSpecif
 
     @Override
     public @Nonnull String getLayer0Path() {
-        return LAYER0_PREFIX + "armor/" + CLASS.name().toLowerCase() + "/" + IRegistrable.toRegistryName(NAME);
+        return LAYER0_PREFIX + "armor/" + CLASS.iterator().next().name().toLowerCase() + "/" + getRegistryName().getResourcePath();
     }
 
     @Nonnull
@@ -67,14 +66,8 @@ public class ItemModArmor extends ItemArmor implements IModellable, IClassSpecif
 
     @Nonnull
     @Override
-    public Set<Classes> getClasses() {
-        return CLASS.setOf();
-    }
-
-    @Nonnull
-    @Override
-    public String getNameToRegister() {
-        return CLASS.name() + "." + NAME;
+    public ImmutableSet<Classes> getClasses() {
+        return CLASS;
     }
 
 }
