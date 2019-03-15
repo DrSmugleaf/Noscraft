@@ -33,10 +33,12 @@ public class EquipmentCapabilityProvider implements ICapabilityProvider, INBTSer
 
     @Override
     public NBTTagCompound serializeNBT() {
-        return null;
+        return EQUIPMENT.serializeNBT();
     }
 
     @Override
-    public void deserializeNBT(NBTTagCompound nbt) {}
+    public void deserializeNBT(NBTTagCompound nbt) {
+        EQUIPMENT.deserializeNBT(nbt);
+    }
 
 }

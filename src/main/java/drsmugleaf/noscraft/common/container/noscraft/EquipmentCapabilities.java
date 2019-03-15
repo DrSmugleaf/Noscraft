@@ -1,6 +1,7 @@
 package drsmugleaf.noscraft.common.container.noscraft;
 
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -20,11 +21,13 @@ public class EquipmentCapabilities {
         @Nullable
         @Override
         public NBTBase writeNBT(Capability<Equipment> capability, Equipment instance, EnumFacing side) {
-            return null;
+            return instance.serializeNBT();
         }
 
         @Override
-        public void readNBT(Capability<Equipment> capability, Equipment instance, EnumFacing side, NBTBase nbt) {}
+        public void readNBT(Capability<Equipment> capability, Equipment instance, EnumFacing side, NBTBase nbt) {
+            instance.deserializeNBT((NBTTagCompound) nbt);
+        }
 
     }
 
