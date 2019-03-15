@@ -3,8 +3,6 @@ package drsmugleaf.noscraft;
 import drsmugleaf.noscraft.common.CommonProxy;
 import drsmugleaf.noscraft.common.container.noscraft.Equipment;
 import drsmugleaf.noscraft.common.container.noscraft.EquipmentCapabilities;
-import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
-import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
 import drsmugleaf.noscraft.common.container.skill.SkillCapabilities;
 import drsmugleaf.noscraft.common.container.skill.SkillsLearned;
 import drsmugleaf.noscraft.common.network.ModPackets;
@@ -66,12 +64,6 @@ public class Noscraft {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        CapabilityManager.INSTANCE.register(
-                FairyContainer.class,
-                new FairyCapabilities.CapabilityFairy(),
-                FairyContainer::new
-        );
-
         CapabilityManager.INSTANCE.register(
                 SkillsLearned.class,
                 new SkillCapabilities.CapabilitySkills(),

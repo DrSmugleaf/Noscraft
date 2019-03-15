@@ -3,6 +3,7 @@ package drsmugleaf.noscraft.client.gui;
 import drsmugleaf.noscraft.Noscraft;
 import drsmugleaf.noscraft.common.item.equipment.Slots;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.util.ResourceLocation;
@@ -31,10 +32,13 @@ public class ModGuis {
         }
 
         GuiContainer guiContainer = (GuiContainer) gui;
-        int x = 173 + (152 - guiContainer.getGuiLeft());
-        GuiInventoryButton inventory = new GuiInventoryButton(guiContainer, x - 16, -16, 16, 16);
-        GuiCharacterButton character = new GuiCharacterButton(guiContainer, x - 32, -16, 16, 16);
-        GuiSkillMenuButton skill = new GuiSkillMenuButton(guiContainer, x - 48, -16, 16, 16);
+        ScaledResolution resolution = new ScaledResolution(gui.mc);
+        int x = resolution.getScaledWidth() - guiContainer.getGuiLeft() * 2 - 16;
+
+        GuiInventoryButton inventory = new GuiInventoryButton(guiContainer, x, -16, 16, 16);
+        GuiCharacterButton character = new GuiCharacterButton(guiContainer, x - 16, -16, 16, 16);
+        GuiSkillMenuButton skill = new GuiSkillMenuButton(guiContainer, x - 32, -16, 16, 16);
+
         event.getButtonList().add(character);
         event.getButtonList().add(inventory);
         event.getButtonList().add(skill);

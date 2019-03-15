@@ -1,8 +1,8 @@
 package drsmugleaf.noscraft.common.network;
 
 import drsmugleaf.noscraft.Noscraft;
-import drsmugleaf.noscraft.common.container.noscraft.FairyCapabilities;
-import drsmugleaf.noscraft.common.container.noscraft.FairyContainer;
+import drsmugleaf.noscraft.common.container.noscraft.Equipment;
+import drsmugleaf.noscraft.common.container.noscraft.EquipmentCapabilities;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -59,12 +59,12 @@ public class PacketSync extends PacketMod<PacketSync, IMessage> {
 
             Entity player = world.getEntityByID(message.playerID);
             if (player instanceof EntityPlayer) {
-                FairyContainer container = player.getCapability(FairyCapabilities.CAPABILITY_FAIRIES, null);
-                if (container == null) {
+                Equipment equipment = player.getCapability(EquipmentCapabilities.CAPABILITY_EQUIPMENT, null);
+                if (equipment == null) {
                     return;
                 }
 
-                container.setStackInSlot(message.slot, message.stack);
+//                equipment.setStackInSlot(message.slot, message.stack);
             }
         });
 

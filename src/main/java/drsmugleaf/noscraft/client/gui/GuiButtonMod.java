@@ -1,6 +1,5 @@
 package drsmugleaf.noscraft.client.gui;
 
-import drsmugleaf.noscraft.Noscraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

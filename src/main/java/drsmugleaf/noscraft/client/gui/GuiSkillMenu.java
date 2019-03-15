@@ -45,7 +45,6 @@ public class GuiSkillMenu extends GuiInventoryMod {
         super.initGui();
 
         Map<Integer, ISkill> skillsLearned = PLAYER.getCapability(SkillCapabilities.CAPABILITY_SKILLS, null).getSkills();
-
         int i = 0;
         Iterator<Map.Entry<Integer, ISkill>> iterator = skillsLearned.entrySet().iterator();
         for (int row = 0; row < ROWS; row++) {

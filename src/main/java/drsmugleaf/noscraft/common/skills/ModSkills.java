@@ -97,7 +97,7 @@ public class ModSkills {
                 nextID++;
             }
         } catch (FileNotFoundException e) {
-            Noscraft.LOG.error("File " + filePath + " not found", e); // TODO: 20/02/2019 Remove when all skill csvs are added
+            Noscraft.LOG.error("File " + filePath + " not found"); // TODO: 20/02/2019 Remove when all skill csvs are added
         } catch (IOException e) {
             throw new IllegalStateException("Error reading file " + filePath, e);
         }
